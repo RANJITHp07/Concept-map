@@ -1,24 +1,25 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { images } from "../constant.js";
 
 interface MenuItem {
-  logo: string;
+  logo: string; 
   title: string;
 }
 
 function LeftMenu() {
   const [activeItem, setActiveItem] = useState<number | null>(null);
   const Data: MenuItem[] = [
-    { logo: "x", title: "Dashboard" },
-    { logo: "x", title: "Reports" },
-    { logo: "x", title: "Profile" },
-    { logo: "x", title: "Contracts" },
-    { logo: "x", title: "Invoices" },
-    { logo: "x", title: "Projects" },
-    { logo: "x", title: "Tasks" },
-    { logo: "x", title: "Settings" },
+    { logo: images.first, title: "Dashboard" },
+    { logo: images.second, title: "Reports" },
+    { logo: images.third, title: "Profile" },
+    { logo: images.fourth, title: "Contracts" },
+    { logo: images.fifth, title: "Invoices" },
+    { logo: images.sixth, title: "Projects" },
+    { logo: images.seventh, title: "Tasks" },
+    { logo: images.eight, title: "Settings" },
   ];
 
   const handleClick = (index: number) => {
@@ -27,20 +28,21 @@ function LeftMenu() {
 
   return (
     <section className="px-[20px] py-[20px]">
-      <img src={images.logo.src} alt="logo" />
-      <div className="">
+      <div>
         {Data.map((item, index: number) => (
           <div
             key={index}
             onClick={() => handleClick(index)}
-            className={`flex items-center justify-start px-[20px] py-[10px] rounded-[12px] 
+            className={`flex items-center justify-start px-[20px] py-[10px] mt-[5px] rounded-[12px] 
               ${activeItem === index ? "bg-[rgba(246,170,22,1)] text-white" : "hover:bg-[rgba(246,170,22,1)]"}`}
           >
-            <span
-              className={`text-xl font-bold ${activeItem === index ? "text-white" : "text-gray-600"} mr-4`}
-            >
-              {item.logo}
-            </span>
+            <Image
+              src={item.logo}
+              alt={item.title}
+              width={32}
+              height={32}
+              className="mr-4 text-[red]"
+            />
             <span
               className={`text-[18px] leading-[21px] ${activeItem === index ? "text-white" : "text-gray-800"}`}
             >
