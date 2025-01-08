@@ -1,6 +1,4 @@
-import React from "react";
 import Image from "next/image";
-import { leftSideProfile } from "../constant";
 
 function LeftProfile() {
   interface MenuItem {
@@ -12,10 +10,10 @@ function LeftProfile() {
 
   const data: MenuItem[] = [
     {
-      logo: leftSideProfile.LeftProfile,
+      logo: "/logo.png",
       title: "Jackson",
       role: "Writer",
-      icon: leftSideProfile.Arrow,
+      icon: "/logo.png",
     },
   ];
 
@@ -25,7 +23,9 @@ function LeftProfile() {
         {/* Header */}
         <div className="flex justify-between items-center mb-[10px]">
           <h1 className="text-[22px] leading-[25px] font-bold">Following</h1>
-          <h1 className="text-[15px] leading-[17px] text-blue-500 cursor-pointer">View All</h1>
+          <h1 className="text-[15px] leading-[17px] text-blue-500 cursor-pointer">
+            View All
+          </h1>
         </div>
 
         {/* Data List */}
@@ -48,12 +48,7 @@ function LeftProfile() {
               </div>
 
               {/* Icon */}
-              <Image
-                src={item.icon}
-                alt="Arrow Icon"
-                width={24}
-                height={24}
-              />
+              <Image src={item.icon} alt="Arrow Icon" width={24} height={24} />
             </div>
           ))}
         </div>

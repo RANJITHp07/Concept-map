@@ -1,25 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { images } from "../constant.js";
+// import { images } from "../constant";
 
 interface MenuItem {
-  logo: string; 
+  logo: string;
   title: string;
 }
 
 function LeftMenu() {
   const [activeItem, setActiveItem] = useState<number | null>(null);
   const Data: MenuItem[] = [
-    { logo: images.first, title: "Dashboard" },
-    { logo: images.second, title: "Reports" },
-    { logo: images.third, title: "Profile" },
-    { logo: images.fourth, title: "Contracts" },
-    { logo: images.fifth, title: "Invoices" },
-    { logo: images.sixth, title: "Projects" },
-    { logo: images.seventh, title: "Tasks" },
-    { logo: images.eight, title: "Settings" },
+    { logo: "/logo.png", title: "Dashboard" },
+    { logo: "/logo.png", title: "Reports" },
+    { logo: "/logo.png", title: "Profile" },
+    { logo: "/logo.png", title: "Contracts" },
+    { logo: "/logo.png", title: "Invoices" },
+    { logo: "/logo.png", title: "Projects" },
+    { logo: "/logo.png", title: "Tasks" },
+    { logo: "/logo.png", title: "Settings" },
   ];
 
   const handleClick = (index: number) => {
