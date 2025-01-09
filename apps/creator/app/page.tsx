@@ -3,12 +3,19 @@ import Image from "next/image";
 import LeftMenu from "@repo/ui/components/LeftMenu";
 import RightMenu from "@repo/ui/components/RightMenu";
 import LeftProfile from "@repo/ui/components/LeftProfile";
+import LeftActivites from "@repo/ui/components/LeftActivities";
+import HomeNavbar from "@repo/ui/components/HomeNavbar";
+import HomeInfo from "@repo/ui/components/HomeInfo";
+
 
 function Home() {
+
+
   return (
-    <section className=" pt-[20px]">
-      <div className="flex w-full  ">
-        <div className="w-[20%] ">
+    <section className="pt-[20px]">
+      <div className="flex w-full h-full">
+        {/* Left section (20% width) with border */}
+        <div className="w-[20%] px-[20px] border-r border-gray-300">
           <div className="flex justify-center">
             <Image
               alt="logo"
@@ -20,43 +27,30 @@ function Home() {
           </div>
           <LeftMenu />
           <LeftProfile />
+          <LeftActivites />
         </div>
 
-        <div className="w-[60%] bg-gray-300 p-4 "></div>
+        {/* Middle section (60% width) */}
+        <div
+          className="w-[60%] px-[20px]"
+          style={{
+            borderLeft: "1px solid rgba(160,160,160,1)",
+            borderRight: "1px solid rgba(160,160,160,1)",
+          }}
+        >
+          <HomeNavbar />
+          <HomeInfo/>
+        </div>
 
-        {/* Right section (20% width) */}
-        <div className="w-[20%] p-4 bg-black">{/* <RightMenu /> */}</div>
+        {/* Right section (20% width) with border */}
+        <div className="w-[20%] p-4 border-l border-gray-300">
+          <RightMenu />
+        </div>
       </div>
+
+    
     </section>
   );
 }
 
 export default Home;
-
-// import React from 'react';
-// import Image from "next/image";
-
-// function Home() {
-//   return (
-//     <>
-//       <section className="pt-5 w-full">
-//         <div className="flex w-full">
-//           {/* Left Section - 20% */}
-//           <div className="w-1/5 bg-gray-200">
-//             <h1>niyas</h1>
-//           </div>
-//           {/* Center Section - 60% */}
-//           <div className="w-3/5 bg-gray-400 text-center">
-//             <p>Content here</p>
-//           </div>
-//           {/* Right Section - 20% */}
-//           <div className="w-1/5 bg-gray-200">
-//             <h1>niyas</h1>
-//           </div>
-//         </div>
-//       </section>
-//     </>
-//   );
-// }
-
-// export default Home;

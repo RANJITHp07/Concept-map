@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-// import { images } from "../constant";
+
 
 interface MenuItem {
   logo: string;
@@ -12,14 +12,14 @@ interface MenuItem {
 function LeftMenu() {
   const [activeItem, setActiveItem] = useState<number | null>(null);
   const Data: MenuItem[] = [
-    { logo: "/logo.png", title: "Dashboard" },
-    { logo: "/logo.png", title: "Reports" },
-    { logo: "/logo.png", title: "Profile" },
-    { logo: "/logo.png", title: "Contracts" },
-    { logo: "/logo.png", title: "Invoices" },
-    { logo: "/logo.png", title: "Projects" },
-    { logo: "/logo.png", title: "Tasks" },
-    { logo: "/logo.png", title: "Settings" },
+    { logo: "LeftMenu/1.svg", title: "Dashboard" },
+    { logo: "LeftMenu/2.svg", title: "Reports" },
+    { logo: "LeftMenu/3.svg", title: "Profile" },
+    { logo: "LeftMenu/4.svg", title: "Contracts" },
+    { logo: "LeftMenu/5.svg", title: "Invoices" },
+    { logo: "LeftMenu/6.svg", title: "Projects" },
+    { logo: "LeftMenu/7.svg", title: "Tasks" },
+    { logo: "LeftMenu/8.svg", title: "Settings" },
   ];
 
   const handleClick = (index: number) => {
