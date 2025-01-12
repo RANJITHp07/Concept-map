@@ -12,7 +12,7 @@ export interface IUser extends Document {
 
 //OtpSchema model type
 export interface IOtp extends Document {
-  code: string;
+  code: number;
   retry_count: number;
   userId: mongoose.ObjectId;
   action_type: VerificationAction;

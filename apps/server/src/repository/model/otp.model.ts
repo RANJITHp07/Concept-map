@@ -4,7 +4,7 @@ import { IOtp, VerificationAction } from "../../types/model";
 const OtpSchema: Schema = new Schema(
   {
     code: {
-      type: String,
+      type: Number,
       required: true,
     },
     retry_count: {
