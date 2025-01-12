@@ -1,10 +1,12 @@
 import Form from "./_components/form";
-import Slider from "./_components/slider";
+import Slider from "../components/slider";
 export default function Page() {
   return (
     <>
-      <Form />
-      <Slider />
+      <div className="min-h-screen flex flex-col md:flex-row">
+        <Form />
+        <Slider />
+      </div>
     </>
   );
 }
