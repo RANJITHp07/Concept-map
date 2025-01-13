@@ -1,24 +1,29 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const router = useRouter()
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Here you would typically handle the registration logic
-    console.log('Registration submitted:', { name, email, password, confirmPassword })
+    console.log("Registration submitted:", {
+      name,
+      email,
+      password,
+      confirmPassword,
+    });
     // After successful registration, you might want to redirect the user
     // router.push('/dashboard')
-  }
+  };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -27,7 +32,10 @@ export default function RegisterPage() {
         <div className="flex justify-between items-center mb-8 md:mb-12">
           <div /> {/* Empty div for spacing */}
           <div className="text-sm">
-            Have an account ? <Link href="/login" className="text-[#f5a623]">Sign In</Link>
+            Have an account ?{" "}
+            <Link href="/login" className="text-[#f5a623]">
+              Sign In
+            </Link>
           </div>
         </div>
 
@@ -35,24 +43,27 @@ export default function RegisterPage() {
           {/* Logo */}
           <div className="mb-6">
             <div className="flex items-center gap-2">
-              <Image 
-                src="/logo.svg" 
-                alt="Concepts Map" 
-                width={40} 
+              <Image
+                src="/logo.svg"
+                alt="Concepts Map"
+                width={40}
                 height={40}
                 className="w-8"
               />
               <h1 className="text-2xl md:text-3xl font-bold">CONCEPTS MAP</h1>
             </div>
             <p className="text-gray-500 mt-4 text-sm md:text-base">
-              Welcome to our portal where you can explore ultimate ads concepts from fresh and talented brains.
+              Welcome to our portal where you can explore ultimate ads concepts
+              from fresh and talented brains.
             </p>
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm mb-1">Full Name</label>
+              <label htmlFor="name" className="block text-sm mb-1">
+                Full Name
+              </label>
               <input
                 id="name"
                 type="text"
@@ -64,7 +75,9 @@ export default function RegisterPage() {
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm mb-1">E-mail</label>
+              <label htmlFor="email" className="block text-sm mb-1">
+                E-mail
+              </label>
               <input
                 id="email"
                 type="email"
@@ -76,7 +89,9 @@ export default function RegisterPage() {
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm mb-1">Password</label>
+              <label htmlFor="password" className="block text-sm mb-1">
+                Password
+              </label>
               <input
                 id="password"
                 type="password"
@@ -88,7 +103,9 @@ export default function RegisterPage() {
               />
             </div>
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm mb-1">Confirm Password</label>
+              <label htmlFor="confirmPassword" className="block text-sm mb-1">
+                Confirm Password
+              </label>
               <input
                 id="confirmPassword"
                 type="password"
@@ -114,7 +131,9 @@ export default function RegisterPage() {
                 <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500">Or sign up with</span>
+                <span className="px-4 bg-white text-gray-500">
+                  Or sign up with
+                </span>
               </div>
             </div>
 
@@ -123,10 +142,20 @@ export default function RegisterPage() {
                 <Image src="/google.svg" alt="Google" width={24} height={24} />
               </button>
               <button className="flex justify-center items-center py-2 px-4 border rounded-lg hover:bg-gray-50 transition-colors">
-                <Image src="/facebook.svg" alt="Facebook" width={24} height={24} />
+                <Image
+                  src="/facebook.svg"
+                  alt="Facebook"
+                  width={24}
+                  height={24}
+                />
               </button>
               <button className="flex justify-center items-center py-2 px-4 border rounded-lg hover:bg-gray-50 transition-colors">
-                <Image src="/linkedin.svg" alt="LinkedIn" width={24} height={24} />
+                <Image
+                  src="/linkedin.svg"
+                  alt="LinkedIn"
+                  width={24}
+                  height={24}
+                />
               </button>
             </div>
           </div>
@@ -137,10 +166,10 @@ export default function RegisterPage() {
       <div className="hidden md:flex w-full md:w-1/2 bg-gray-100 p-8 items-center justify-center">
         <div className="relative max-w-lg w-full">
           <div className="absolute top-0 right-0 z-10">
-            <Image 
-              src="/concepts-map-presents.png" 
-              alt="Concepts Map Presents" 
-              width={200} 
+            <Image
+              src="/concepts-map-presents.png"
+              alt="Concepts Map Presents"
+              width={200}
               height={50}
             />
           </div>
@@ -148,33 +177,35 @@ export default function RegisterPage() {
             <div className="text-3xl font-semibold">16</div>
             <div>Sep</div>
             <div>2023</div>
-            <div className="mt-2 text-sm">
-              10 am to 6 pm
-            </div>
+            <div className="mt-2 text-sm">10 am to 6 pm</div>
             <div className="mt-1 text-xs text-gray-600">
-              Grand Ballroom,<br />
-              Grand Hyatt<br />
+              Grand Ballroom,
+              <br />
+              Grand Hyatt
+              <br />
               Kochi Bolgatty
             </div>
           </div>
           <div className="rounded-lg overflow-hidden shadow-lg">
-            <Image 
-              src="/writer.jpg" 
-              alt="Script Writing Festival" 
-              width={800} 
+            <Image
+              src="/writer.jpg"
+              alt="Script Writing Festival"
+              width={800}
               height={600}
               className="w-full"
             />
             <div className="relative">
-              <Image 
-                src="/spark23.png" 
-                alt="Spark 23" 
-                width={120} 
+              <Image
+                src="/spark23.png"
+                alt="Spark 23"
+                width={120}
                 height={120}
                 className="absolute -top-16 right-4"
               />
               <div className="bg-white p-6">
-                <h2 className="text-2xl font-semibold mb-2">Annual Script Writing Festival</h2>
+                <h2 className="text-2xl font-semibold mb-2">
+                  Annual Script Writing Festival
+                </h2>
                 <h3 className="text-xl mb-4">for TVC and Short Form Video</h3>
                 <button className="bg-[#f5a623] text-white px-6 py-2 rounded-full font-medium hover:bg-[#e69516] transition-colors">
                   REGISTER NOW
@@ -188,6 +219,5 @@ export default function RegisterPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

@@ -52,24 +52,23 @@ export interface IPurschase extends Document {
   payment_status: string;
   reason: string;
   transaction_id: string;
-  reason: string;
 }
 
 //actions in which we do otp verification
-enum VerificationAction {
+export enum VerificationAction {
   VERIFY_EMAIL = "VERIFY_EMAIL",
   RESET_PASSWORD = "RESET_PASSWORD",
 }
 
 //different roles avaiable in the system
-enum Role {
+export enum Role {
   ADMIN = "ADMIN",
   CREATOR = "CREATOR",
   BUYER = "BUYER",
 }
 
 //various categories avaiable for a script
-enum ScriptCategory {
+export enum ScriptCategory {
   TVC = "TVC",
   OTT_SERIES = "OTT_SERIES",
   SHORT_FORM_VIDEO = "SHORT_FORM_VIDEO",
@@ -136,13 +135,13 @@ export enum IndustryCategory {
 }
 
 //various types of scripts avaiable
-enum ScriptType {
+export enum ScriptType {
   SCRIPT = "SCRIPT",
   STORY_BOARD = "STORY_BOARD",
   SYNOPSIS = "SYNOPSIS",
 }
 
-enum PaymentMethod {
+export enum PaymentMethod {
   NETBANKING = "NETBANKING",
   UPI = "UPI",
   DEBIT_CARD = "DEBIT_CARD",

@@ -90,7 +90,7 @@ const ScriptSchema: Schema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const ScriptModel = mongoose.model<IScript>("Script", ScriptSchema);

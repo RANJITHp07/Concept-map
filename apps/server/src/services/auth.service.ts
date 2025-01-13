@@ -5,16 +5,19 @@ import { IOtp, IUser } from "../types/model";
 import argon2 from "argon2";
 import { CustomError } from "../utils/customError";
 import { generateOTP, hasOtpExpired } from "../utils/helper";
+import OtpModel from "../repository/model/otp.model";
 
 export class AuthService {
-  private crudRepository: CrudRepository<IUser | IOtp>;
+  private readonly userCrudRepository: CrudRepository<IUser | IOtp>;
+  private readonly otpCrudRepository: CrudRepository<IOtp>;
 
   constructor() {
-    this.crudRepository = new CrudRepository(UserModel);
+    this.userCrudRepository = new CrudRepository(UserModel);
+    this.otpCrudRepository = new CrudRepository(OtpModel);
   }
 
   async register(data: IRegister) {
-    const user = (await this.crudRepository.fetchOneDocument({
+    const user = (await this.userCrudRepository.fetchOneDocument({
       email: data.email,
     })) as IUser;
 
@@ -27,14 +30,14 @@ export class AuthService {
     }
 
     const hashPassword = await argon2.hash("password");
-    return await this.crudRepository.createDocument({
+    return await this.userCrudRepository.createDocument({
       ...data,
       password: hashPassword,
     });
   }
 
   async login(email: string, password: string) {
-    const user = (await this.crudRepository.fetchOneDocument({
+    const user = (await this.userCrudRepository.fetchOneDocument({
       email: email,
     })) as IUser;
 
@@ -53,7 +56,7 @@ export class AuthService {
 
   // otp related methods
   async generateVerificationOTP(userId: string) {
-    const otp = (await this.crudRepository.fetchOneDocument({
+    const otp = (await this.otpCrudRepository.fetchOneDocument({
       userId: userId,
       action_type: "VERIFY_EMAIL",
     })) as IOtp & { updatedAt: string };
@@ -71,7 +74,7 @@ export class AuthService {
 
       const count = otp.retry_count > 0 ? otp.retry_count - 1 : 3;
 
-      return await this.crudRepository.updateDocumenById(otp._id as string, {
+      return await this.otpCrudRepository.updateDocumenById(otp._id as string, {
         code: newCode,
         retry_count: count,
       });
@@ -80,12 +83,12 @@ export class AuthService {
         userId: userId,
         code: newCode,
       };
-      return this.crudRepository.createDocument(otpData);
+      return this.otpCrudRepository.createDocument(otpData);
     }
   }
 
   async verifyEmail(code: number, userId: string) {
-    const otp = (await this.crudRepository.fetchOneDocument({
+    const otp = (await this.otpCrudRepository.fetchOneDocument({
       userId: userId,
       action_type: "VERIFY_EMAIL",
     })) as IOtp & { updatedAt: string };
@@ -101,9 +104,36 @@ export class AuthService {
       });
     }
     if (otp.code === code) {
-      return otp;
+      await this.otpCrudRepository.deleteDocumenById(otp._id as string);
+      return await this.userCrudRepository.updateDocumenById(userId, {
+        is_verified: true,
+      });
     }
 
     throw new CustomError(400, "BAD_REQUEST", { message: "Wrong OTP" });
+  }
+
+  async resendOtp(userId: string) {
+    const otp = (await this.otpCrudRepository.fetchOneDocument({
+      userId: userId,
+      action_type: "VERIFY_EMAIL",
+    })) as IOtp & { updatedAt: string };
+
+    if (otp.retry_count === 0 && !hasOtpExpired(otp.updatedAt)) {
+      throw new CustomError(400, "BAD_REQUEST", {
+        message:
+          "You can only request OTP up to 3 times within an hour. Please try again later.",
+      });
+    }
+
+    // Generate a new OTP code
+    const newCode = generateOTP();
+
+    const count = otp.retry_count > 0 ? otp.retry_count - 1 : 3;
+
+    return await this.otpCrudRepository.updateDocumenById(otp._id as string, {
+      code: newCode,
+      retry_count: count,
+    });
   }
 }

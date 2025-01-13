@@ -25,7 +25,7 @@ const OtpSchema: Schema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const OtpModel = mongoose.model<IOtp>("Otp", OtpSchema);

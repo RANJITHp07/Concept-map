@@ -44,7 +44,9 @@ function HomeInfo() {
 
               {/* Right Section with Title and Description */}
               <div className="flex-grow text-white">
-                <h2 className="text-4xl font-bold leading-tight">{item.title}</h2>
+                <h2 className="text-4xl font-bold leading-tight">
+                  {item.title}
+                </h2>
                 <p className="mt-3 text-lg">{item.description}</p>
               </div>
             </div>

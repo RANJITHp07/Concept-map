@@ -12,7 +12,7 @@
     "typescript": "^5.7.2"
   },
   "scripts": {
-    "dev": " tsx watch src/app.ts",
+    "server:dev": "tsx watch src/app.ts",
     "server:build": "tsc",
     "server:start": "node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"

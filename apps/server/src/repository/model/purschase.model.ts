@@ -38,7 +38,7 @@ const PurchaseSchema: Schema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const PurchaseModel = mongoose.model<IPurschase>("Purchase", PurchaseSchema);

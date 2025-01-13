@@ -51,4 +51,8 @@ export class CrudRepository<T> {
   ): Promise<T | null> {
     return await this.model.findByIdAndUpdate(id, updateData, { new: true });
   }
+
+  async deleteDocumenById(id: string): Promise<T | null> {
+    return await this.model.findByIdAndDelete(id);
+  }
 }
