@@ -18,6 +18,9 @@
     "dev": {
       "cache": false,
       "persistent": true
-    }
+    },
+    "server:dev": { "cache": false, "persistent": true },
+    "server:build": { "cache": false, "persistent": true },
+    "server:start": { "cache": false, "persistent": true }
   }
 }

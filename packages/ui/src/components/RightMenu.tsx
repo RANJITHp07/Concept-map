@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
+import Image from "next/image";
 
 function RightMenu() {
   interface RightMenuItem {
@@ -8,10 +8,10 @@ function RightMenu() {
   }
 
   const Data: RightMenuItem[] = [
-    { logo: '/rightMenu/1.png' },
-    { logo: '/rightMenu/2.png' },
-    { logo: '/rightMenu/3.png' },
-    { logo: '/rightMenu/4.png' },
+    { logo: "/rightMenu/1.png" },
+    { logo: "/rightMenu/2.png" },
+    { logo: "/rightMenu/3.png" },
+    { logo: "/rightMenu/4.png" },
   ];
 
   return (

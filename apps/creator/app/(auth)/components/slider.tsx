@@ -3,7 +3,7 @@ import React from "react";
 
 function slider() {
   return (
- 
+    <div>
       <div className="hidden md:flex w-full md:w-1/2 bg-gray-100 p-8 items-center justify-center">
         <div className="relative max-w-lg w-full">
           <div className="absolute top-0 right-0 z-10">
@@ -59,7 +59,7 @@ function slider() {
           </div>
         </div>
       </div>
-  
+    </div>
   );
 }
 

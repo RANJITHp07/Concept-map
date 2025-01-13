@@ -7,10 +7,7 @@ import LeftActivites from "@repo/ui/components/LeftActivities";
 import HomeNavbar from "@repo/ui/components/HomeNavbar";
 import HomeInfo from "@repo/ui/components/HomeInfo";
 
-
 function Home() {
-
-
   return (
     <section className="pt-[20px]">
       <div className="flex w-full h-full">
@@ -39,7 +36,7 @@ function Home() {
           }}
         >
           <HomeNavbar />
-          <HomeInfo/>
+          <HomeInfo />
         </div>
 
         {/* Right section (20% width) with border */}
@@ -47,8 +44,6 @@ function Home() {
           <RightMenu />
         </div>
       </div>
-
-    
     </section>
   );
 }

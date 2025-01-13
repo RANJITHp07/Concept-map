@@ -1,0 +1,17 @@
+{
+  "name": "@repo/notification",
+  "main": "./src/index.ts",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "dev": "tsc -w",
+    "server:dev": "npm run dev",
+    "server:build": "tsc"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "typescript": "latest"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
+}

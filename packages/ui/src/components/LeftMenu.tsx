@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 
-
 interface MenuItem {
   logo: string;
   title: string;
