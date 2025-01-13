@@ -19,7 +19,7 @@ app.use(
       /http(|s):\/\/(|www\.)localhost:(3000|3001|3002|3003)$/,
       /http(|s):\/\/(|www\.)127.0.0.1:(3000|3001|3002|3003)$/,
     ],
-  })
+  }),
 );
 
 app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));

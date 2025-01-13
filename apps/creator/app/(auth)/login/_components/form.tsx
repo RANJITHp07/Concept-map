@@ -5,10 +5,9 @@ import Link from "next/link";
 function form() {
   return (
     <>
-      
       <div className="w-full md:w-1/2 p-4 md:p-8 flex flex-col justify-center items-center">
         <div className="flex justify-between items-center mb-8 md:mb-12">
-          <div /> 
+          <div />
           <div className="text-sm">
             Have an account ?{" "}
             <Link href="/register" className="text-[#f5a623]">

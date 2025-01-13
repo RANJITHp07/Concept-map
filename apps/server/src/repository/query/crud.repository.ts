@@ -18,7 +18,7 @@ export class CrudRepository<T> {
     where: Record<string, any>,
     skip: number,
     take: string | number = "all",
-    populateField: string[] | string = []
+    populateField: string[] | string = [],
   ): Promise<T[]> {
     const limit = take === "all" ? 0 : Number(take);
     const query = this.model.find(where).populate(populateField);
@@ -47,7 +47,7 @@ export class CrudRepository<T> {
 
   async updateDocumenById(
     id: string,
-    updateData: Record<string, any>
+    updateData: Record<string, any>,
   ): Promise<T | null> {
     return await this.model.findByIdAndUpdate(id, updateData, { new: true });
   }
