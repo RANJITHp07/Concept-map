@@ -1,66 +1,102 @@
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
 
-function slider() {
+export default function ScriptFestival() {
   return (
-    <div>
-      <div className="hidden md:flex w-full md:w-1/2 bg-gray-100 p-8 items-center justify-center">
-        <div className="relative max-w-lg w-full">
-          <div className="absolute top-0 right-0 z-10">
+    <div className="max-w-4xl mx-auto p-6 flex flex-col justify-center items-center ">
+      {/* Main Content */}
+      <div className="grid md:grid-cols-2 gap-8 items-start ">
+        {/* Left Column - Image */}
+        <div className="relative">
+          <Image
+            src="/young-woman.avif"
+            alt="Student writing"
+            width={500}
+            height={300}
+            className="w-72 rounded-lg"
+          />
+        </div>
+
+        {/* Right Column - Event Details */}
+        <div className="space-y-6">
+          <div className=" items-center gap-3 flex flex-col justify-center">
             <Image
-              src="/concepts-map-presents.png"
-              alt="Concepts Map Presents"
-              width={200}
-              height={50}
+              src="/logo_.png"
+              alt="Concepts Map"
+              width={150}
+              height={100}
+              className="w-auto h-auto"
             />
+            <h1 className="text-[#f5a623] text-2xl tracking-[10px]">
+              PRESENTS
+            </h1>
           </div>
-          <div className="absolute top-16 right-0 z-10 bg-white p-4 rounded-lg shadow-md text-center">
-            <div className="text-3xl font-semibold">16</div>
-            <div>Sep</div>
-            <div>2023</div>
-            <div className="mt-2 text-sm">10 am to 6 pm</div>
-            <div className="mt-1 text-xs text-gray-600">
-              Grand Ballroom,
-              <br />
-              Grand Hyatt
-              <br />
-              Kochi Bolgatty
-            </div>
-          </div>
-          <div className="rounded-lg overflow-hidden shadow-lg">
-            <Image
-              src="/writer.jpg"
-              alt="Script Writing Festival"
-              width={800}
-              height={600}
-              className="w-full"
-            />
-            <div className="relative">
-              <Image
-                src="/spark23.png"
-                alt="Spark 23"
-                width={120}
-                height={120}
-                className="absolute -top-16 right-4"
-              />
-              <div className="bg-white p-6">
-                <h2 className="text-2xl font-semibold mb-2">
-                  Annual Script Writing Festival
-                </h2>
-                <h3 className="text-xl mb-4">for TVC and Short Form Video</h3>
-                <button className="bg-[#f5a623] text-white px-6 py-2 rounded-full font-medium hover:bg-[#e69516] transition-colors">
-                  REGISTER NOW
-                </button>
-                <div className="mt-4 text-gray-600">
-                  Pitches | Workshops | Awards
+
+          <div className=" flex justify-center">
+            {/* Date Box */}
+            <div className="bg-gray-100 p-6 rounded-lg w-48 mt-5">
+              <div className="text-center">
+                <div className="text-4xl font-bold text-gray-800">16</div>
+                <div className="text-xl text-gray-600">Sep</div>
+                <div className="text-2xl text-gray-700">2023</div>
+                <div className="mt-2 text-sm text-gray-600">10 am to 6 pm</div>
+                <div className="mt-6 text-sm text-gray-600 leading-tight">
+                  Grand Ballroom,
+                  <br />
+                  Grand Hyatt
+                  <br />
+                  Kochi Bolgatty
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Festival Title */}
+      <div className="mt-12 text-center ">
+        {/* Spark Logo */}
+        <div className="flex justify-center mb-5">
+          <div className="bg-[#f5a623] text-white w-32 p-4 rounded-lg ">
+            <div className="text-2xl font-bold">Spark</div>
+            <div className="text-4xl font-bold">23</div>
+          </div>
+        </div>
+
+        <h2 className="text-1xl  md:text-4xl lg:text-4xl text-gray-800 font-light leading-tight ">
+          Annual Script Writing Festival
+          <span className="block mt-2">for TVC and Short Form Video</span>
+        </h2>
+      </div>
+
+      {/* Register Button */}
+      <div className="mt-8 flex justify-center">
+        <Link
+          href="/register"
+          className="bg-[#f5a623] text-white px-8 py-3 rounded-full inline-flex items-center gap-2 hover:bg-[#e69516] transition-colors"
+        >
+          REGISTER NOW
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 12h14m-7-7l7 7-7 7" />
+          </svg>
+        </Link>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-8 text-center">
+        <p className="text-xl text-gray-500 tracking-wide">
+          Pitches | Workshops | Awards
+        </p>
+      </div>
     </div>
   );
 }
-
-export default slider;
