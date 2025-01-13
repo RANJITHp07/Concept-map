@@ -6,6 +6,8 @@ import LeftProfile from "@repo/ui/components/LeftProfile";
 import LeftActivites from "@repo/ui/components/LeftActivities";
 import HomeNavbar from "@repo/ui/components/HomeNavbar";
 import HomeInfo from "@repo/ui/components/HomeInfo";
+import HomeData from "@repo/ui/components/HomeSlider";
+import SearchBar from "@repo/ui/components/SearchBars";
 
 
 function Home() {
@@ -28,6 +30,7 @@ function Home() {
           <LeftMenu />
           <LeftProfile />
           <LeftActivites />
+         
         </div>
 
         {/* Middle section (60% width) */}
@@ -40,6 +43,8 @@ function Home() {
         >
           <HomeNavbar />
           <HomeInfo/>
+          <HomeData/>
+          <SearchBar/>
         </div>
 
         {/* Right section (20% width) with border */}
