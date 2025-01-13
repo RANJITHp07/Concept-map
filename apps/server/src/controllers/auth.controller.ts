@@ -11,7 +11,11 @@ export class AuthController {
   register = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const result = await this.authService.register(req.body);
-      res.status(201).json({ success: true, data: result });
+      res.status(201).json({
+        success: "success",
+        message: "Registration completed successfully",
+        data: result,
+      });
     } catch (error) {
       next(error);
     }
@@ -21,7 +25,11 @@ export class AuthController {
     try {
       const { email, password } = req.body;
       const result = await this.authService.login(email, password);
-      res.status(200).json({ success: true, data: result });
+      res.status(200).json({
+        success: "success",
+        message: "User successfully logged in",
+        data: result,
+      });
     } catch (error) {
       next(error);
     }
@@ -31,7 +39,11 @@ export class AuthController {
     try {
       const { userId } = req.body;
       const result = await this.authService.generateVerificationOTP(userId);
-      res.status(200).json({ success: true, data: result });
+      res.status(200).json({
+        success: "success",
+        message: "OTP is generated successfully",
+        data: result,
+      });
     } catch (error) {
       next(error);
     }
@@ -41,7 +53,11 @@ export class AuthController {
     try {
       const { code, userId } = req.body;
       const result = await this.authService.verifyEmail(code, userId);
-      res.status(200).json({ success: true, data: result });
+      res.status(200).json({
+        success: "success",
+        message: "Successfully verified the email",
+        data: result,
+      });
     } catch (error) {
       next(error);
     }
@@ -51,7 +67,11 @@ export class AuthController {
     try {
       const { userId } = req.body;
       const result = await this.authService.resendOtp(userId);
-      res.status(200).json({ success: true, data: result });
+      res.status(200).json({
+        success: "success",
+        message: "OTP is again send again successfully",
+        data: result,
+      });
     } catch (error) {
       next(error);
     }
