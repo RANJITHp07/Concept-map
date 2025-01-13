@@ -1,8 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import TextInput from "@repo/ui/components/TextInput";
+import Button from "@repo/ui/components/Button";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registrationSchema } from "../../../../lib/validator/registration";
+import apiHelper from "../../../../lib/apiHelper";
+import { apis } from "../../../../lib/api";
 
 function Form() {
   const [name, setName] = useState("");
@@ -10,14 +17,32 @@ function Form() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Registration submitted:", {
-      name,
-      email,
-      password,
-      confirmPassword,
-    });
+  const {
+    handleSubmit,
+    formState: { errors },
+    getValues,
+    trigger,
+    setValue,
+  } = useForm({
+    resolver: zodResolver(registrationSchema),
+  });
+
+  const handleInputFieldChange = (field: string, value: string) => {
+    trigger(field);
+    setValue(field, value);
+  };
+
+  const onSubmit = (data: any) => {
+    console.log("Form submitted:", data);
+    const userData = {
+      username: data.name,
+      email: data.email,
+      password: data.password,
+      role: "BUYER",
+    };
+    const res = apiHelper(apis.register, "POST", userData);
+
+    console.log(res);
   };
 
   return (
@@ -47,81 +72,55 @@ function Form() {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-gray-400 text-sm mb-2"
-              >
-                Full Name
-              </label>
-              <input
-                id="name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="John Doe"
-                className="w-full px-4 py-3.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 placeholder-gray-400"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-gray-400 text-sm mb-2"
-              >
-                E-mail
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="example@gmail.com"
-                className="w-full px-4 py-3.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 placeholder-gray-400"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-gray-400 text-sm mb-2"
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="6+ strong character"
-                className="w-full px-4 py-3.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 placeholder-gray-400"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="confirmPassword"
-                className="block text-gray-400 text-sm mb-2"
-              >
-                Confirm Password
-              </label>
-              <input
-                id="confirmPassword"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm your password"
-                className="w-full px-4 py-3.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 placeholder-gray-400"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-[#f5a623] text-white py-3.5 rounded-lg font-medium hover:bg-[#e69516] transition-colors mt-4"
-            >
-              Create an Account
-            </button>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <TextInput
+              label="Full Name"
+              htmlFor="name"
+              value={name}
+              onChange={(value) =>
+                handleInputFieldChange("name", value as string)
+              }
+              placeholder="John Doe"
+              type="text"
+              errorMessage={errors.name?.message as string}
+            />
+
+            <TextInput
+              label="E-mail"
+              htmlFor="email"
+              value={email}
+              placeholder="example@gmail.com"
+              onChange={(value) =>
+                handleInputFieldChange("email", value as string)
+              }
+              type="email"
+              errorMessage={errors.email?.message as string}
+            />
+
+            <TextInput
+              label="Password"
+              htmlFor="password"
+              value={password}
+              onChange={(value) =>
+                handleInputFieldChange("password", value as string)
+              }
+              placeholder="6+ strong characters"
+              type="password"
+              errorMessage={errors.password?.message as string}
+            />
+
+            <TextInput
+              label="Confirm Password"
+              htmlFor="confirmPassword"
+              value={confirmPassword}
+              onChange={(value) =>
+                handleInputFieldChange("confirmPassword", value as string)
+              }
+              placeholder="Confirm your password"
+              type="password"
+              errorMessage={errors.confirmPassword?.message as string}
+            />
+            <Button actionName="Create an Account" type="submit" />
           </form>
 
           {/* Social Login */}
