@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import TextInput from "@repo/ui/components/TextInput";
@@ -12,37 +12,29 @@ import apiHelper from "../../../../lib/apiHelper";
 import { apis } from "../../../../lib/api";
 
 function Form() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
   const {
     handleSubmit,
     formState: { errors },
+    clearErrors,
     getValues,
-    trigger,
     setValue,
   } = useForm({
     resolver: zodResolver(registrationSchema),
   });
 
   const handleInputFieldChange = (field: string, value: string) => {
-    trigger(field);
     setValue(field, value);
+    clearErrors(field);
   };
 
-  const onSubmit = (data: any) => {
-    console.log("Form submitted:", data);
+  const onSubmit = async (data: any) => {
     const userData = {
       username: data.name,
       email: data.email,
       password: data.password,
       role: "BUYER",
     };
-    const res = apiHelper(apis.register, "POST", userData);
-
-    console.log(res);
+    const res = await apiHelper(apis.register, "POST", userData);
   };
 
   return (
@@ -76,7 +68,7 @@ function Form() {
             <TextInput
               label="Full Name"
               htmlFor="name"
-              value={name}
+              value={getValues("name")}
               onChange={(value) =>
                 handleInputFieldChange("name", value as string)
               }
@@ -88,19 +80,19 @@ function Form() {
             <TextInput
               label="E-mail"
               htmlFor="email"
-              value={email}
+              value={getValues("email")}
               placeholder="example@gmail.com"
               onChange={(value) =>
                 handleInputFieldChange("email", value as string)
               }
-              type="email"
+              type="text"
               errorMessage={errors.email?.message as string}
             />
 
             <TextInput
               label="Password"
               htmlFor="password"
-              value={password}
+              value={getValues("password")}
               onChange={(value) =>
                 handleInputFieldChange("password", value as string)
               }
@@ -112,7 +104,7 @@ function Form() {
             <TextInput
               label="Confirm Password"
               htmlFor="confirmPassword"
-              value={confirmPassword}
+              value={getValues("confirmPassword")}
               onChange={(value) =>
                 handleInputFieldChange("confirmPassword", value as string)
               }

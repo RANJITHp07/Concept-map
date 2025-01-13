@@ -1,3 +1,4 @@
+"use client";
 import Form from "./_components/form";
 import Slider from "../components/slider";
 export default function Page() {

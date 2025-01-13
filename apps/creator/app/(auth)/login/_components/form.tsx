@@ -1,8 +1,37 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import TextInput from "@repo/ui/components/TextInput";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "../../../../lib/validator/login";
 
 function Form() {
+  const {
+    handleSubmit,
+    formState: { errors },
+    clearErrors,
+    getValues,
+    setValue,
+  } = useForm({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const handleInputFieldChange = (field: string, value: string) => {
+    setValue(field, value);
+    clearErrors(field);
+  };
+
+  const onSubmit = async (data: any) => {
+    // const userData = {
+    //   username: data.name,
+    //   email: data.email,
+    //   password: data.password,
+    //   role: "BUYER",
+    // };
+    // const res = await apiHelper(apis.register, "POST", userData);
+  };
+
   return (
     <div className="min-h-screen flex w-full  md:w-1/2 ">
       {/* Left Section - Form */}
@@ -30,25 +59,31 @@ function Form() {
           </div>
 
           {/* Form */}
-          <form className="space-y-6">
-            <div>
-              <label className="block text-gray-400 text-sm mb-2">E-mail</label>
-              <input
-                type="email"
-                placeholder="example@gmail.com"
-                className="w-full px-4 py-3.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 placeholder-gray-400"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-400 text-sm mb-2">
-                Password
-              </label>
-              <input
-                type="password"
-                placeholder="6+ strong character"
-                className="w-full px-4 py-3.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 placeholder-gray-400"
-              />
-            </div>
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <TextInput
+              label="E-mail"
+              htmlFor="email"
+              value={getValues("email")}
+              placeholder="example@gmail.com"
+              onChange={(value) =>
+                handleInputFieldChange("email", value as string)
+              }
+              type="text"
+              errorMessage={errors.email?.message as string}
+            />
+
+            <TextInput
+              label="Password"
+              htmlFor="password"
+              value={getValues("password")}
+              onChange={(value) =>
+                handleInputFieldChange("password", value as string)
+              }
+              placeholder="6+ strong characters"
+              type="password"
+              errorMessage={errors.password?.message as string}
+            />
+
             <button
               type="submit"
               className="w-full bg-[#f5a623] text-white py-3.5 rounded-lg font-medium hover:bg-[#e69516] transition-colors mt-4"
