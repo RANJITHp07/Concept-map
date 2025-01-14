@@ -17,21 +17,21 @@ function LeftActivities() {
       title: "You liked John Doe's post",
     },
     {
-        logo: "/LeftActivity/activity.svg",
-        title: "You started to follow Stephen Burg",
-      },
-      {
-        logo: "/LeftActivity/activity.svg",
-        title: "You liked John Doe's post",
-      },
-      {
-        logo: "/LeftActivity/activity.svg",
-        title: "You started to follow Stephen Burg",
-      },
-      {
-        logo: "/LeftActivity/activity.svg",
-        title: "You liked John Doe's post",
-      },
+      logo: "/LeftActivity/activity.svg",
+      title: "You started to follow Stephen Burg",
+    },
+    {
+      logo: "/LeftActivity/activity.svg",
+      title: "You liked John Doe's post",
+    },
+    {
+      logo: "/LeftActivity/activity.svg",
+      title: "You started to follow Stephen Burg",
+    },
+    {
+      logo: "/LeftActivity/activity.svg",
+      title: "You liked John Doe's post",
+    },
   ];
 
   return (
@@ -47,9 +47,7 @@ function LeftActivities() {
                 className="grid grid-cols-[auto_1fr] gap-[10px] items-center border rounded-[14px] py-[10px] px-[15px] mb-[10px]"
               >
                 {/* Logo Container */}
-                <div
-                  className="h-[44px] w-[44px] rounded-full flex items-center justify-center bg-[rgba(246,170,22,1)] overflow-hidden"
-                >
+                <div className="h-[44px] w-[44px] rounded-full flex items-center justify-center bg-[rgba(246,170,22,1)] overflow-hidden">
                   <Image
                     src={activity.logo}
                     alt="Activity Logo"
@@ -59,9 +57,7 @@ function LeftActivities() {
                 </div>
 
                 {/* Title */}
-                <div className="text-[15px] font-medium">
-                  {activity.title}
-                </div>
+                <div className="text-[15px] font-medium">{activity.title}</div>
               </div>
             ))}
           </div>

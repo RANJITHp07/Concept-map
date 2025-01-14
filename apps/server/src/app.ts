@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import { PORT } from "./config";
+import { router } from "./routes";
+import { errorHandler } from "./middleware/errorHandler";
+import { connectToDatabase } from "./connectDB";
 
 const app = express();
 
@@ -16,10 +19,19 @@ app.use(
       /http(|s):\/\/(|www\.)localhost:(3000|3001|3002|3003)$/,
       /http(|s):\/\/(|www\.)127.0.0.1:(3000|3001|3002|3003)$/,
     ],
-  })
+  }),
 );
 
 app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
+
+//function to connect to the database
+connectToDatabase();
+
+//routes
+app.use("/api", router);
+
+//global error hanlder
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Successfully running on port ${PORT}`);

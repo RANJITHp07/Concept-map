@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} w-[40rem]`}>
+      <body className={`${roboto.className}`}>
         {children}
       </body>
     </html>

@@ -11,10 +11,7 @@ import SearchBar from "@repo/ui/components/SearchBars";
 import SearchResult from "@repo/ui/components/HomeResult";
 import HomeSwiper from "@repo/ui/components/HomeSwiper";
 
-
 function Home() {
-
-
   return (
     <section className="pt-[20px]">
       <div className="flex w-full h-full">
@@ -60,8 +57,6 @@ function Home() {
           <RightMenu />
         </div>
       </div>
-
-    
     </section>
   );
 }

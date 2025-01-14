@@ -37,9 +37,6 @@ function LeftProfile() {
 
   return (
     <section className="pt-[20px]">
-  
-
-
       <div className="rounded-[28px] p-[20px] bg-[rgba(254,201,97,0.22)]">
  
         <div className="flex justify-between items-center mb-[5px]">
@@ -74,7 +71,6 @@ function LeftProfile() {
           ))}
         </div>
       </div>
-   
     </section>
   );
 }
