@@ -58,78 +58,82 @@ function OtpVerificationForm() {
   };
 
   return (
-    <div className="min-h-screen flex w-full md:w-1/2">
-      <div className="w-full p-6 lg:p-8 flex flex-col">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-16 lg:mb-20">
-          <div className="flex items-center">
-            <Image
-              src="/logo_.png"
-              alt="Concepts Map"
-              width={180}
-              height={60}
-              className="w-auto h-auto"
-            />
-          </div>
-        </div>
-
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full">
-          <div className="text-center mb-14">
-            <p className="text-gray-400 text-lg">
-              Please enter the 6-digit code sent to your email or phone to
-              verify your account.
-            </p>
-          </div>
-
-          {/* OTP Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="otp" className="block text-gray-400 text-sm mb-4">
-                Enter Verification Code
-              </label>
-              <div className="flex justify-between gap-2">
-                {otp.map((digit, index) => (
-                  <input
-                    key={index}
-                    ref={(el: any) => (inputRefs.current[index] = el)}
-                    // type="number"
-                    inputMode="numeric"
-                    maxLength={1}
-                    value={digit}
-                    onChange={(e) => handleChange(index, e.target.value)}
-                    onKeyDown={(e) => handleKeyDown(index, e)}
-                    className="w-12 h-12 text-center text-2xl border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600"
-                    required
-                  />
-                ))}
+    <>
+      <div className="h-screen flex w-full md:w-1/2">
+        <div className="w-full p-6 lg:p-8 flex flex-col">
+          {/* Main Content */}
+          <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full">
+            <div className="flex items-center ">
+              <div className="flex items-center">
+                <Image
+                  src="/logo_.png"
+                  alt="Concepts Map"
+                  width={280}
+                  height={60}
+                  className="w-auto h-auto"
+                />
               </div>
             </div>
-            <button
-              type="submit"
-              className="w-full bg-[#f5a623] text-white py-3.5 rounded-lg font-medium hover:bg-[#e69516] transition-colors mt-4"
-            >
-              Verify OTP
-            </button>
-          </form>
 
-          <div className="mt-8 text-center">
-            <button className="text-[#f5a623] hover:text-[#e69516] transition-colors">
-              Resend Code
-            </button>
-          </div>
-          <div className="text-sm text-gray-600 flex justify-center mt-5">
-            Need help?{" "}
-            <Link
-              href="/contact"
-              className="text-[#f5a623] hover:text-[#e69516]"
-            >
-              Contact Us
-            </Link>
+            <div className="text-center mt-2 mb-5">
+              <p className="text-gray-400 text-sm text-start mt-2">
+                Welcome to our portal where you can explore ultimate ads
+                concepts from fresh and talented brains.
+              </p>
+            </div>
+
+            {/* OTP Form */}
+            <form onSubmit={handleSubmit} className="space-y-2">
+              <div>
+                <label
+                  htmlFor="otp"
+                  className="block text-gray-400 text-sm mb-4"
+                >
+                  Enter Verification Code
+                </label>
+                <div className="flex justify-between gap-2">
+                  {otp.map((digit, index) => (
+                    <input
+                      key={index}
+                      ref={(el: any) => (inputRefs.current[index] = el)}
+                      // type="number"
+                      inputMode="numeric"
+                      maxLength={1}
+                      value={digit}
+                      onChange={(e) => handleChange(index, e.target.value)}
+                      onKeyDown={(e) => handleKeyDown(index, e)}
+                      className="w-12 h-12 text-center text-2xl border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600"
+                      required
+                    />
+                  ))}
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-[#f5a623] text-white py-3.5 rounded-lg font-medium hover:bg-[#e69516] transition-colors mt-4"
+              >
+                Verify OTP
+              </button>
+            </form>
+
+            <div className="mt-5 text-center">
+              <button className="text-[#f5a623] hover:text-[#e69516] transition-colors">
+                Resend Code
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <div className="  p-6 flex justify-center items-center ">
+        <Image
+          src="/auth/img-1.png"
+          alt="Concepts Map"
+          width={600}
+          height={100}
+          className="w-[600px] h-[700px] hidden lg:block md:block"
+        />
+      </div>
+    </>
   );
 }
 
