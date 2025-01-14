@@ -6,37 +6,65 @@ const sliderData = [
     id: 1,
     name: "Stephen Burg",
     title: "Crime in scene",
-    date: "Feb, 29 | 2024",
+    rating: "5.0(123)",
     image: "/HomeData/face.png",
-    dot: "/HomeData/dot.svg",
-    bookmark: "/HomeData/bookmark.svg",
+    dot: "/HomeResult/star.svg",
+    bookmark: "/HomeResult/right.svg",
   },
   {
     id: 2,
     name: "Stephen Burg",
     title: "Crime in scene",
-    date: "Feb, 29 | 2024",
+    rating: "5.0(123)",
     image: "/HomeData/face.png",
-    dot: "/HomeData/dot.svg",
-    bookmark: "/HomeData/bookmark.svg",
+    dot: "/HomeResult/star.svg",
+    bookmark: "/HomeResult/right.svg",
   },
   {
     id: 3,
     name: "Stephen Burg",
     title: "Crime in scene",
-    date: "Feb, 29 | 2024",
+    rating: "5.0(123)",
     image: "/HomeData/face.png",
-    dot: "/HomeData/dot.svg",
-    bookmark: "/HomeData/bookmark.svg",
+    dot: "/HomeResult/star.svg",
+    bookmark: "/HomeResult/right.svg",
   },
+  {
+    id: 4,
+    name: "Stephen Burg",
+    title: "Crime in scene",
+    rating: "5.0(123)",
+    image: "/HomeData/face.png",
+    dot: "/HomeResult/star.svg",
+    bookmark: "/HomeResult/right.svg",
+  },
+  {
+    id: 5,
+    name: "Stephen Burg",
+    title: "Crime in scene",
+    rating: "5.0(123)",
+    image: "/HomeData/face.png",
+    dot: "/HomeResult/star.svg",
+    bookmark: "/HomeResult/right.svg",
+  },
+  {
+    id: 6,
+    name: "Stephen Burg",
+    title: "Crime in scene",
+    rating: "5.0(123)",
+    image: "/HomeData/face.png",
+    dot: "/HomeResult/star.svg",
+    bookmark: "/HomeResult/right.svg",
+  },
+  
 ];
 
-function HomeSlider() {
+function HomeResult() {
   return (
     <>
       <section className="py-[60px]">
         <div className="flex items-center justify-between">
-          <h1 className="text-[22px]">Ideas Marketplace</h1>
+          <h1 className="text-[22px]">100+ Results</h1>
           <button className="py-[10px] px-[15px] border text-[12px] rounded-[10px]">
             View All
           </button>
@@ -73,15 +101,17 @@ function HomeSlider() {
                       Torem ipsum dolor sit amet, consectetur adipiscing elit.
                       Etiam eu turpis molestie, dictum est a, mattis tellus. ....
                     </p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <p className="text-[10px]">{item.date}</p>
-                        <Image
+                    <div className="flex items-center justify-between pt-[10px]">
+                      <div className="flex items-center ">
+                      <Image
                           src={item.dot}
                           alt="dot"
-                          width={20}
-                          height={20}
+                          width={15}
+                          height={15}
+                          className="mr-[5px]"
                         />
+                        <p className="text-[10px]">{item.rating}</p>
+                    
                       </div>
                       <div className="inline-block p-2 rounded-[100px] bg-[rgba(246,170,22,1)]">
                         <Image
@@ -103,4 +133,4 @@ function HomeSlider() {
   );
 }
 
-export default HomeSlider;
+export default HomeResult;
