@@ -6,9 +6,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "../../../../auth";
 import handleRegistration from "../../../../lib/serverAction";
+import Timer from "./timer";
 
 function OtpVerificationForm() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [isTimerDisabled, setIsTimerDisabled] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const router = useRouter();
 
@@ -53,9 +55,9 @@ function OtpVerificationForm() {
       //dispaly the error message
       console.log(authentication?.error?.message);
     }
-
-    // router.push('/dashboard')
   };
+
+  const handleResendOtp = () => {};
 
   return (
     <div className="min-h-screen flex w-full md:w-1/2">
@@ -114,9 +116,17 @@ function OtpVerificationForm() {
           </form>
 
           <div className="mt-8 text-center">
-            <button className="text-[#f5a623] hover:text-[#e69516] transition-colors">
+            <button
+              onClick={() => setIsTimerDisabled(false)}
+              disabled={!isTimerDisabled}
+              className="text-[#f5a623] hover:text-[#e69516] transition-colors disabled:text-black"
+            >
               Resend Code
             </button>
+            <Timer
+              isTimerDisabled={isTimerDisabled}
+              handleTimerDisable={(disable) => setIsTimerDisabled(disable)}
+            />
           </div>
           <div className="text-sm text-gray-600 flex justify-center mt-5">
             Need help?{" "}

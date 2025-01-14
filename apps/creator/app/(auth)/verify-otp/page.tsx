@@ -1,6 +1,7 @@
 import Form from "./_components/form";
 import Slider from "../components/slider";
-export default function RegisterPage() {
+
+export default function VerifyOtp() {
   return (
     <>
       <div className="min-h-screen flex flex-col md:flex-row">
