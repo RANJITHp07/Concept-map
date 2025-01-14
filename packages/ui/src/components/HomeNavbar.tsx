@@ -17,9 +17,9 @@ function HomeNavbar() {
           {/* Navigation links */}
           <div className="flex justify-between items-center">
             <ul className="flex gap-10">
-              <li className="text-[22px]">About Us</li>
-              <li className="text-[22px]">Why Us</li>
-              <li className="text-[22px]">Contact Us</li>
+              <li className="text-[17px] font-medium">About Us</li>
+              <li className="text-[17px] font-medium">Why Us</li>
+              <li className="text-[17px] font-medium">Contact Us</li>
             </ul>
             {/* Notification and profile */}
             <div className="flex items-center gap-4">
@@ -30,8 +30,8 @@ function HomeNavbar() {
                     <Image
                       src={item.notification}
                       alt="Notification Icon"
-                      width={50}
-                      height={50}
+                      width={30}
+                      height={30}
                     />
                   </div>
                   {/* Profile Icon */}
@@ -39,8 +39,8 @@ function HomeNavbar() {
                     <Image
                       src={item.profile}
                       alt="Profile Icon"
-                      width={50}
-                      height={50}
+                      width={40}
+                      height={40}
                       className="rounded-full"
                     />
                   </div>

@@ -20,13 +20,13 @@ function Home() {
       <div className="flex w-full h-full">
         {/* Left section (20% width) with border */}
         <div className="w-[20%] px-[20px] border-r border-gray-300">
-          <div className="flex justify-center">
+          <div className="flex justify-center my-2">
             <Image
               alt="logo"
               src={"/logo.png"}
-              width={100}
+              width={230}
               height={100}
-              className="w-[276px] h-[57px]"
+              className="w-[230px] h-[40px]"
             />
           </div>
           <LeftMenu />
@@ -47,8 +47,8 @@ function Home() {
           <HomeInfo/>
           <HomeSwiper/>
           <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
-      <h1 className="text-[22px]">Find Talent</h1>
-      <hr className="flex-grow border-t border-[rgba(192, 192, 192, 1)]" />
+      <h1 className="text-[20px] font-bold">Find Talent</h1>
+      <hr className="flex-grow border-[3px] border-[#C0C0C0" />
     </div>
           <HomeData/>
           <SearchBar/>

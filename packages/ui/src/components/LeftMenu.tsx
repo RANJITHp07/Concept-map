@@ -10,7 +10,7 @@ interface MenuItem {
 }
 
 function LeftMenu() {
-  const [activeItem, setActiveItem] = useState<number | null>(null);
+  const [activeItem, setActiveItem] = useState<number | null>(0);
   const Data: MenuItem[] = [
     { logo: "LeftMenu/1.svg", title: "Dashboard" },
     { logo: "LeftMenu/2.svg", title: "Reports" },
@@ -33,18 +33,18 @@ function LeftMenu() {
           <div
             key={index}
             onClick={() => handleClick(index)}
-            className={`flex items-center justify-start px-[20px] py-[10px] mt-[5px] rounded-[12px] 
+            className={`flex items-center justify-start px-[20px] py-[10px] mt-[5px] rounded-[12px] cursor-pointer 
               ${activeItem === index ? "bg-[rgba(246,170,22,1)] text-white" : "hover:bg-[rgba(246,170,22,1)]"}`}
           >
             <Image
               src={item.logo}
               alt={item.title}
-              width={32}
-              height={32}
-              className="mr-4 text-[red]"
+              width={24}
+              height={24}
+              className="mr-4 text-white"
             />
             <span
-              className={`text-[18px] leading-[21px] ${activeItem === index ? "text-white" : "text-gray-800"}`}
+            className={`text-[17px] leading-[21px] font-medium ${activeItem === index ? "text-gray-800" : "text-gray-800"}`}
             >
               {item.title}
             </span>

@@ -38,7 +38,7 @@ function LeftActivities() {
     <>
       <section className="pt-[20px]">
         <div>
-          <h1 className="text-[22px] font-bold">Activities</h1>
+          <h1 className="text-[21px] font-bold">Activities</h1>
 
           <div className="pt-[10px]">
             {data.map((activity, index) => (
