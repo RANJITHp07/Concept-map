@@ -103,14 +103,16 @@ export class AuthService {
         message: "Otp has expired",
       });
     }
-    if (otp.code === code) {
+    if (otp.code === Number(code)) {
       await this.otpCrudRepository.deleteDocumenById(otp._id as string);
       return await this.userCrudRepository.updateDocumenById(userId, {
         is_verified: true,
       });
     }
 
-    throw new CustomError(400, "BAD_REQUEST", { message: "Wrong OTP" });
+    throw new CustomError(400, "BAD_REQUEST", {
+      message: "Incorrect OTP entered",
+    });
   }
 
   async resendOtp(userId: string) {

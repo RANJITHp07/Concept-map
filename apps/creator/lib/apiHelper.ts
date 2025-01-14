@@ -22,13 +22,19 @@ const apiHelper = async (
 
     const result = await response.json();
     if (!response.ok) {
-      throw new Error(result.message || "Something went wrong");
+      throw new Error(JSON.stringify(result) || "Something went wrong");
     }
 
     return result;
   } catch (error: any) {
-    console.error("API Error:", error.message);
-    throw error; // Propagate the error to the caller
+    let errorResponse;
+    try {
+      errorResponse = JSON.parse(error.message);
+    } catch (error: any) {
+      errorResponse = error.message;
+    }
+
+    return errorResponse;
   }
 };
 

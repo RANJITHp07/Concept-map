@@ -10,14 +10,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registrationSchema } from "../../../../lib/validator/registration";
 import apiHelper from "../../../../lib/apiHelper";
 import { apis } from "../../../../lib/api";
+import { useRouter } from "next/navigation";
 
 function Form() {
+  const router = useRouter();
   const {
     handleSubmit,
     formState: { errors },
     clearErrors,
     getValues,
     setValue,
+    setError,
   } = useForm({
     resolver: zodResolver(registrationSchema),
   });
@@ -28,6 +31,12 @@ function Form() {
   };
 
   const onSubmit = async (data: any) => {
+    if (data.password !== data.confirmPassword) {
+      setError("confirmPassword", {
+        type: "manual",
+        message: "Passwords do not match",
+      });
+    }
     const userData = {
       username: data.name,
       email: data.email,
@@ -35,6 +44,19 @@ function Form() {
       role: "BUYER",
     };
     const res = await apiHelper(apis.register, "POST", userData);
+
+    if (res.status == "success" && res.data) {
+      const userId = res.data._id;
+      const response = await apiHelper(apis.generateOtp, "POST", { userId });
+
+      if (response.status == "success") {
+        localStorage.setItem("RegisteredUser", userId);
+        router.push("/verify-otp");
+      }
+    } else if (res.status == "error") {
+      //dispaly the error message
+      console.log(res.error.message);
+    }
   };
 
   return (

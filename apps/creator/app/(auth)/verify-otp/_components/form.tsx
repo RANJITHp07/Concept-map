@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signIn } from "../../../../auth";
+import handleRegistration from "../../../../lib/serverAction";
 
 function OtpVerificationForm() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -38,12 +40,20 @@ function OtpVerificationForm() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const otpString = otp.join("");
-    console.log("OTP submitted:", otpString);
-    // Here you would typically verify the OTP
-    // If successful, redirect to the next page
+    const userId = localStorage.getItem("RegisteredUser");
+
+    const authentication = await handleRegistration(userId!, otpString);
+
+    if (authentication && authentication.status == "success") {
+      router.push("/");
+    } else {
+      //dispaly the error message
+      console.log(authentication?.error?.message);
+    }
+
     // router.push('/dashboard')
   };
 

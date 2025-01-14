@@ -12,7 +12,7 @@ export class AuthController {
     try {
       const result = await this.authService.register(req.body);
       res.status(201).json({
-        success: "success",
+        status: "success",
         message: "Registration completed successfully",
         data: result,
       });
@@ -26,7 +26,7 @@ export class AuthController {
       const { email, password } = req.body;
       const result = await this.authService.login(email, password);
       res.status(200).json({
-        success: "success",
+        status: "success",
         message: "User successfully logged in",
         data: result,
       });
@@ -40,7 +40,7 @@ export class AuthController {
       const { userId } = req.body;
       const result = await this.authService.generateVerificationOTP(userId);
       res.status(200).json({
-        success: "success",
+        status: "success",
         message: "OTP is generated successfully",
         data: result,
       });
@@ -54,7 +54,7 @@ export class AuthController {
       const { code, userId } = req.body;
       const result = await this.authService.verifyEmail(code, userId);
       res.status(200).json({
-        success: "success",
+        status: "success",
         message: "Successfully verified the email",
         data: result,
       });
@@ -68,7 +68,7 @@ export class AuthController {
       const { userId } = req.body;
       const result = await this.authService.resendOtp(userId);
       res.status(200).json({
-        success: "success",
+        status: "success",
         message: "OTP is again send again successfully",
         data: result,
       });

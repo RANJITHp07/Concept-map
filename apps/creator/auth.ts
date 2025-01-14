@@ -33,50 +33,45 @@ export const { handlers, signIn, signOut } = NextAuth({
     Credentials({
       name: "credentials",
       credentials: {
-        code: { label: "code", type: "text" },
-        userId: { label: "code", type: "text" },
-        type: { label: "type", type: "text" },
-        email: { label: "email", type: "text" },
-        password: { label: "password", type: "text" },
+        code: {},
+        userId: {},
+        type: {},
+        email: {},
+        password: {},
       },
       async authorize(credentials) {
-        const { password, email, code, type, userId } = credentials;
+        try {
+          const { password, email, code, type, userId } = credentials;
 
-        if (type == "register" && !code && !userId)
-          throw new Error("Code and userId is a required field");
+          if (type == "register" && !code && !userId)
+            throw new Error("Code and userId is a required field");
 
-        if (type == "login" && !email && !password)
-          throw new Error("Email and password is a required field");
+          if (type == "login" && !email && !password)
+            throw new Error("Email and password is a required field");
 
-        if (type == "login") {
-          const res = await apiHelper(apis.login, "POST", {
-            email: email,
-            password: password,
-          });
+          if (type == "login") {
+            const res = await apiHelper(apis.login, "POST", {
+              email: email,
+              password: password,
+            });
 
-          if (res.status == "success") return res.data;
+            if (res.status == "success") return res.data;
 
-          throw new Error(res.message);
-        }
+            throw new Error(res.message);
+          } else if (type == "register") {
+            const res = await apiHelper(apis.verifyOtp, "POST", {
+              code,
+              userId,
+            });
 
-        if (type == "login") {
-          const res = await apiHelper(apis.login, "POST", {
-            email: email,
-            password: password,
-          });
+            if (res.status == "success") return res.data;
 
-          if (res.status == "success") return res.data;
+            throw new Error(res.error.message);
+          }
 
-          throw new Error(res.message);
-        } else if (type == "register") {
-          const res = await apiHelper(apis.login, "POST", {
-            code,
-            userId,
-          });
-
-          if (res.status == "success") return res.data;
-
-          throw new Error(res.message);
+          throw new Error("Invalid credentials");
+        } catch (error: any) {
+          throw new Error(error.message);
         }
       },
     }),
@@ -110,5 +105,5 @@ export const { handlers, signIn, signOut } = NextAuth({
   pages: {
     signIn: "/login",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: "12345555",
 });
