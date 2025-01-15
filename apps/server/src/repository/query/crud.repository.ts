@@ -36,8 +36,8 @@ export class CrudRepository<T> {
   }
 
   // Fetch a single document based on conditions
-  async fetchOneDocument(where: Record<string, any>): Promise<T | null> {
-    return await this.model.findOne(where);
+  async fetchOneDocument(where: Record<string, any>,populateField: string[] | string = []): Promise<T | null> {
+    return await this.model.findOne(where).populate(populateField);
   }
 
   // Create a new document

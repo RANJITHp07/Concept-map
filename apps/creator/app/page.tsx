@@ -45,7 +45,7 @@ function Home() {
           <HomeSwiper/>
           <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
       <h1 className="text-[20px] font-bold">Find Talent</h1>
-      <hr className="flex-grow border-[3px] border-[#C0C0C0" />
+      <hr className="flex-grow border-t border-[#C0C0C0]" />
     </div>
           <HomeData/>
           <SearchBar/>

@@ -11,6 +11,7 @@ import { registrationSchema } from "../../../../lib/validator/registration";
 import apiHelper from "../../../../lib/apiHelper";
 import { apis } from "../../../../lib/api";
 import { useRouter } from "next/navigation";
+import {toast} from "react-hot-toast";
 
 function Form() {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +38,7 @@ function Form() {
         type: "manual",
         message: "Passwords do not match",
       });
+      return;
     }
     setIsLoading(true);
     const userData = {
@@ -57,9 +59,10 @@ function Form() {
       }
     } else if (res.status == "error") {
       //dispaly the error message
-      console.log(res.error.message);
+      toast.error(res.error?.message || 'An error occurred')
+      console.log(res.error.message)
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
@@ -91,7 +94,7 @@ function Form() {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
               <TextInput
                 label="Full Name"
                 htmlFor="name"
@@ -139,7 +142,9 @@ function Form() {
                 type="password"
                 errorMessage={errors.confirmPassword?.message as string}
               />
-              <Button actionName="Create an Account" type="submit" />
+              <div className='my-3'>
+              <Button actionName="Create an Account" type="submit" isDisabled={isLoading} loadingName="Sending OTP..." />
+              </div>
             </form>
 
             {/* Social Login */}
@@ -210,9 +215,9 @@ function Form() {
         <Image
           src="/auth/img-1.png"
           alt="Concepts Map"
-          width={600}
+          width={500}
           height={100}
-          className="w-[600px] h-[700px] hidden lg:block md:block"
+          className="w-[500px] h-[600px] hidden lg:block md:block"
         />
       </div>
     </>

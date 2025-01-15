@@ -16,11 +16,12 @@ function Timer({ handleTimerDisable, isTimerDisabled }: Props) {
       if (savedTime == "0" && isTimerDisabled) {
         handleTimerDisable(true);
         return;
-      } else if (!isTimerDisabled) {
+      } else if(savedTime == "0" && !isTimerDisabled){
         setTime(60);
-      } else {
+      }else{
         setTime(Number(savedTime));
       }
+      
     }
 
     intervalRef.current = setInterval(() => {
@@ -43,7 +44,7 @@ function Timer({ handleTimerDisable, isTimerDisabled }: Props) {
 
   return (
     <div>
-      <p>{time}</p>
+      <p className="text-[#f5a623]">{time} s</p>
     </div>
   );
 }

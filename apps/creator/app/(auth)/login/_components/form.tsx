@@ -8,6 +8,7 @@ import { loginSchema } from "../../../../lib/validator/login";
 import apiHelper from "../../../../lib/apiHelper";
 import { apis } from "../../../../lib/api";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 function Form() {
   const router = useRouter();
@@ -36,7 +37,7 @@ function Form() {
       router.replace("/");
     } else if (res.status === "error") {
       // display the error to the user
-      console.log(res.error.message);
+      toast.error(res.error.message)
     }
   };
 

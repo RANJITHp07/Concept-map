@@ -4,4 +4,5 @@ export const apis = {
   login: "/auth/login",
   generateOtp: "/auth/otp/generate",
   verifyOtp: "/auth/otp/verify",
+  resendOtp:'/auth/otp/resend'
 };

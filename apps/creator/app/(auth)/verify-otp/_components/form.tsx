@@ -4,13 +4,17 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signIn } from "../../../../auth";
 import handleRegistration from "../../../../lib/serverAction";
 import Timer from "./timer";
+import Button from "@repo/ui/components/Button";
+import apiHelper from "../../../../lib/apiHelper";
+import { apis } from "../../../../lib/api";
+import toast from "react-hot-toast";
 
 function OtpVerificationForm() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [isTimerDisabled, setIsTimerDisabled] = useState(false);
+  const [isLoading,setIsLoading]=useState(false)
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const router = useRouter();
 
@@ -45,7 +49,10 @@ function OtpVerificationForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const otpString = otp.join("");
-    const userId = localStorage.getItem("RegisteredUser");
+    if(otp.length!==6) return;
+
+    setIsLoading(true)
+    const userId = sessionStorage.getItem("RegisteredUser");
 
     const authentication = await handleRegistration(userId!, otpString);
 
@@ -53,11 +60,22 @@ function OtpVerificationForm() {
       router.push("/");
     } else {
       //dispaly the error message
-      console.log(authentication?.error?.message);
+      toast.error(authentication?.error?.message!)
     }
+    setIsLoading(false)
   };
 
-  const handleResendOtp = () => {};
+  const handleResendOtp =async () => {
+    const userId = sessionStorage.getItem("RegisteredUser");
+
+    const resendOtp = await apiHelper(apis.resendOtp, "POST", {userId});
+
+    if(resendOtp.status==='success'){
+      setIsTimerDisabled(false)
+    }
+
+    console.log(resendOtp)
+  };
 
   return (
     <>
@@ -85,7 +103,7 @@ function OtpVerificationForm() {
             </div>
 
             {/* OTP Form */}
-            <form onSubmit={handleSubmit} className="space-y-2">
+            <form onSubmit={handleSubmit} className="space-y-3">
               <div>
                 <label
                   htmlFor="otp"
@@ -110,18 +128,22 @@ function OtpVerificationForm() {
                   ))}
                 </div>
               </div>
-              <button
-                type="submit"
-                className="w-full bg-[#f5a623] text-white py-3.5 rounded-lg font-medium hover:bg-[#e69516] transition-colors mt-4"
-              >
-                Verify OTP
-              </button>
+              <div className='my-3'>
+              <Button actionName="Verify OTP" type="submit" isDisabled={isLoading} loadingName="Verifying..." />
+              </div>
             </form>
 
-            <div className="mt-5 text-center">
-              <button className="text-[#f5a623] hover:text-[#e69516] transition-colors">
-                Resend Code
+            <div className="mt-5 text-center flex justify-center gap-1">
+            <p className="text-gray-400">{isTimerDisabled ? "If you haven't received the code, click here to":"The code will expire in"} </p>
+            {
+              isTimerDisabled ? 
+              <button className="text-[#f5a623] hover:text-[#e69516] transition-colors" onClick={handleResendOtp} >
+              resend 
               </button>
+              :
+              <Timer isTimerDisabled={isTimerDisabled} handleTimerDisable={()=>setIsTimerDisabled(true)}/>
+            }
+
             </div>
           </div>
         </div>

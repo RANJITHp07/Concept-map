@@ -39,7 +39,7 @@ function TextInput({
 
   return (
     <div>
-      <label htmlFor={htmlFor} className="block text-gray-400 text-sm mb-2">
+      <label htmlFor={htmlFor} className={`block ${errorMessage ? "text-red-400" : "text-gray-400"} text-sm mb-1`}>
         {label}
       </label>
       <input
@@ -48,11 +48,11 @@ function TextInput({
         value={state}
         onChange={handleChange}
         placeholder={placeholder}
-        className={`w-full px-4 py-3.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 placeholder-gray-400 ${className}`}
+        className={`w-full px-4 py-3.5 rounded-lg border  ${errorMessage ? "border-red-400" : "border-gray-300"} focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 placeholder-gray-400 ${className}`}
         required={isRequired}
         disabled={isDisabled}
       />
-      {errorMessage && <p className="text-xs text-red-500">{errorMessage}</p>}
+      {errorMessage && <p className="text-xs text-red-400">{errorMessage}</p>}
     </div>
   );
 }

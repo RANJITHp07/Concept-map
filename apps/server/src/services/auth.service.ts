@@ -6,6 +6,7 @@ import argon2 from "argon2";
 import { CustomError } from "../utils/customError";
 import { generateOTP, hasOtpExpired } from "../utils/helper";
 import OtpModel from "../repository/model/otp.model";
+import {sendEmail} from '@repo/notification'
 
 export class AuthService {
   private readonly userCrudRepository: CrudRepository<IUser | IOtp>;
@@ -37,11 +38,12 @@ export class AuthService {
   }
 
   async login(email: string, password: string) {
+    console.log(password)
     const user = (await this.userCrudRepository.fetchOneDocument({
       email: email,
     })) as IUser;
 
-    if (!user || (user && user.is_verified)) {
+    if (!user || (user && !user.is_verified)) {
       throw new CustomError(400, "INVALID_INPUT", {
         message: "No such user exist",
       });
@@ -59,7 +61,7 @@ export class AuthService {
     const otp = (await this.otpCrudRepository.fetchOneDocument({
       userId: userId,
       action_type: "VERIFY_EMAIL",
-    })) as IOtp & { updatedAt: string };
+    },'userId')) as any;
 
     // Generate a new OTP code
     const newCode = generateOTP();
@@ -74,17 +76,43 @@ export class AuthService {
 
       const count = otp.retry_count > 0 ? otp.retry_count - 1 : 3;
 
+      const username = otp.userId?.username;
+const formattedUsername = username
+  ? username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
+  : null;
+
+      sendEmail({to:otp.userId?.email,template:'emailVerificationOtp',template_variables:{
+        firstName:formattedUsername,
+        OTP: newCode
+      }})
+
       return await this.otpCrudRepository.updateDocumenById(otp._id as string, {
         code: newCode,
         retry_count: count,
       });
     } else {
+      const user =await this.userCrudRepository.fetchDocumentById(userId) as IUser
+      if(!user) throw new CustomError(400, "BAD_REQUEST", {
+        message: "No such user",
+      })
       const otpData = {
         userId: userId,
         code: newCode,
       };
+
+      const username = user?.username;
+const formattedUsername = username
+  ? username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
+  : null;
+
+      sendEmail({to:user.email,template:'emailVerificationOtp',template_variables:{
+        firstName:formattedUsername,
+        OTP: newCode
+      }})
+
       return this.otpCrudRepository.createDocument(otpData);
     }
+    
   }
 
   async verifyEmail(code: number, userId: string) {
@@ -98,7 +126,8 @@ export class AuthService {
     const timeDifference = now.getTime() - otpUpdatedAt.getTime();
     const oneMinute = 60 * 1000;
 
-    if (timeDifference < oneMinute) {
+
+    if (timeDifference > oneMinute) {
       throw new CustomError(400, "BAD_REQUEST", {
         message: "Otp has expired",
       });
@@ -119,7 +148,7 @@ export class AuthService {
     const otp = (await this.otpCrudRepository.fetchOneDocument({
       userId: userId,
       action_type: "VERIFY_EMAIL",
-    })) as IOtp & { updatedAt: string };
+    },'userId')) as any;
 
     if (otp.retry_count === 0 && !hasOtpExpired(otp.updatedAt)) {
       throw new CustomError(400, "BAD_REQUEST", {
@@ -132,6 +161,16 @@ export class AuthService {
     const newCode = generateOTP();
 
     const count = otp.retry_count > 0 ? otp.retry_count - 1 : 3;
+
+    const username = otp.userId?.username;
+const formattedUsername = username
+  ? username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
+  : null;
+
+      sendEmail({to:otp.userId?.email,template:'emailVerificationOtp',template_variables:{
+        firstName:formattedUsername,
+        OTP: newCode
+      }})
 
     return await this.otpCrudRepository.updateDocumenById(otp._id as string, {
       code: newCode,

@@ -18,6 +18,7 @@ const handleRegistration = async (userId: string, otpString: string) => {
     };
   } catch (error) {
     if (error instanceof AuthError) {
+      
       return {
         status: "error",
         error: {

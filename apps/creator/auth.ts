@@ -60,10 +60,11 @@ export const { handlers, signIn, signOut } = NextAuth({
             throw new Error(res.message);
           } else if (type == "register") {
             const res = await apiHelper(apis.verifyOtp, "POST", {
-              code,
+              code:Number(code as string),
               userId,
             });
 
+            console.log(res)
             if (res.status == "success") return res.data;
 
             throw new Error(res.error.message);
