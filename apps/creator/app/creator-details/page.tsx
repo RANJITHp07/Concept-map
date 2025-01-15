@@ -1,12 +1,12 @@
 import { ArrowLeft, Star } from 'lucide-react'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@workspace/ui/components/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/components/avatar"
+import {Button} from '@repo/ui/components/button'
+import { Tabs,TabsList, TabsTrigger } from "@repo/ui/components/tabs"
 import Link from "next/link"
 
 export default function Page() {
   return (
-    <div className="max-w-3xl mx-auto p-4">
+    <div className="p-12">
       {/* Header */}
       <div className="flex items-center gap-2 mb-6">
         <Link href="#" className="hover:opacity-80">
@@ -17,8 +17,8 @@ export default function Page() {
 
       {/* Profile Section */}
       <div className="flex flex-col md:flex-row gap-4 items-start mb-8">
-        <Avatar className="w-20 h-20">
-          <AvatarImage src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-01-13%20002344-4aJoFD7susH0XsLxM11He3Jb83JtXe.png" alt="Profile picture" />
+        <Avatar className="w-12 h-12 md:w-20 md:h-20">
+          <AvatarImage src="/HomeNavbar/Ellipse 18.png" alt="Profile picture" />
           <AvatarFallback>BE</AvatarFallback>
         </Avatar>
         <div className="flex-1">
@@ -114,7 +114,7 @@ export default function Page() {
             <div key={i} className="border rounded-lg p-4">
               <div className="flex items-start gap-4">
                 <Avatar className="w-10 h-10">
-                  <AvatarImage src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-01-13%20002344-4aJoFD7susH0XsLxM11He3Jb83JtXe.png" alt="Reviewer" />
+                  <AvatarImage src="/HomeNavbar/Ellipse 18.png" alt="Reviewer" />
                   <AvatarFallback>MW</AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
