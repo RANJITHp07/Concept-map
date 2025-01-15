@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import TextInput from "@repo/ui/components/TextInput";
@@ -13,6 +13,7 @@ import { apis } from "../../../../lib/api";
 import { useRouter } from "next/navigation";
 
 function Form() {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const {
     handleSubmit,
@@ -37,6 +38,7 @@ function Form() {
         message: "Passwords do not match",
       });
     }
+    setIsLoading(true);
     const userData = {
       username: data.name,
       email: data.email,
@@ -50,13 +52,14 @@ function Form() {
       const response = await apiHelper(apis.generateOtp, "POST", { userId });
 
       if (response.status == "success") {
-        localStorage.setItem("RegisteredUser", userId);
-        router.push("/verify-otp");
+        sessionStorage.setItem("RegisteredUser", userId);
+        router.replace("/verify-otp");
       }
     } else if (res.status == "error") {
       //dispaly the error message
       console.log(res.error.message);
     }
+    setIsLoading(false);
   };
 
   return (

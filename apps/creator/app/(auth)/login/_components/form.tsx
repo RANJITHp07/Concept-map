@@ -5,8 +5,12 @@ import TextInput from "@repo/ui/components/TextInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../../../lib/validator/login";
+import apiHelper from "../../../../lib/apiHelper";
+import { apis } from "../../../../lib/api";
+import { useRouter } from "next/navigation";
 
 function Form() {
+  const router = useRouter();
   const {
     handleSubmit,
     formState: { errors },
@@ -23,13 +27,17 @@ function Form() {
   };
 
   const onSubmit = async (data: any) => {
-    // const userData = {
-    //   username: data.name,
-    //   email: data.email,
-    //   password: data.password,
-    //   role: "BUYER",
-    // };
-    // const res = await apiHelper(apis.register, "POST", userData);
+    const userData = {
+      email: data.email,
+      password: data.password,
+    };
+    const res = await apiHelper(apis.login, "POST", userData);
+    if (res.status === "success") {
+      router.replace("/");
+    } else if (res.status === "error") {
+      // display the error to the user
+      console.log(res.error.message);
+    }
   };
 
   return (
