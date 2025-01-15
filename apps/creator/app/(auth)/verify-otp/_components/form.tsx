@@ -6,9 +6,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "../../../../auth";
 import handleRegistration from "../../../../lib/serverAction";
+import Timer from "./timer";
 
 function OtpVerificationForm() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [isTimerDisabled, setIsTimerDisabled] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const router = useRouter();
 
@@ -53,9 +55,9 @@ function OtpVerificationForm() {
       //dispaly the error message
       console.log(authentication?.error?.message);
     }
-
-    // router.push('/dashboard')
   };
+
+  const handleResendOtp = () => {};
 
   return (
     <>
