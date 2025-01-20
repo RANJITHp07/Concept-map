@@ -36,37 +36,47 @@ function LeftProfile() {
   ];
 
   return (
-    <section className="pt-[20px]">
-      <div className="rounded-[28px] p-[20px] bg-[rgba(254,201,97,0.22)]">
- 
-        <div className="flex justify-between items-center mb-[5px]">
-          <h1 className="text-[21px]  font-bold">Following</h1>
-          <h1 className="text-[12px]  text-blue-500 cursor-pointer">
+    <section className="leftMenu-hidden">
+      <div className="rounded-[20px] p-[15px] bg-[rgba(254,201,97,0.22)] left-profile-padding">
+        <div className="grid grid-cols-[1fr_auto] items-center mb-[20px]">
+          <h1 className="text-[18px] leading-[25px] ">Following</h1>
+          <h1 className="text-[15px] leading-[17px] text-blue-500 cursor-pointer">
             View All
           </h1>
         </div>
 
         {/* Data List */}
-        <div className="pt-[5px]">
+        <div className="grid gap-[10px]">
           {data.map((item, index) => (
-            <div key={index} className="flex items-center gap-[15px] mt-[20px]">
+            <div
+              key={index}
+              className="grid grid-cols-[auto_1fr_auto] items-center gap-[10px] left-profile-gap cursor-pointer hover:bg-[#F6AA16] hover:shadow-md hover:scale-[1.02] hover:rounded-[10px] transition-all duration-200 ease-in-out hover:text-[white]"
+            >
               {/* Logo */}
               <Image
                 src={item.logo}
                 alt={`${item.title} Logo`}
-                width={40}
-                height={40}
-                className="rounded-full w-[40px] h-[40px] object-cover border-[2px] border-[rgba(246,170,22,1)]"
+                width={45}
+                height={45}
+                className="rounded-full w-[50px] h-[50px] object-cover border-[2px] border-[rgba(246,170,22,1)] leftProfile-image"
               />
 
               {/* Title and Role */}
-              <div className="flex-1">
-                <h2 className="text-[17px] ">{item.title}</h2>
-                <p className="text-[15px] text-gray-600">{item.role}</p>
+              <div className="hover:text-[white]">
+                <h2 className="text-[14px] left-profile-title ">
+                  {item.title}
+                </h2>
+                <p className="text-[14px]    left-profile-para">{item.role}</p>
               </div>
 
               {/* Icon */}
-              <Image src={item.icon} alt="Arrow Icon" width={25} height={25} />
+              <Image
+                className="left-profile-arrow"
+                src={item.icon}
+                alt="Arrow Icon"
+                width={18}
+                height={18}
+              />
             </div>
           ))}
         </div>

@@ -6,6 +6,8 @@ const config = {
     "../../apps/creator/app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
     "../../packages/ui/src/**/*.{ts,tsx}",
+    "../../apps/creator/components/**/*.{ts,tsx}",
+    "../../apps/creator/app/**/*.{ts,tsx}",
   ],
 
   theme: {

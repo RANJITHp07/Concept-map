@@ -2,3 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+ @media (min-width: 1024px) and (max-width: 1350px) {
+.Home-result-gird{
+     grid-template-columns: repeat(2, minmax(0, 1fr)) !important; 
+}
+.home-other-none{
+
+    justify-content: center;
+    gap: 0px;
+}
+.home-img-none{
+    display: none;
+}
+.custom-size-leftMenu{
+    font-size: 14px;
+}
+} 
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .home-other-none{
+
+        justify-content: center;
+        gap: 0px;
+    }
+    .home-img-none{
+        display: none;
+    }
+}
+
+
+@media (min-width: 320px) and (max-width:767px) {
+    .home-other-none{
+display: none !important;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width:1400px) {
+.leftMenu-hidden {
+    display: none;
+}
+}
