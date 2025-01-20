@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
@@ -54,27 +54,24 @@ const sliderData: SliderItem[] = [
 
 function HomeSlider(): JSX.Element {
   const [followState, setFollowState] = useState<FollowState>(() =>
-    sliderData.reduce((acc: FollowState, item) => ({
-      ...acc,
-      [item.id]: item.isFollowed
-    }), {})
+    sliderData.reduce(
+      (acc: FollowState, item) => ({
+        ...acc,
+        [item.id]: item.isFollowed,
+      }),
+      {},
+    ),
   );
 
   const toggleFollow = (id: number): void => {
-    setFollowState(prev => ({
+    setFollowState((prev) => ({
       ...prev,
-      [id]: !prev[id]
+      [id]: !prev[id],
     }));
   };
 
   return (
-    <Fade
-      direction="up"
-      triggerOnce
-      cascade
-      damping={0.2}
-      duration={1000}
-    >
+    <Fade direction="up" triggerOnce cascade damping={0.2} duration={1000}>
       <section className="pt-[40px]">
         <div className="flex items-center justify-between">
           <h1 className="text-[22px]">Ideas Marketplace</h1>
@@ -93,8 +90,8 @@ function HomeSlider(): JSX.Element {
                 delay={index * 200} // Delay for each item to animate one by one
                 duration={800} // The duration of the fade animation
               >
-                <div 
-                  key={item.id} 
+                <div
+                  key={item.id}
                   className="border rounded-[30px] shadow-lg hover:shadow-xl transition-shadow"
                 >
                   <div className="pl-[20px] py-[20px] flex justify-between">
@@ -108,20 +105,24 @@ function HomeSlider(): JSX.Element {
                         className="rounded-full h-[40px] w-[40px] lg:h-[50px] lg:w-[50px]  mr-[10px] object-cover border border-[rgba(254,201,97,1)]"
                       />
                       <div>
-                        <h2 className="text-[14px] lg:text-[16px]">{item.name}</h2>
-                        <p className="text-[14px] lg:text-[14px]">{item.title}</p>
+                        <h2 className="text-[14px] lg:text-[16px]">
+                          {item.name}
+                        </h2>
+                        <p className="text-[14px] lg:text-[14px]">
+                          {item.title}
+                        </p>
                       </div>
                     </div>
                     {/* Button */}
-                    <button 
+                    <button
                       onClick={() => toggleFollow(item.id)}
                       className={`self-start py-[6px] px-[12px] rounded-tl-[15px] rounded-bl-[15px] border transition-colors text-[14px] ${
-                        followState[item.id] 
-                          ? 'bg-[rgb(246,170,22)] text-white' 
-                          : 'bg-white text-black'
+                        followState[item.id]
+                          ? "bg-[rgb(246,170,22)] text-white"
+                          : "bg-white text-black"
                       }`}
                     >
-                      {followState[item.id] ? 'Followed' : 'Following'}
+                      {followState[item.id] ? "Followed" : "Following"}
                     </button>
                   </div>
 
@@ -129,7 +130,8 @@ function HomeSlider(): JSX.Element {
                     <div>
                       <p className="text-[14px]">
                         Torem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Etiam eu turpis molestie, dictum est a, mattis tellus. ....
+                        Etiam eu turpis molestie, dictum est a, mattis tellus.
+                        ....
                       </p>
                       <div className="flex items-center justify-between pt-[10px]">
                         <div className="flex items-center">

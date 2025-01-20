@@ -27,10 +27,9 @@ function Home() {
             />
             <LeftMenu />
             <LeftProfile />
-            <LeftActivities  />
+            <LeftActivities />
           </div>
 
-      
           <div
             className="md:col-span-9 lg:col-span-10  px-[10px] md:px-[15px] lg:px-[20px] pb-[40px]"
             style={{
@@ -38,19 +37,19 @@ function Home() {
             }}
           >
             <HomeNavbar />
-         <HomeInfo />
-           <RightMenu />
-             <HomeSwiper />
-         <SearchBarsWithTags />
-           <HomeResult /> 
+            <HomeInfo />
+            <RightMenu />
+            <HomeSwiper />
+            <SearchBarsWithTags />
+            <HomeResult />
 
-     <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
+            <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
               <h1 className="text-[22px]">Find Talent</h1>
               <hr className="flex-grow border-t border-[#C0C0C0]" />
-            </div> 
-           <HomeSlider />
+            </div>
+            <HomeSlider />
             <SearchBarsWithTags />
-            <HomeResult /> 
+            <HomeResult />
           </div>
         </div>
       </div>

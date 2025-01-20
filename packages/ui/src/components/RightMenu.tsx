@@ -1,11 +1,11 @@
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/autoplay';
+import React from "react";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
 import { Fade } from "react-awesome-reveal";
 
 function RightMenu() {
@@ -14,29 +14,24 @@ function RightMenu() {
   }
 
   const Data: RightMenuItem[] = [
-    { logo: '/rightMenu/1.png' },
-    { logo: '/rightMenu/2.png' },
-    { logo: '/rightMenu/3.png' },
-    { logo: '/rightMenu/4.png' },
-    { logo: '/rightMenu/1.png' },
-    { logo: '/rightMenu/2.png' },
-    { logo: '/rightMenu/3.png' },
-    { logo: '/rightMenu/4.png' },
-    { logo: '/rightMenu/1.png' },
-    { logo: '/rightMenu/2.png' },
-    { logo: '/rightMenu/3.png' },
-    { logo: '/rightMenu/4.png' },
+    { logo: "/rightMenu/1.png" },
+    { logo: "/rightMenu/2.png" },
+    { logo: "/rightMenu/3.png" },
+    { logo: "/rightMenu/4.png" },
+    { logo: "/rightMenu/1.png" },
+    { logo: "/rightMenu/2.png" },
+    { logo: "/rightMenu/3.png" },
+    { logo: "/rightMenu/4.png" },
+    { logo: "/rightMenu/1.png" },
+    { logo: "/rightMenu/2.png" },
+    { logo: "/rightMenu/3.png" },
+    { logo: "/rightMenu/4.png" },
   ];
 
   return (
-    <Fade 
-      direction="up"
-      triggerOnce
-      cascade
-      damping={0.2}
-    >
-      <section className='pt-[40px]'>
-        <h1 className='text-[22px]'>Advertisement</h1>
+    <Fade direction="up" triggerOnce cascade damping={0.2}>
+      <section className="pt-[40px]">
+        <h1 className="text-[22px]">Advertisement</h1>
 
         <Swiper
           modules={[Autoplay]}
@@ -67,7 +62,7 @@ function RightMenu() {
                   src={item.logo}
                   alt={`Menu item ${index + 1}`}
                   layout="fill"
-                  objectFit="cover"  
+                  objectFit="cover"
                   className="rounded-[12px]"
                 />
               </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { FaArrowRight } from "react-icons/fa"; 
+import { FaArrowRight } from "react-icons/fa";
 import Image from "next/image";
 import { Fade } from "react-awesome-reveal";
 
@@ -54,12 +54,19 @@ function HomeInfo() {
 
                 {/* Right Section with Title and Description */}
                 <div className="text-white flex flex-col justify-center ">
-                  <h2 className=" text-[36px] lg:text-[40px] leading-none text-start">{item.title}</h2>
-                  <p className="mt-3 text-[14px] lg:text-[18px] leading-auto text-start">{item.description}</p>
-                  
+                  <h2 className=" text-[36px] lg:text-[40px] leading-none text-start">
+                    {item.title}
+                  </h2>
+                  <p className="mt-3 text-[14px] lg:text-[18px] leading-auto text-start">
+                    {item.description}
+                  </p>
+
                   {/* New div with Right Arrow Icon */}
                   <div className=" mt-[10px] md:mt-[20px] lg:mt-[30px] md:mr-[30px] flex justify-center md:justify-end items-center cursor-pointer">
-                    <FaArrowRight size={25} className="md:w-[25px] md:h-[25px]" />
+                    <FaArrowRight
+                      size={25}
+                      className="md:w-[25px] md:h-[25px]"
+                    />
                   </div>
                 </div>
               </div>
@@ -85,8 +92,12 @@ function HomeInfo() {
                     key={index}
                     className="flex flex-col items-center justify-center text-center text-white rounded-[30px]"
                   >
-                    <h2 className=" text-[10px] md:text-[14px] lg:text-[15px] leading-auto">{item.title}</h2>
-                    <p className=" text-[28px] md:text-[40px] lg:text-[60px] leading-auto">{item.numbers}</p>
+                    <h2 className=" text-[10px] md:text-[14px] lg:text-[15px] leading-auto">
+                      {item.title}
+                    </h2>
+                    <p className=" text-[28px] md:text-[40px] lg:text-[60px] leading-auto">
+                      {item.numbers}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -100,11 +111,20 @@ function HomeInfo() {
                   className="grid grid-cols-[auto_1fr] items-center justify-center gap-5 home-other-none"
                 >
                   <div className="home-img-none ">
-                    <Image src={item.logo} alt="Info Logo" width={64} height={64} />
+                    <Image
+                      src={item.logo}
+                      alt="Info Logo"
+                      width={64}
+                      height={64}
+                    />
                   </div>
                   <div className="flex flex-col items-center justify-center">
-                    <h2 className="text-[14px] lg:text-[15px] leading-auto">{item.title}</h2>
-                    <p className="text-[40px] lg:text-[60px] leading-auto">{item.number}</p>
+                    <h2 className="text-[14px] lg:text-[15px] leading-auto">
+                      {item.title}
+                    </h2>
+                    <p className="text-[40px] lg:text-[60px] leading-auto">
+                      {item.number}
+                    </p>
                   </div>
                 </div>
               ))}

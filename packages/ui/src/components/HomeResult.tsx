@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
@@ -69,8 +69,8 @@ function HomeResult() {
         ...acc,
         [item.id]: false,
       }),
-      {}
-    )
+      {},
+    ),
   );
 
   const toggleFollow = (id: number) => {
@@ -113,7 +113,9 @@ function HomeResult() {
                       className="rounded-full h-[40px] w-[40px] lg:h-[50px] lg:w-[50px] mr-[10px] object-cover border border-[rgba(254,201,97,1)]"
                     />
                     <div>
-                      <h2 className="text-[14px] lg:text-[16px]">{item.name}</h2>
+                      <h2 className="text-[14px] lg:text-[16px]">
+                        {item.name}
+                      </h2>
                       <p className="text-[14px] lg:text-[14px]">{item.title}</p>
                     </div>
                   </div>
@@ -134,7 +136,8 @@ function HomeResult() {
                   <div>
                     <p className="text-[14px]">
                       Torem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Etiam eu turpis molestie, dictum est a, mattis tellus. ....
+                      Etiam eu turpis molestie, dictum est a, mattis tellus.
+                      ....
                     </p>
                     <div className="flex items-center mt-[5px]">
                       <Image

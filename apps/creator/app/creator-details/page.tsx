@@ -1,8 +1,12 @@
-import { ArrowLeft, Star } from 'lucide-react'
-import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/components/avatar"
-import { Button } from '@repo/ui/components/Button'
-import { Tabs,TabsList, TabsTrigger } from "@repo/ui/components/tabs"
-import Link from "next/link"
+import { ArrowLeft, Star } from "lucide-react";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@repo/ui/components/avatar";
+import { Button } from "@repo/ui/components/Button";
+import { Tabs, TabsList, TabsTrigger } from "@repo/ui/components/tabs";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -50,10 +54,14 @@ export default function Page() {
       {/* Description */}
       <div className="mb-8">
         <h3 className="text-xl text-gray-500 mb-4">
-          I will provide industry standard script coverage and development notes on your script
+          I will provide industry standard script coverage and development notes
+          on your script
         </h3>
         <p className="text-gray-600">
-          Eve is wonderful to work with! Delivers such high quality storytelling and delivers fast! Honestly couldn't have a better experience than with Eve. If you want high quality work with a really kind person wh......
+          Eve is wonderful to work with! Delivers such high quality storytelling
+          and delivers fast! Honestly couldn't have a better experience than
+          with Eve. If you want high quality work with a really kind person
+          wh......
         </p>
       </div>
 
@@ -65,7 +73,10 @@ export default function Page() {
             A short story with the characters and situation of your choice.
           </p>
           <div className="flex justify-between items-center">
-            <Button variant="default" className="bg-[#F7AB0A] hover:bg-[#F7AB0A]/90 text-black">
+            <Button
+              variant="default"
+              className="bg-[#F7AB0A] hover:bg-[#F7AB0A]/90 text-black"
+            >
               View Script
             </Button>
             <span className="font-semibold">$250</span>
@@ -95,7 +106,13 @@ export default function Page() {
           <div key={i} className="mb-6 last:mb-0">
             <h4 className="font-semibold mb-2">Scene {i}</h4>
             <p className="text-sm text-gray-600">
-              Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
+              Contrary to popular belief, Lorem Ipsum is not simply random text.
+              It has roots in a piece of classical Latin literature from 45 BC,
+              making it over 2000 years old. Richard McClintock, a Latin
+              professor at Hampden-Sydney College in Virginia, looked up one of
+              the more obscure Latin words, consectetur, from a Lorem Ipsum
+              passage, and going through the cites of the word in classical
+              literature, discovered the undoubtable source.
             </p>
           </div>
         ))}
@@ -114,7 +131,10 @@ export default function Page() {
             <div key={i} className="border rounded-lg p-4">
               <div className="flex items-start gap-4">
                 <Avatar className="w-10 h-10">
-                  <AvatarImage src="/HomeNavbar/Ellipse 18.png" alt="Reviewer" />
+                  <AvatarImage
+                    src="/HomeNavbar/Ellipse 18.png"
+                    alt="Reviewer"
+                  />
                   <AvatarFallback>MW</AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
@@ -124,19 +144,31 @@ export default function Page() {
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <span>🌍 United States</span>
                         <div className="flex items-center">
-                          {Array(5).fill(null).map((_, i) => (
-                            <Star key={i} className="w-4 h-4 fill-current text-yellow-400" />
-                          ))}
+                          {Array(5)
+                            .fill(null)
+                            .map((_, i) => (
+                              <Star
+                                key={i}
+                                className="w-4 h-4 fill-current text-yellow-400"
+                              />
+                            ))}
                           <span className="ml-1">5.0</span>
                         </div>
                       </div>
                     </div>
-                    <Button variant="ghost" size="icon" className="text-gray-400">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-gray-400"
+                    >
                       <ArrowLeft className="w-4 h-4 rotate-180" />
                     </Button>
                   </div>
                   <p className="text-sm text-gray-600 mt-2">
-                    Eve is wonderful to work with! Delivers such high quality storytelling and delivers fast! Honestly couldn't have a better experience than with Eve. If you want high quality work with a really kind person wh......
+                    Eve is wonderful to work with! Delivers such high quality
+                    storytelling and delivers fast! Honestly couldn't have a
+                    better experience than with Eve. If you want high quality
+                    work with a really kind person wh......
                   </p>
                 </div>
               </div>
@@ -145,6 +177,5 @@ export default function Page() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

@@ -31,7 +31,8 @@ function LeftActivities() {
     {
       logo: "/LeftActivity/activity.svg",
       title: "You liked John Doe's post",
-    },{
+    },
+    {
       logo: "/LeftActivity/activity.svg",
       title: "You started to follow Stephen Burg",
     },

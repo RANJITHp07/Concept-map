@@ -2,7 +2,7 @@ const apiHelper = async (
   endpoint: string,
   method = "GET",
   data?: Record<string, any>,
-  headers = {}
+  headers = {},
 ) => {
   try {
     const url = "http://localhost:8000/api/web" + endpoint;

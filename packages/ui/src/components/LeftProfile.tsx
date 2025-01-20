@@ -66,9 +66,7 @@ function LeftProfile() {
                 <h2 className="text-[14px] left-profile-title ">
                   {item.title}
                 </h2>
-                <p className="text-[14px]    left-profile-para">
-                  {item.role}
-                </p>
+                <p className="text-[14px]    left-profile-para">{item.role}</p>
               </div>
 
               {/* Icon */}
@@ -88,4 +86,3 @@ function LeftProfile() {
 }
 
 export default LeftProfile;
-

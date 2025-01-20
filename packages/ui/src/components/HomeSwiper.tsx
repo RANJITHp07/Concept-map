@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import Image from "next/image";
@@ -23,49 +23,56 @@ function HomeSwiper() {
       title: "Crime in scene",
       image: "/HomeData/face.png",
       bottomimage: "/HomeSwiper/face.svg",
-      description: "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor"
+      description:
+        "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
     },
     {
       name: "faizu",
       title: "Crime in scene",
       image: "/HomeData/face.png",
       bottomimage: "/HomeSwiper/face.svg",
-      description: "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor"
+      description:
+        "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
     },
     {
       name: "fazil",
       title: "Crime in scene",
       image: "/HomeData/face.png",
       bottomimage: "/HomeSwiper/face.svg",
-      description: "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor"
+      description:
+        "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
     },
     {
       name: "renjith",
       title: "Crime in scene",
       image: "/HomeData/face.png",
       bottomimage: "/HomeSwiper/face.svg",
-      description: "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor"
+      description:
+        "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
     },
     {
       name: "Stephen Burg",
       title: "Crime in scene",
       image: "/HomeData/face.png",
       bottomimage: "/HomeSwiper/face.svg",
-      description: "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor"
+      description:
+        "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
     },
     {
       name: "Stephen Burg",
       title: "Crime in scene",
       image: "/HomeData/face.png",
       bottomimage: "/HomeSwiper/face.svg",
-      description: "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor"
+      description:
+        "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
     },
     {
       name: "Stephen Burg",
       title: "Crime in scene",
       image: "/HomeData/face.png",
       bottomimage: "/HomeSwiper/face.svg",
-      description: "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor"
+      description:
+        "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
     },
   ];
 
@@ -92,21 +99,21 @@ function HomeSwiper() {
               breakpoints={{
                 320: {
                   slidesPerView: 1,
-                  spaceBetween: 10
+                  spaceBetween: 10,
                 },
-               
+
                 768: {
                   slidesPerView: 1.5,
-                  spaceBetween: 20
+                  spaceBetween: 20,
                 },
                 1024: {
                   slidesPerView: 2.5,
-                  spaceBetween: 20
+                  spaceBetween: 20,
                 },
                 1300: {
                   slidesPerView: 3,
-                  spaceBetween: 25
-                }
+                  spaceBetween: 25,
+                },
               }}
               className="mySwiper ] cursor-pointer"
             >
@@ -127,9 +134,7 @@ function HomeSwiper() {
                         <h3 className="text-xl font-bold text-gray-800">
                           {item.name}
                         </h3>
-                        <p className="text-sm text-gray-600">
-                          {item.title}
-                        </p>
+                        <p className="text-sm text-gray-600">{item.title}</p>
                       </div>
                     </div>
 
@@ -143,7 +148,9 @@ function HomeSwiper() {
                     </div>
 
                     <div className="p-[20px]">
-                      <p className="text-sm text-gray-700">{item.description}</p>
+                      <p className="text-sm text-gray-700">
+                        {item.description}
+                      </p>
                     </div>
                   </div>
                 </SwiperSlide>

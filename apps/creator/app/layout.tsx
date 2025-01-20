@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import {Roboto} from 'next/font/google'
+import { Roboto } from "next/font/google";
 import "@repo/ui/globals.css";
 
 const roboto = Roboto({
-  subsets: ['latin'], 
-  weight: ['400','500','700'], // Include the font weights you need
-  style: ['normal', 'italic'], // Optional: include styles
+  subsets: ["latin"],
+  weight: ["400", "500", "700"], // Include the font weights you need
+  style: ["normal", "italic"], // Optional: include styles
 });
 
 export const metadata: Metadata = {
@@ -20,9 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.className}`}>
-        {children}
-      </body>
+      <body className={`${roboto.className}`}>{children}</body>
     </html>
   );
 }

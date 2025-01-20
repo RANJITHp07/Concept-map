@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
@@ -18,19 +18,20 @@ function HomeNavbar() {
       <div className="flex justify-between items-center ">
         {/* Logo for small screens */}
         <div className="md:hidden">
-          <Image
-            alt="logo"
-            src="/logo.png"
-            width={180}
-            height={180}
-          />
+          <Image alt="logo" src="/logo.png" width={180} height={180} />
         </div>
 
         {/* Links for medium and larger screens */}
         <ul className="hidden md:flex gap-[35px] lg:gap-[50px]">
-          <li className="text-[16px] lg:text-[18px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">About Us</li>
-          <li className="text-[16px] lg:text-[18px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">Why Us</li>
-          <li className="text-[16px] lg:text-[18px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">Contact Us</li>
+          <li className="text-[16px] lg:text-[18px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">
+            About Us
+          </li>
+          <li className="text-[16px] lg:text-[18px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">
+            Why Us
+          </li>
+          <li className="text-[16px] lg:text-[18px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">
+            Contact Us
+          </li>
         </ul>
 
         {/* Notification and Profile Section - only visible on md and above */}
@@ -73,21 +74,27 @@ function HomeNavbar() {
       </div>
 
       {/* Sidebar for small screens */}
-      <div 
+      <div
         className={`fixed top-0 left-0 w-[250px] h-full bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {isMenuOpen && (
           <Slide direction="left" duration={300} triggerOnce>
             <div className="p-6">
               <div>
-                <LeftMenu/>
+                <LeftMenu />
               </div>
               <ul className="flex flex-col gap-[10px] justify-center">
-                <li className="text-[16px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">About Us</li>
-                <li className="text-[16px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">Why Us</li>
-                <li className="text-[16px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">Contact Us</li>
+                <li className="text-[16px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">
+                  About Us
+                </li>
+                <li className="text-[16px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">
+                  Why Us
+                </li>
+                <li className="text-[16px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">
+                  Contact Us
+                </li>
               </ul>
             </div>
           </Slide>
