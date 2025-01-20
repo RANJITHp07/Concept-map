@@ -3,7 +3,10 @@
 import React from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import { Fade } from "react-awesome-reveal";
 import "swiper/css";
+import "swiper/css/autoplay";
 
 interface DataItem {
   name: string;
@@ -15,6 +18,34 @@ interface DataItem {
 
 function HomeSwiper() {
   const data: DataItem[] = [
+    {
+      name: "niyas",
+      title: "Crime in scene",
+      image: "/HomeData/face.png",
+      bottomimage: "/HomeSwiper/face.svg",
+      description: "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor"
+    },
+    {
+      name: "faizu",
+      title: "Crime in scene",
+      image: "/HomeData/face.png",
+      bottomimage: "/HomeSwiper/face.svg",
+      description: "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor"
+    },
+    {
+      name: "fazil",
+      title: "Crime in scene",
+      image: "/HomeData/face.png",
+      bottomimage: "/HomeSwiper/face.svg",
+      description: "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor"
+    },
+    {
+      name: "renjith",
+      title: "Crime in scene",
+      image: "/HomeData/face.png",
+      bottomimage: "/HomeSwiper/face.svg",
+      description: "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor"
+    },
     {
       name: "Stephen Burg",
       title: "Crime in scene",
@@ -39,76 +70,89 @@ function HomeSwiper() {
   ];
 
   return (
-    <section className="pt-[50px] ">
-       <h1 className="text-[20px] font-bold my-3">CM Community</h1>
-      <div className="grid grid-cols-12 gap-[20px] relative">
-        {/* Left Side (11 Columns) */}
-        <div className="col-span-12  rounded-lg p-4">
-          <Swiper
-            spaceBetween={20}
-            slidesPerView={2.5}
-            centeredSlides={false}
-            className="mySwiper"
-          >
-            {data.map((item, index) => (
-              <SwiperSlide key={index}>
-                <div className="bg-white shadow-lg border-2 border-[#FEC96138] rounded-lg overflow-hidden flex flex-col">
-                  {/* Top Content Container - Profile Info */}
-                  <div className="p-[20px] flex">
-                    {/* Left Side - Profile Image */}
-                    <div className="relative w-[40px] h-[40px] ">
+    <Fade direction="up" triggerOnce>
+      <section className="pt-[40px]">
+        {/* Header with View More button */}
+        <div className="grid grid-cols-[1fr_auto] items-center gap-4 pb-[40px]">
+          <h1 className="text-[22px]">Ideas Marketplace</h1>
+          <button className="py-[10px] px-[15px] border rounded-[10px] text-[12px] shadow-[0_2px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)] transition-shadow">
+            View More
+          </button>
+        </div>
+
+        <div className="grid grid-cols-12 gap-[10px]">
+          <div className="col-span-12">
+            <Swiper
+              modules={[Autoplay]}
+              spaceBetween={10}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              breakpoints={{
+                320: {
+                  slidesPerView: 1,
+                  spaceBetween: 10
+                },
+               
+                768: {
+                  slidesPerView: 1.5,
+                  spaceBetween: 20
+                },
+                1024: {
+                  slidesPerView: 2.5,
+                  spaceBetween: 20
+                },
+                1300: {
+                  slidesPerView: 3,
+                  spaceBetween: 25
+                }
+              }}
+              className="mySwiper ] cursor-pointer"
+            >
+              {data.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <div className="bg-white rounded-[30px] overflow-hidden border border-[rgba(254,201,97,0.3)] my-[5px] mx-[5px] shadow-[0px_0px_10px_rgba(0,0,0,0.05)] hover:shadow-[0px_0px_15px_rgba(0,0,0,0.1)] transition-all">
+                    <div className="p-[15px] md:p-[20px] grid grid-cols-[40px_1fr] items-center">
+                      <div className="relative w-[40px] h-[40px]">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          className="rounded-full object-cover border border-[rgba(254,201,97,1)]"
+                        />
+                      </div>
+
+                      <div className="ml-[10px]">
+                        <h3 className="text-xl font-bold text-gray-800">
+                          {item.name}
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          {item.title}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="w-full h-[100px] relative">
                       <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        className="rounded-full object-cover border border-[#FEC96138]"
+                        src={item.bottomimage}
+                        alt="Bottom content"
+                        layout="fill"
+                        className="object-cover"
                       />
                     </div>
 
-                    {/* Right Side - Name and Title */}
-                    <div className="flex flex-col justify-center ml-[10px]"> {/* Added gap of 10px */}
-                      <h3 className="text-sm font-bold text-gray-800 leading-none">
-                        {item.name}
-                      </h3>
-                      <p className="text-md text-[#C0C0C0] font-medium leading-none mt-1">
-                        {item.title}
-                      </p>
+                    <div className="p-[20px]">
+                      <p className="text-sm text-gray-700">{item.description}</p>
                     </div>
                   </div>
-
-                  {/* Bottom Image Container */}
-          
-                    <Image
-                      src={item.bottomimage}
-                      alt="Bottom content"
-                     width={100}
-                     height={10}
-                      className=" h-[100px] w-[100%]"  
-                    />
-            
-
-                  {/* Description Section */}
-                  <div className="px-2 pb-3">
-                    <p className="text-xs text-gray-700 leading-none">{item.description}</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
-
-        {/* Right Side (1 Column) */}
-        <div className="z-50 absolute right-0 top-12">
-          <Image
-            src="/HomeSwiper/swipe.svg"
-            alt="swipe"
-            width={50}
-            height={50}
-            className="object-contain"
-          />
-        </div>
-      </div>
-    </section>
+      </section>
+    </Fade>
   );
 }
 
