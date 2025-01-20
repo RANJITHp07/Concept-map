@@ -148,7 +148,7 @@ function Form() {
             </form>
 
             {/* Social Login */}
-            <div className="mt-8">
+            <div className="mt-8 mb-3">
               <div className="relative mb-8">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-gray-200"></div>
@@ -199,12 +199,12 @@ function Form() {
                 </button>
               </div>
               <div className="text-sm text-gray-600 flex justify-center mt-5">
-                Have an account?{" "}
+              Already have an account?{" "}
                 <Link
                   href="/login"
-                  className="text-[#f5a623] hover:text-[#e69516]"
+                  className="text-[#f5a623] hover:text-[#e69516] mx-1"
                 >
-                  Sign In
+                  Login
                 </Link>
               </div>
             </div>

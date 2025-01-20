@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import TextInput from "@repo/ui/components/TextInput";
@@ -9,8 +9,10 @@ import apiHelper from "../../../../lib/apiHelper";
 import { apis } from "../../../../lib/api";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Button from "@repo/ui/components/Button";
 
 function Form() {
+  const [isLoading,setIsLoading]=useState(false)
   const router = useRouter();
   const {
     handleSubmit,
@@ -32,6 +34,7 @@ function Form() {
       email: data.email,
       password: data.password,
     };
+    setIsLoading(true)
     const res = await apiHelper(apis.login, "POST", userData);
     if (res.status === "success") {
       router.replace("/");
@@ -39,6 +42,8 @@ function Form() {
       // display the error to the user
       toast.error(res.error.message)
     }
+
+    setIsLoading(false)
   };
 
   return (
@@ -92,13 +97,9 @@ function Form() {
                 type="password"
                 errorMessage={errors.password?.message as string}
               />
-
-              <button
-                type="submit"
-                className="w-full bg-[#f5a623] text-white py-3.5 rounded-lg font-medium hover:bg-[#e69516] transition-colors mt-4"
-              >
-                Create an Account
-              </button>
+              <div className='my-3'>
+              <Button actionName="Login" type="submit" isDisabled={isLoading} loadingName="Verifying..." />
+              </div>
             </form>
 
             {/* Social Login */}
@@ -141,10 +142,10 @@ function Form() {
               </button>
             </div>
             <div className="text-sm text-gray-600 justify-center  flex mt-5">
-              Have an account?{" "}
+            Don’t have an account?{" "}
               <Link
                 href="/register"
-                className="text-[#f5a623] hover:text-[#e69516]"
+                className="text-[#f5a623] hover:text-[#e69516] mx-1"
               >
                 Sign In
               </Link>
@@ -158,7 +159,7 @@ function Form() {
           alt="Concepts Map"
           width={600}
           height={100}
-          className="w-[600px] h-[700px] hidden lg:block md:block"
+          className="w-[500px] h-[600px] hidden lg:block md:block"
         />
       </div>
     </>
