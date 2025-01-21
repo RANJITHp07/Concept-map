@@ -4,7 +4,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@repo/ui/components/avatar";
-import { Button } from "@repo/ui/components/Button";
+import Button from "@repo/ui/components/Button";
 import { Tabs, TabsList, TabsTrigger } from "@repo/ui/components/tabs";
 import Link from "next/link";
 
@@ -73,12 +73,12 @@ export default function Page() {
             A short story with the characters and situation of your choice.
           </p>
           <div className="flex justify-between items-center">
-            <Button
+            {/* <Button
               variant="default"
               className="bg-[#F7AB0A] hover:bg-[#F7AB0A]/90 text-black"
             >
               View Script
-            </Button>
+            </Button> */}
             <span className="font-semibold">$250</span>
           </div>
         </div>
@@ -122,9 +122,9 @@ export default function Page() {
       <div>
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-semibold">What people loved</h3>
-          <Button variant="link" className="text-gray-600">
+          {/* <Button variant="link" className="text-gray-600">
             See all reviews
-          </Button>
+          </Button> */}
         </div>
         <div className="space-y-4">
           {[1, 2].map((i) => (
@@ -156,13 +156,13 @@ export default function Page() {
                         </div>
                       </div>
                     </div>
-                    <Button
+                    {/* <Button
                       variant="ghost"
                       size="icon"
                       className="text-gray-400"
                     >
                       <ArrowLeft className="w-4 h-4 rotate-180" />
-                    </Button>
+                    </Button> */}
                   </div>
                   <p className="text-sm text-gray-600 mt-2">
                     Eve is wonderful to work with! Delivers such high quality

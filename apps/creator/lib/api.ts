@@ -4,5 +4,8 @@ export const apis = {
   login: "/auth/login",
   generateOtp: "/auth/otp/generate",
   verifyOtp: "/auth/otp/verify",
-  resendOtp:'/auth/otp/resend'
+  resendOtp: "/auth/otp/resend",
+
+  //user related apis
+  getUserDetails: (id: string) => `/user/${id}`,
 };

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { AuthService } from "../services/auth.service";
 
 export class AuthController {
-  private authService: AuthService;
+  private readonly authService: AuthService;
 
   constructor() {
     this.authService = new AuthService();

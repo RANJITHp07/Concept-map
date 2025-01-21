@@ -18,7 +18,7 @@ export class CrudRepository<T> {
     where: Record<string, any>,
     skip: number,
     take: string | number = "all",
-    populateField: string[] | string = [],
+    populateField: string[] | string = []
   ): Promise<T[]> {
     const limit = take === "all" ? 0 : Number(take);
     const query = this.model.find(where).populate(populateField);
@@ -31,12 +31,18 @@ export class CrudRepository<T> {
   }
 
   // Fetch a document by its ID
-  async fetchDocumentById(id: string): Promise<T | null> {
-    return await this.model.findById(id);
+  async fetchDocumentById(
+    id: string,
+    nonRequiredFields?: string
+  ): Promise<T | null> {
+    return await this.model.findById(id).select(nonRequiredFields ?? "");
   }
 
   // Fetch a single document based on conditions
-  async fetchOneDocument(where: Record<string, any>,populateField: string[] | string = []): Promise<T | null> {
+  async fetchOneDocument(
+    where: Record<string, any>,
+    populateField: string[] | string = []
+  ): Promise<T | null> {
     return await this.model.findOne(where).populate(populateField);
   }
 
@@ -47,7 +53,7 @@ export class CrudRepository<T> {
 
   async updateDocumenById(
     id: string,
-    updateData: Record<string, any>,
+    updateData: Record<string, any>
   ): Promise<T | null> {
     return await this.model.findByIdAndUpdate(id, updateData, { new: true });
   }

@@ -1,27 +1,25 @@
-import  { NextResponse} from 'next/server';
-import { auth } from './auth';
-import { PUBLIC_ROUTE } from './lib/constant';
+import { NextResponse } from "next/server";
+import { auth } from "./auth";
+import { PUBLIC_ROUTE } from "./lib/constant";
 
+export default auth((req: any) => {
+  const { nextUrl } = req;
 
-export default auth((req:any) => {
- const { nextUrl } = req;
+  const isAuthenticated = !!req.auth;
+  const isPublicRoute = PUBLIC_ROUTE.includes(nextUrl.pathname);
 
- const isAuthenticated = !!req.auth;
- const isPublicRoute = PUBLIC_ROUTE.includes(nextUrl.pathname);
+  if (isPublicRoute && isAuthenticated)
+    return NextResponse.redirect(new URL("/", req.url));
 
- if (isPublicRoute && isAuthenticated)
-  return NextResponse.redirect(new URL('/', req.url));
+  if (!isAuthenticated && !isPublicRoute)
+    return NextResponse.redirect(new URL("/login", req.url));
 
- if (!isAuthenticated && !isPublicRoute)
-  return NextResponse.redirect(new URL('/login', req.url));
+  if (req?.auth && req.auth.user.role !== "BUYER")
+    return NextResponse.redirect(new URL("/login", req.url));
 
- return NextResponse.next();
+  return NextResponse.next();
 });
 
-
 export const config = {
-    matcher: [
-      '/((?!_next/static|_next/image|favicon.ico|images).*)', 
-    ],
-  };
-  
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|images).*)"],
+};

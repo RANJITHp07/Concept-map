@@ -6,7 +6,7 @@ import argon2 from "argon2";
 import { CustomError } from "../utils/customError";
 import { generateOTP, hasOtpExpired } from "../utils/helper";
 import OtpModel from "../repository/model/otp.model";
-import {sendEmail} from '@repo/notification'
+import { sendEmail } from "@repo/notification";
 
 export class AuthService {
   private readonly userCrudRepository: CrudRepository<IUser | IOtp>;
@@ -30,7 +30,7 @@ export class AuthService {
       return user;
     }
 
-    const hashPassword = await argon2.hash("password");
+    const hashPassword = await argon2.hash(data.password);
     return await this.userCrudRepository.createDocument({
       ...data,
       password: hashPassword,
@@ -48,20 +48,22 @@ export class AuthService {
       });
     }
 
-    return user;
-    // if (await argon2.verify(user.password, password)) {
-    //   return user;
-    // }
+    if (await argon2.verify(user.password, password)) {
+      return user;
+    }
 
     throw new CustomError(400, "BAD_REQUEST", { message: "Wrong password" });
   }
 
   // otp related methods
   async generateVerificationOTP(userId: string) {
-    const otp = (await this.otpCrudRepository.fetchOneDocument({
-      userId: userId,
-      action_type: "VERIFY_EMAIL",
-    },'userId')) as any;
+    const otp = (await this.otpCrudRepository.fetchOneDocument(
+      {
+        userId: userId,
+        action_type: "VERIFY_EMAIL",
+      },
+      "userId"
+    )) as any;
 
     // Generate a new OTP code
     const newCode = generateOTP();
@@ -77,42 +79,52 @@ export class AuthService {
       const count = otp.retry_count > 0 ? otp.retry_count - 1 : 3;
 
       const username = otp.userId?.username;
-const formattedUsername = username
-  ? username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
-  : null;
+      const formattedUsername = username
+        ? username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
+        : null;
 
-      sendEmail({to:otp.userId?.email,template:'emailVerificationOtp',template_variables:{
-        firstName:formattedUsername,
-        OTP: newCode
-      }})
+      sendEmail({
+        to: otp.userId?.email,
+        template: "emailVerificationOtp",
+        template_variables: {
+          firstName: formattedUsername,
+          OTP: newCode,
+        },
+      });
 
       return await this.otpCrudRepository.updateDocumenById(otp._id as string, {
         code: newCode,
         retry_count: count,
       });
     } else {
-      const user =await this.userCrudRepository.fetchDocumentById(userId) as IUser
-      if(!user) throw new CustomError(400, "BAD_REQUEST", {
-        message: "No such user",
-      })
+      const user = (await this.userCrudRepository.fetchDocumentById(
+        userId
+      )) as IUser;
+      if (!user)
+        throw new CustomError(400, "BAD_REQUEST", {
+          message: "No such user",
+        });
       const otpData = {
         userId: userId,
         code: newCode,
       };
 
       const username = user?.username;
-const formattedUsername = username
-  ? username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
-  : null;
+      const formattedUsername = username
+        ? username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
+        : null;
 
-      sendEmail({to:user.email,template:'emailVerificationOtp',template_variables:{
-        firstName:formattedUsername,
-        OTP: newCode
-      }})
+      sendEmail({
+        to: user.email,
+        template: "emailVerificationOtp",
+        template_variables: {
+          firstName: formattedUsername,
+          OTP: newCode,
+        },
+      });
 
       return this.otpCrudRepository.createDocument(otpData);
     }
-    
   }
 
   async verifyEmail(code: number, userId: string) {
@@ -125,7 +137,6 @@ const formattedUsername = username
     const now = new Date();
     const timeDifference = now.getTime() - otpUpdatedAt.getTime();
     const oneMinute = 60 * 1000;
-
 
     if (timeDifference > oneMinute) {
       throw new CustomError(400, "BAD_REQUEST", {
@@ -145,10 +156,13 @@ const formattedUsername = username
   }
 
   async resendOtp(userId: string) {
-    const otp = (await this.otpCrudRepository.fetchOneDocument({
-      userId: userId,
-      action_type: "VERIFY_EMAIL",
-    },'userId')) as any;
+    const otp = (await this.otpCrudRepository.fetchOneDocument(
+      {
+        userId: userId,
+        action_type: "VERIFY_EMAIL",
+      },
+      "userId"
+    )) as any;
 
     if (otp.retry_count === 0 && !hasOtpExpired(otp.updatedAt)) {
       throw new CustomError(400, "BAD_REQUEST", {
@@ -163,14 +177,18 @@ const formattedUsername = username
     const count = otp.retry_count > 0 ? otp.retry_count - 1 : 3;
 
     const username = otp.userId?.username;
-const formattedUsername = username
-  ? username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
-  : null;
+    const formattedUsername = username
+      ? username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
+      : null;
 
-      sendEmail({to:otp.userId?.email,template:'emailVerificationOtp',template_variables:{
-        firstName:formattedUsername,
-        OTP: newCode
-      }})
+    sendEmail({
+      to: otp.userId?.email,
+      template: "emailVerificationOtp",
+      template_variables: {
+        firstName: formattedUsername,
+        OTP: newCode,
+      },
+    });
 
     return await this.otpCrudRepository.updateDocumenById(otp._id as string, {
       code: newCode,

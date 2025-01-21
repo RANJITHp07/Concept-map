@@ -10,8 +10,17 @@ import SearchBarsWithTags from "@repo/ui/components/SearchBars";
 import HomeResult from "@repo/ui/components/HomeResult";
 import HomeSwiper from "@repo/ui/components/HomeSwiper";
 import RightMenu from "@repo/ui/components/RightMenu";
+import { auth } from "../auth";
+import apiHelper from "../lib/apiHelper";
+import { apis } from "../lib/api";
 
-function Home() {
+async function Home() {
+  const session = await auth();
+
+  if (!session?.user) return null;
+
+  const { data: user } = await apiHelper(apis.getUserDetails(session.user.id!));
+
   return (
     <>
       <div>
@@ -37,18 +46,38 @@ function Home() {
             }}
           >
             <HomeNavbar />
-            <HomeInfo />
+            <HomeInfo name={user.username} />
             <RightMenu />
             <HomeSwiper />
-            <SearchBarsWithTags />
-            <HomeResult />
 
+            {/* scripts */}
             <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
-              <h1 className="text-[22px]">Find Talent</h1>
+              <h1 className="text-[22px] font-medium">
+                Discover Exceptional Scripts
+              </h1>
               <hr className="flex-grow border-t border-[#C0C0C0]" />
             </div>
-            <HomeSlider />
-            <SearchBarsWithTags />
+            <SearchBarsWithTags initialTags={["scripts"]} />
+            <HomeResult />
+
+            {/* story board */}
+            <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
+              <h1 className="text-[22px] font-medium">
+                Discover Exceptional Story Board
+              </h1>
+              <hr className="flex-grow border-t border-[#C0C0C0]" />
+            </div>
+            <SearchBarsWithTags initialTags={["story board"]} />
+            <HomeResult />
+
+            {/* synopsis*/}
+            <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
+              <h1 className="text-[22px] font-medium">
+                Discover Exceptional Synopsis
+              </h1>
+              <hr className="flex-grow border-t border-[#C0C0C0]" />
+            </div>
+            <SearchBarsWithTags initialTags={["synopsis"]} />
             <HomeResult />
           </div>
         </div>

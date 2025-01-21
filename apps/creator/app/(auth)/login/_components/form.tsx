@@ -5,15 +5,13 @@ import TextInput from "@repo/ui/components/TextInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../../../lib/validator/login";
-import apiHelper from "../../../../lib/apiHelper";
-import { apis } from "../../../../lib/api";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Button from "@repo/ui/components/Button";
 import { handleLogin } from "../../../../lib/serverAction";
 
 function Form() {
-  const [isLoading,setIsLoading]=useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const {
     handleSubmit,
@@ -35,18 +33,17 @@ function Form() {
       email: data.email,
       password: data.password,
     };
-    setIsLoading(true)
-    
-  const authentication = await handleLogin(userData.email,userData.password)
-  console.log(authentication)
+    setIsLoading(true);
+
+    const authentication = await handleLogin(userData.email, userData.password);
     if (authentication && authentication.status == "success") {
       router.push("/");
     } else {
       //dispaly the error message
-      toast.error(authentication?.error?.message!)
+      toast.error(authentication?.error?.message!);
     }
 
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   return (
@@ -100,8 +97,13 @@ function Form() {
                 type="password"
                 errorMessage={errors.password?.message as string}
               />
-              <div className='my-3'>
-              <Button actionName="Login" type="submit" isDisabled={isLoading} loadingName="Verifying..." />
+              <div className="my-3">
+                <Button
+                  actionName="Login"
+                  type="submit"
+                  isDisabled={isLoading}
+                  loadingName="Verifying..."
+                />
               </div>
             </form>
 
@@ -145,7 +147,7 @@ function Form() {
               </button>
             </div>
             <div className="text-sm text-gray-600 justify-center  flex mt-5">
-            Don’t have an account?{" "}
+              Don’t have an account?{" "}
               <Link
                 href="/register"
                 className="text-[#f5a623] hover:text-[#e69516] mx-1"

@@ -1,4 +1,8 @@
-import NextAuth, { DefaultSession, Session, User } from "next-auth";
+import NextAuth, {
+  DefaultSession,
+  Session,
+  User,
+} from "next-auth";
 import { JWT } from "next-auth/jwt";
 import Credentials from "next-auth/providers/credentials";
 import apiHelper from "./lib/apiHelper";
@@ -28,7 +32,7 @@ declare module "next-auth/jwt" {
   }
 }
 
-export const { handlers,auth, signIn, signOut } = NextAuth({
+export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       name: "credentials",
@@ -59,9 +63,9 @@ export const { handlers,auth, signIn, signOut } = NextAuth({
 
             throw new Error(res.error.message);
           } else if (type == "register") {
-            console.log("jiii")
+            console.log("jiii");
             const res = await apiHelper(apis.verifyOtp, "POST", {
-              code:Number(code as string),
+              code: Number(code as string),
               userId,
             });
 
@@ -84,7 +88,6 @@ export const { handlers,auth, signIn, signOut } = NextAuth({
 
   callbacks: {
     async jwt({ token, user }: { token: JWT; user: User }) {
-      console.log("user",user,token)
       if (user?.email && user._id) {
         token.email = user.email;
         token.id = user._id;

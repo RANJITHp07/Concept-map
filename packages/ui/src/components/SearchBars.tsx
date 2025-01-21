@@ -20,7 +20,7 @@ interface SearchBarsWithTagsProps {
 const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
   initialTags = [],
 }) => {
-  const [selectedTags, setSelectedTags] = useState<string[]>(["synopsis"]);
+  const [selectedTags, setSelectedTags] = useState<string[]>(initialTags);
   const [searchValue, setSearchValue] = useState<string>("");
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [openDropdown, setOpenDropdown] = useState<string>("");
@@ -94,7 +94,7 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
 
   const renderDropdownButton = (
     key: string,
-    data: DropdownOption,
+    data: DropdownOption
   ): JSX.Element => (
     <div className="relative hidden md:block" ref={dropdownRef}>
       <button
@@ -160,9 +160,7 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
               <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                 {suggestions
                   .filter((suggestion) =>
-                    suggestion
-                      .toLowerCase()
-                      .includes(searchValue.toLowerCase()),
+                    suggestion.toLowerCase().includes(searchValue.toLowerCase())
                   )
                   .map((suggestion: string, index: number) => (
                     <div
@@ -187,7 +185,7 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
           {/* Show all filters on large screens */}
           <div className="hidden lg:flex lg:gap-4">
             {Object.entries(dropdownData).map(([key, data]) =>
-              renderDropdownButton(key, data),
+              renderDropdownButton(key, data)
             )}
           </div>
 

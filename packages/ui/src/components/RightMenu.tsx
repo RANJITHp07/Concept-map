@@ -31,7 +31,7 @@ function RightMenu() {
   return (
     <Fade direction="up" triggerOnce cascade damping={0.2}>
       <section className="pt-[40px]">
-        <h1 className="text-[22px]">Advertisement</h1>
+        <h1 className="text-[22px] font-medium">Advertisement</h1>
 
         <Swiper
           modules={[Autoplay]}

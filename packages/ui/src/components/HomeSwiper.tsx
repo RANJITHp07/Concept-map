@@ -81,7 +81,7 @@ function HomeSwiper() {
       <section className="pt-[40px]">
         {/* Header with View More button */}
         <div className="grid grid-cols-[1fr_auto] items-center gap-4 pb-[40px]">
-          <h1 className="text-[22px]">Ideas Marketplace</h1>
+          <h1 className="text-[22px] font-medium">CM Community</h1>
           <button className="py-[10px] px-[15px] border rounded-[10px] text-[12px] shadow-[0_2px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)] transition-shadow">
             View More
           </button>
