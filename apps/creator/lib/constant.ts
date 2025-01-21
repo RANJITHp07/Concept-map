@@ -1,0 +1,1 @@
+export const PUBLIC_ROUTE=['/login','/verify-otp','/register']

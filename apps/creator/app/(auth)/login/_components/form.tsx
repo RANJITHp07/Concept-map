@@ -10,6 +10,7 @@ import { apis } from "../../../../lib/api";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Button from "@repo/ui/components/Button";
+import { handleLogin } from "../../../../lib/serverAction";
 
 function Form() {
   const [isLoading,setIsLoading]=useState(false)
@@ -35,12 +36,14 @@ function Form() {
       password: data.password,
     };
     setIsLoading(true)
-    const res = await apiHelper(apis.login, "POST", userData);
-    if (res.status === "success") {
-      router.replace("/");
-    } else if (res.status === "error") {
-      // display the error to the user
-      toast.error(res.error.message)
+    
+  const authentication = await handleLogin(userData.email,userData.password)
+  console.log(authentication)
+    if (authentication && authentication.status == "success") {
+      router.push("/");
+    } else {
+      //dispaly the error message
+      toast.error(authentication?.error?.message!)
     }
 
     setIsLoading(false)

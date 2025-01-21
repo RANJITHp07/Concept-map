@@ -29,4 +29,32 @@ const handleRegistration = async (userId: string, otpString: string) => {
   }
 };
 
+export const handleLogin = async (email: string,password: string) => {
+  try {
+    console.log("hleooo")
+    const response = await signIn("credentials", {
+      userId:'',
+      password: password, 
+      email: email,
+      type: "login",
+      redirect: false,
+    });
+    return {
+      status: "success",
+      data: response,
+    };
+  } catch (error) {
+    if (error instanceof AuthError) {
+      
+      return {
+        status: "error",
+        error: {
+          message: error?.cause?.err?.message,
+        },
+      };
+    }
+  }
+};
+
+
 export default handleRegistration;

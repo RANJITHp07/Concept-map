@@ -28,7 +28,7 @@ declare module "next-auth/jwt" {
   }
 }
 
-export const { handlers, signIn, signOut } = NextAuth({
+export const { handlers,auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       name: "credentials",
@@ -57,14 +57,14 @@ export const { handlers, signIn, signOut } = NextAuth({
 
             if (res.status == "success") return res.data;
 
-            throw new Error(res.message);
+            throw new Error(res.error.message);
           } else if (type == "register") {
+            console.log("jiii")
             const res = await apiHelper(apis.verifyOtp, "POST", {
               code:Number(code as string),
               userId,
             });
 
-            console.log(res)
             if (res.status == "success") return res.data;
 
             throw new Error(res.error.message);
@@ -84,7 +84,8 @@ export const { handlers, signIn, signOut } = NextAuth({
 
   callbacks: {
     async jwt({ token, user }: { token: JWT; user: User }) {
-      if (user.email && user._id) {
+      console.log("user",user,token)
+      if (user?.email && user._id) {
         token.email = user.email;
         token.id = user._id;
         token.role = user.role;
@@ -104,7 +105,7 @@ export const { handlers, signIn, signOut } = NextAuth({
     },
   },
   pages: {
-    signIn: "/login",
+    signIn: "/verify-otp",
   },
   secret: "12345555",
 });
