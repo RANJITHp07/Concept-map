@@ -1,8 +1,4 @@
-import NextAuth, {
-  DefaultSession,
-  Session,
-  User,
-} from "next-auth";
+import NextAuth, { DefaultSession, Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import Credentials from "next-auth/providers/credentials";
 import apiHelper from "./lib/apiHelper";
@@ -57,13 +53,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             const res = await apiHelper(apis.login, "POST", {
               email: email,
               password: password,
+              role: "BUYER",
             });
 
             if (res.status == "success") return res.data;
 
             throw new Error(res.error.message);
           } else if (type == "register") {
-            console.log("jiii");
             const res = await apiHelper(apis.verifyOtp, "POST", {
               code: Number(code as string),
               userId,
