@@ -45,3 +45,31 @@ display: none !important;
     display: none;
 }
 }
+.stats-graph {
+    background: linear-gradient(180deg, rgba(255, 166, 0, 0.1) 0%, rgba(255, 166, 0, 0.05) 100%);
+    border-radius: 12px;
+  }
+  
+  .profile-dots {
+    position: relative;
+  }
+  
+  .profile-dots::before,
+  .profile-dots::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ffa600;
+  }
+  
+  .profile-dots::before {
+    top: -12px;
+    right: -12px;
+  }
+  
+  .profile-dots::after {
+    bottom: -12px;
+    left: -12px;
+  }
