@@ -36,61 +36,70 @@ const ScriptSchema: Schema = new Schema(
       enum: Object.values(IndustryCategory),
       required: true,
     },
-    price: {
-      type: Number,
-      required: true,
-    },
-    currency: {
-      type: String,
-      required: true,
-    },
     type: {
-      type: String,
+      type: [String],
       enum: Object.values(ScriptType),
       required: true,
     },
-    script: [
-      {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    script: {
+      price: {
+        type: Number,
+      },
+      currency: {
+        type: String,
+      },
+      content: Array<{
         name: {
-          type: String,
-          required: true,
-        },
+          type: String;
+        };
         scenes: [
           {
             name: {
-              type: String,
-              required: true,
-            },
+              type: String;
+            };
             description: {
-              type: String,
-              required: true,
-            },
+              type: String;
+            };
           },
-        ],
+        ];
+      }>,
+    },
+    story_borad: {
+      price: {
+        type: Number,
       },
-    ],
-    story_borad: [
-      {
-        name: {
-          type: String,
-          required: true,
-        },
-        cloud_key: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
-    synopsis: {
-      description: {
+      currency: {
         type: String,
-        required: true,
+      },
+      content: Array<{
+        name: {
+          type: String;
+        };
+        cloud_key: {
+          type: String;
+        };
+      }>,
+    },
+    synopsis: {
+      price: {
+        type: Number,
+      },
+      currency: {
+        type: String,
+      },
+      content: {
+        type: String,
       },
     },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 const ScriptModel = mongoose.model<IScript>("Script", ScriptSchema);
