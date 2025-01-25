@@ -5,7 +5,10 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "declaration": false,
+    "declarationMap": false,
+    "esModuleInterop": true
   },
   "include": [
     "**/*.ts",
