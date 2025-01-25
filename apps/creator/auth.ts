@@ -9,6 +9,7 @@ declare module "next-auth" {
     _id?: string | undefined;
     email?: string | undefined | null;
     role?: string;
+    token: string;
   }
 
   interface Session {
@@ -16,6 +17,7 @@ declare module "next-auth" {
       id: string;
       email: string;
       role?: string;
+      token: string;
     } & DefaultSession["user"];
   }
 }
@@ -88,6 +90,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.email = user.email;
         token.id = user._id;
         token.role = user.role;
+        token.jwtToken = user.token;
       }
       return token;
     },
@@ -98,6 +101,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           id: token.id as string,
           email: token.email,
           role: token.role,
+          token: token.jwtToken as string,
         };
       }
       return session;

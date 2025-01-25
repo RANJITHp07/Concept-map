@@ -1,15 +1,20 @@
+import { auth } from "../auth";
+
 const apiHelper = async (
   endpoint: string,
   method = "GET",
   data?: Record<string, any>,
-  headers = {},
+  headers = {}
 ) => {
   try {
+    const session = await auth();
     const url = "http://localhost:8000/api/web" + endpoint;
     const options: RequestInit = {
       method,
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.user.token}`,
         ...headers,
       },
     };

@@ -7,6 +7,8 @@ import { CustomError } from "../utils/customError";
 import { generateOTP, hasOtpExpired } from "../utils/helper";
 import OtpModel from "../repository/model/otp.model";
 import { sendEmail } from "@repo/notification";
+import jwt from "jsonwebtoken";
+import { JWT_SECRET_KEY } from "../config";
 
 export class AuthService {
   private readonly userCrudRepository: CrudRepository<IUser | IOtp>;
@@ -51,7 +53,21 @@ export class AuthService {
     }
 
     if (await argon2.verify(user.password, password)) {
-      return user;
+      const jwtPayload = {
+        id: user?._id,
+        role: user.role,
+        email: user.email,
+      };
+
+      //jwt creation
+      const token = jwt.sign(jwtPayload, JWT_SECRET_KEY!, {
+        expiresIn: "30d",
+      });
+
+      return {
+        ...user,
+        token,
+      };
     }
 
     throw new CustomError(400, "BAD_REQUEST", { message: "Wrong password" });
@@ -147,9 +163,26 @@ export class AuthService {
     }
     if (otp.code === Number(code)) {
       await this.otpCrudRepository.deleteDocumenById(otp._id as string);
-      return await this.userCrudRepository.updateDocumenById(userId, {
+
+      const user = (await this.userCrudRepository.updateDocumenById(userId, {
         is_verified: true,
+      })) as IUser;
+
+      const jwtPayload = {
+        id: user?._id,
+        role: user.role,
+        email: user.email,
+      };
+
+      //jwt creation
+      const token = jwt.sign(jwtPayload, JWT_SECRET_KEY!, {
+        expiresIn: "30d",
       });
+
+      return {
+        ...user,
+        token,
+      };
     }
 
     throw new CustomError(400, "BAD_REQUEST", {
