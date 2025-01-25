@@ -7,6 +7,7 @@ import {
 import Button from "@repo/ui/components/Button";
 import { Tabs, TabsList, TabsTrigger } from "@repo/ui/components/tabs";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Page() {
   return (
@@ -33,7 +34,7 @@ export default function Page() {
             <span>✓ 139 orders completed</span>
           </div>
           <Tabs defaultValue="synopsis" className="w-full">
-            <TabsList className="bg-transparent border-b rounded-none p-0 h-auto">
+            <TabsList className="bg-transparent rounded-none p-0 h-auto">
               <TabsTrigger
                 value="synopsis"
                 className="bg-[#FDF6E7] data-[state=active]:bg-[#FDF6E7] rounded-full px-4 py-1 text-sm"
@@ -53,75 +54,92 @@ export default function Page() {
 
       {/* Description */}
       <div className="mb-8">
-        <h3 className="text-xl text-gray-500 mb-4">
-          I will provide industry standard script coverage and development notes
-          on your script
-        </h3>
         <p className="text-gray-600">
-          Eve is wonderful to work with! Delivers such high quality storytelling
-          and delivers fast! Honestly couldn't have a better experience than
-          with Eve. If you want high quality work with a really kind person
-          wh......
+          Belle Erickson is a talented and versatile writer with a flair for
+          storytelling and a keen eye for detail. Skilled in crafting engaging
+          articles, creative fiction, and persuasive copy, she brings a unique
+          voice and passion to every project. With expertise in content
+          creation, editing, and scriptwriting, Belle excels at connecting with
+          audiences and delivering impactful narratives.
         </p>
-      </div>
-
-      {/* Pricing Tiers */}
-      <div className="grid md:grid-cols-3 gap-4 mb-8">
-        <div className="border rounded-lg p-6">
-          <h4 className="font-semibold mb-4">Script</h4>
-          <p className="text-sm text-gray-600 mb-4">
-            A short story with the characters and situation of your choice.
-          </p>
-          <div className="flex justify-between items-center">
-            {/* <Button
-              variant="default"
-              className="bg-[#F7AB0A] hover:bg-[#F7AB0A]/90 text-black"
-            >
-              View Script
-            </Button> */}
-            <span className="font-semibold">$250</span>
-          </div>
-        </div>
-        {[1, 2].map((i) => (
-          <div key={i} className="border rounded-lg p-6 relative">
-            <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center flex-col">
-              <div className="w-12 h-12 mb-2">🔒</div>
-              <span className="font-medium">Click to Purchase</span>
-            </div>
-            <h4 className="font-semibold mb-4">Story Board</h4>
-            <p className="text-sm text-gray-600 mb-4">
-              A plan video with the characters and situation of your choice.
-            </p>
-            <div className="flex justify-end">
-              <span className="font-semibold">${i === 1 ? "450" : "130"}</span>
-            </div>
-          </div>
-        ))}
       </div>
 
       {/* Script Content */}
       <div className="bg-[#FDF6E7] rounded-lg p-6 mb-8">
-        <h3 className="font-semibold mb-4">Script 01</h3>
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="mb-6 last:mb-0">
-            <h4 className="font-semibold mb-2">Scene {i}</h4>
-            <p className="text-sm text-gray-600">
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
-              It has roots in a piece of classical Latin literature from 45 BC,
-              making it over 2000 years old. Richard McClintock, a Latin
-              professor at Hampden-Sydney College in Virginia, looked up one of
-              the more obscure Latin words, consectetur, from a Lorem Ipsum
-              passage, and going through the cites of the word in classical
-              literature, discovered the undoubtable source.
-            </p>
-          </div>
-        ))}
+        <h3 className="font-semibold mb-4 text-xl">Script 01</h3>
+        <div className="mb-4 last:mb-0">
+          <h4 className="font-semibold text-lg mb-2">Scene</h4>
+          <p className=" text-gray-600">
+            Contrary to popular belief, Lorem Ipsum is not simply random text.
+            It has roots in a piece of classical Latin literature from 45 BC,
+            making it over 2000 years old. Richard McClintock, a Latin professor
+            at Hampden-Sydney College in Virginia, looked up one of the more
+            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+            going through the cites of the word in classical literature,
+            discovered the undoubtable source...
+          </p>
+        </div>
+        <div className="mb-4 last:mb-0">
+          <h4 className="font-semibold text-lg mb-2">Scene</h4>
+          <p className=" text-gray-600">
+            Contrary to popular belief, Lorem Ipsum is not simply random text.
+            It has roots in a piece of classical Latin literature from 45 BC,
+            making it over 2000 years old. Richard McClintock, a Latin professor
+            at Hampden-Sydney College in Virginia, looked up one of the more
+            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+            going through the cites of the word in classical literature,
+            discovered the undoubtable source...
+          </p>
+        </div>
+        <div className="mb-4 last:mb-0">
+          <h4 className="font-semibold text-lg mb-2">Scene</h4>
+          <p className=" text-gray-600">
+            Contrary to popular belief, Lorem Ipsum is not simply random text.
+            It has roots in a piece of classical Latin literature from 45 BC,
+            making it over 2000 years old. Richard McClintock, a Latin professor
+            at Hampden-Sydney College in Virginia, looked up one of the more
+            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+            going through the cites of the word in classical literature,
+            discovered the undoubtable source...
+          </p>
+        </div>
+        <div>
+          <Button actionName="Click to Purchase" />
+        </div>
+      </div>
+
+      {/* Pricing Tiers */}
+      <div className="my-10 flex flex-col gap-5">
+        <h1 className="text-xl font-semibold">
+          Explore More Synopses, Scripts, and Storyboards
+        </h1>
+        <div className="grid md:grid-cols-3 gap-4 mb-8">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="border rounded-lg  relative">
+              <div className="absolute inset-0 bg-white/50 backdrop-blur-sm  flex items-center justify-center flex-col rounded-lg">
+                <div className="w-12 h-12 mb-2">
+                  <Image src="/lock.png" width={50} height={50} alt="lock" />
+                </div>
+                <span className="font-medium text-lg">Click to Purchase</span>
+              </div>
+              <h4 className="font-semibold mb-4 bg-[#C1C1C1] px-6 py-4 rounded-t-lg text-xl">
+                Story Board
+              </h4>
+              <p className="text-sm text-gray-600 mb-4 px-6 py-4">
+                A plan video with the characters and situation of your choice.
+              </p>
+              <div className="flex justify-end px-6 text-xl pb-4">
+                <span className="font-semibold text-2xl">$450</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Reviews */}
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h3 className="font-semibold">What people loved</h3>
+          <h3 className="font-semibold text-xl">What people loved</h3>
           {/* <Button variant="link" className="text-gray-600">
             See all reviews
           </Button> */}
