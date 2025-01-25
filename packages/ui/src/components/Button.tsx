@@ -6,6 +6,7 @@ type Props={
   type?: "button" | "submit" | "reset";
   isDisabled?: boolean;
   loadingName?: string;
+  children?: React.ReactNode;
 }
 
 function Button({
