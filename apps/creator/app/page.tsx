@@ -5,7 +5,6 @@ import React from "react";
 import Image from "next/image";
 import HomeNavbar from "@repo/ui/components/HomeNavbar";
 import HomeInfo from "@repo/ui/components/HomeInfo";
-import HomeSlider from "@repo/ui/components/HomeSlider";
 import SearchBarsWithTags from "@repo/ui/components/SearchBars";
 import HomeResult from "@repo/ui/components/HomeResult";
 import HomeSwiper from "@repo/ui/components/HomeSwiper";
@@ -13,6 +12,7 @@ import RightMenu from "@repo/ui/components/RightMenu";
 import { auth } from "../auth";
 import apiHelper from "../lib/apiHelper";
 import { apis } from "../lib/api";
+import Search from "../components/homeSearch/search";
 
 async function Home() {
   const session = await auth();
@@ -24,7 +24,7 @@ async function Home() {
   return (
     <>
       <div>
-        <div className="grid grid-cols-1 md:grid-cols-12   pt-[10px]">
+        <div className="grid grid-cols-1 md:grid-cols-12   pt-[10px] ">
           {/* Left Column - 4 columns wide */}
           <div className="md:col-span-3 lg:col-span-2 px-[10px] items-center hidden md:block">
             <Image
@@ -57,18 +57,17 @@ async function Home() {
               </h1>
               <hr className="flex-grow border-t border-[#C0C0C0]" />
             </div>
-            <SearchBarsWithTags initialTags={["scripts"]} />
-            <HomeResult />
+            <Search type="scripts" />
 
             {/* story board */}
-            <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
+            {/* <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
               <h1 className="text-[22px] font-medium">
                 Discover Exceptional Story Board
               </h1>
               <hr className="flex-grow border-t border-[#C0C0C0]" />
-            </div>
-            <SearchBarsWithTags initialTags={["story board"]} />
-            <HomeResult />
+            </div> */}
+            {/* <SearchBarsWithTags initialTags={["story board"]} /> */}
+            {/* <HomeResult /> */}
 
             {/* synopsis*/}
             <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
@@ -77,8 +76,7 @@ async function Home() {
               </h1>
               <hr className="flex-grow border-t border-[#C0C0C0]" />
             </div>
-            <SearchBarsWithTags initialTags={["synopsis"]} />
-            <HomeResult />
+            <Search type="synopsis" />
           </div>
         </div>
       </div>

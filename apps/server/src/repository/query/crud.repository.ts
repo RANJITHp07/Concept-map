@@ -18,10 +18,15 @@ export class CrudRepository<T> {
     where: Record<string, any>,
     skip: number,
     take: string | number = "all",
-    populateField: string[] | string = []
+    populateField: string[] | string = [],
+    sortOrder: "asc" | "desc" = "desc"
   ): Promise<T[]> {
     const limit = take === "all" ? 0 : Number(take);
-    const query = this.model.find(where).populate(populateField);
+    const query = this.model
+      .find(where)
+      .populate(populateField)
+      .sort({ createdAt: sortOrder === "asc" ? 1 : -1 });
+
     return await query.skip(skip).limit(limit || 0);
   }
 

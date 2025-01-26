@@ -8,4 +8,7 @@ export const apis = {
 
   //user related apis
   getUserDetails: (id: string) => `/user/${id}`,
+
+  //search
+  getSearchData: "/search",
 };

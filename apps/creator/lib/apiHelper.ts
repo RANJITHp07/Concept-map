@@ -1,26 +1,32 @@
-import { auth } from "../auth";
+// import { auth } from "../auth";
 
 const apiHelper = async (
   endpoint: string,
   method = "GET",
   data?: Record<string, any>,
-  headers = {}
+  headers = {},
+  params?: Record<string, any>
 ) => {
   try {
-    const session = await auth();
-    const url = "http://localhost:8000/api/web" + endpoint;
+    // const session = await auth();
+    let url = "http://localhost:8000/api/web" + endpoint;
     const options: RequestInit = {
       method,
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${session?.user.token}`,
+        // Authorization: `Bearer ${session?.user.token}`,
         ...headers,
       },
     };
 
     if (data && method !== "GET") {
       options.body = JSON.stringify(data);
+    }
+
+    if (params && method === "GET") {
+      const queryParams = new URLSearchParams(params).toString();
+      url = `${url}?${queryParams}`;
     }
 
     const response = await fetch(url, options);
@@ -32,6 +38,7 @@ const apiHelper = async (
 
     return result;
   } catch (error: any) {
+    console.log(error);
     let errorResponse;
     try {
       errorResponse = JSON.parse(error.message);
