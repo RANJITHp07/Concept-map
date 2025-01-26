@@ -20,12 +20,12 @@ export default function DashboardPage() {
             </span>
           </div>
           <div className="flex items-center gap-4">
-            <div className="bg-[rgba(246,170,22,1)] text-white px-4 py-1.5 rounded-lg text-sm">
+            <div className="bg-[rgba(246,170,22,1)] text-white px-4 py-1.5 rounded-lg text-sm w-32">
               Jan - Feb 2024
             </div>
-            <Button actionName="Date" type="button">
+            {/* <Button actionName="Date" type="button">
               <Bell className="h-5 w-5" />
-            </Button>
+            </Button> */}
           </div>
         </header>
 
@@ -87,13 +87,13 @@ export default function DashboardPage() {
                   className="pl-9 rounded-full border-gray-200 w-full"
                 />
               </div>
-              <div className="flex items-center gap-4">
+              {/* <div className="flex items-center gap-4">
                 {["3 Story board", "5 Scripts", "3 story"].map((filter) => (
                   <Button actionName="Story board" type="button" key={filter}>
                     {filter}
                   </Button>
                 ))}
-              </div>
+              </div> */}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -16,7 +16,9 @@ export class SearchService {
       type = "",
       filter = "",
       textSearch,
+      priceRange = "0",
     } = searchFilter;
+    // console.log(priceRange);
 
     const filterQuery = {
       ...(type && { type: { $in: type.split(",") } }),
@@ -33,8 +35,26 @@ export class SearchService {
         }),
       ...(textSearch && {
         $or: [
-          { "script.content": { $regex: textSearch, $options: "i" } },
+          {
+            "script.content.scenes.description": {
+              $regex: textSearch,
+              $options: "i",
+            },
+          },
+          {
+            "script.content.scenes.name": {
+              $regex: textSearch,
+              $options: "i",
+            },
+          },
           { "synopsis.content": { $regex: textSearch, $options: "i" } },
+        ],
+      }),
+      ...(parseInt(priceRange) !== 0 && {
+        $or: [
+          { "script.price": { $lte: parseInt(priceRange) } },
+          { "story_borad.price": { $lte: parseInt(priceRange) } },
+          { "synopsis.price": { $lte: parseInt(priceRange) } },
         ],
       }),
     };

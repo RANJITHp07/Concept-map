@@ -78,3 +78,28 @@
   bottom: -12px;
   left: -12px;
 }
+
+.range-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px; /* Size of the round thumb */
+    height: 16px;
+    background: rgb(246, 170, 22); /* Color of the thumb */
+    border-radius: 50%; /* Makes it round */
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2); /* Optional: shadow for better appearance */
+  }
+
+  .range-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: rgb(246, 170, 22);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Adjust focus outline if needed */
+  .range-slider:focus::-webkit-slider-thumb {
+    outline: none;
+    box-shadow: 0 0 4px rgba(246, 170, 22, 0.8); /* Glow effect */
+  }

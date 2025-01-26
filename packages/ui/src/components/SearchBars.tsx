@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Fade } from "react-awesome-reveal";
+import { useRouter } from "next/navigation";
 
 export const genreTVOption = [
   { name: "Romance", value: "ROMANCE" },
@@ -64,6 +65,12 @@ export const industryOptions = [
   { name: "Others", value: "OTHERS" },
 ];
 
+export const screenwriting = [
+  { name: "Scripts", value: "SCRIPT" },
+  { name: "Story Board", value: "STORY_BOARD" },
+  { name: "Synopsis", value: "SYNOPSIS" },
+];
+
 interface DropdownOption {
   title: string;
   options: Array<{
@@ -102,6 +109,7 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
   // const [searchValue, setSearchValue] = useState<string>("");
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [openDropdown, setOpenDropdown] = useState<string>("");
+  const router = useRouter();
 
   const dropdownData: DropdownData = {
     tvc: {
@@ -199,7 +207,7 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
         />
       </button>
       {openDropdown === key && (
-        <div className="absolute bottom-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-100">
+        <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-100">
           {data.options.map(
             (
               option: {
@@ -284,6 +292,7 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
           <button
             className="hidden md:block p-4 rounded-full bg-yellow-400 hover:bg-yellow-500 transition-colors"
             type="button"
+            onClick={() => router.push("/search")}
           >
             <Image
               src="/HomeData/arrow.svg"

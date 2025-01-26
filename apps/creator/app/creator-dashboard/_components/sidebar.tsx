@@ -11,7 +11,7 @@ import {
   Upload,
   Plus,
 } from "lucide-react";
-import { Button } from "@repo/ui/components/Button";
+import Button from "@repo/ui/components/Button";
 import LeftMenu from "@repo/ui/components/LeftMenu";
 
 export function Sidebar() {
@@ -60,14 +60,16 @@ export function Sidebar() {
       </div>
       <div className="mt-auto space-y-2">
         <Button
-          variant="outline"
+          actionName="Upload"
           className="w-full justify-center text-muted-foreground text-[17px] leading-[21px] font-medium bg-gray-300 hover:bg-gray-100"
         >
           Upload
           <Upload className="mr-2 h-4 w-4" />
         </Button>
-        <Button className="w-full justify-center text-[17px] leading-[21px] font-medium bg-[rgba(246,170,22,1)] hover:bg-orange-600 text-white">
-          Create New
+        <Button
+          actionName="Create New"
+          className="w-full justify-center text-[17px] leading-[21px] font-medium bg-[rgba(246,170,22,1)] hover:bg-orange-600 text-white"
+        >
           <Plus className="mr-2 h-4 w-4" />
         </Button>
       </div>

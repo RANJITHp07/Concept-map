@@ -1,13 +1,14 @@
-import React from 'react'
+import React from "react";
 
-type Props={
+type Props = {
   actionName: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   isDisabled?: boolean;
   loadingName?: string;
   children?: React.ReactNode;
-}
+  className?: string;
+};
 
 function Button({
   actionName,
@@ -15,6 +16,7 @@ function Button({
   type = "button",
   isDisabled = false,
   loadingName = "",
+  className,
 }: Props) {
   return (
     <button
@@ -25,11 +27,11 @@ function Button({
         isDisabled
           ? "bg-gray-400 text-gray-700 cursor-not-allowed"
           : "bg-[#f5a623] text-white hover:bg-[#e69516]"
-      }`}
+      } ${className}`}
     >
       {isDisabled ? loadingName : actionName}
     </button>
   );
 }
 
-export default Button
+export default Button;

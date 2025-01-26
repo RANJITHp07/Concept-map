@@ -4,6 +4,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
 import { FaUsers, FaHeart } from "react-icons/fa";
 import { Fade } from "react-awesome-reveal";
+import { useRouter } from "next/navigation";
 import {
   genreShortsOption,
   genreTVOption,
@@ -17,6 +18,7 @@ function HomeResult({
   data: Array<Record<any, any>>;
   count: number;
 }) {
+  const router = useRouter();
   const sliderData = useMemo(() => {
     return (data ?? []).map((script) => {
       return {
@@ -28,6 +30,7 @@ function HomeResult({
         image: script.userId.profile_url || "/HomeData/face.png",
         dot: script.dot || "/HomeResult/star.svg",
         bookmark: script.bookmark || "/HomeResult/right.svg",
+
         genre:
           [...genreTVOption, ...genreShortsOption].find(
             (_script) => _script.value == script.genre
@@ -65,7 +68,10 @@ function HomeResult({
         <div className="flex items-center justify-between">
           <h1 className="text-[22px]">{count} Records Found</h1>
           {count != 0 && (
-            <button className="py-[10px] px-[15px] border text-[12px] rounded-[10px] shadow-md hover:shadow-lg transition-shadow">
+            <button
+              onClick={() => router.push("/search")}
+              className="py-[10px] px-[15px] border text-[12px] rounded-[10px] shadow-md hover:shadow-lg transition-shadow"
+            >
               View All
             </button>
           )}
@@ -83,7 +89,10 @@ function HomeResult({
                 delay={index * 200}
                 duration={800}
               >
-                <div className="border  rounded-[30px] shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                <div
+                  className="border  rounded-[30px] shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                  onClick={() => router.push("/creator-details")}
+                >
                   <div className="pl-[20px] py-[20px] flex justify-between">
                     {/* Image and Content */}
                     <div className="flex items-start">
@@ -130,7 +139,7 @@ function HomeResult({
                         </div>
                         <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full">
                           <span className="text-gray-700 text-[14px] lg:text-[16px]">
-                            {item.industry_category}
+                            {item.industry_category}roiroioiroiorio
                           </span>
                         </div>
                       </div>
