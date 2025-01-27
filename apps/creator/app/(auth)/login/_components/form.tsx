@@ -8,6 +8,7 @@ import { loginSchema } from "../../../../lib/validator/login";
 import apiHelper from "../../../../lib/apiHelper";
 import { apis } from "../../../../lib/api";
 import { useRouter } from "next/navigation";
+import ScriptFestival from "../../_components/slider";
 
 function Form() {
   const router = useRouter();
@@ -35,7 +36,6 @@ function Form() {
     if (res.status === "success") {
       router.replace("/");
     } else if (res.status === "error") {
-      // display the error to the user
       console.log(res.error.message);
     }
   };
@@ -151,14 +151,10 @@ function Form() {
           </div>
         </div>
       </div>
-      <div className="  p-6 flex justify-center items-center ">
-        <Image
-          src="/auth/img-1.png"
-          alt="Concepts Map"
-          width={600}
-          height={100}
-          className="w-[600px] h-[700px] hidden lg:block md:block"
-        />
+      <div className="justify-center items-center  flex ">
+        <div className="  p-6 hidden lg:block md:block ">
+          <ScriptFestival />
+        </div>
       </div>
     </>
   );

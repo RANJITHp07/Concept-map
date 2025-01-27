@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import TextInput from "@repo/ui/components/TextInput";
-import Button from "@repo/ui/components/Button";
+import { Button } from "@repo/ui/components/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registrationSchema } from "../../../../lib/validator/registration";
 import apiHelper from "../../../../lib/apiHelper";
 import { apis } from "../../../../lib/api";
 import { useRouter } from "next/navigation";
+import ScriptFestival from "../../_components/slider";
 
 function Form() {
   const [isLoading, setIsLoading] = useState(false);
@@ -206,14 +207,10 @@ function Form() {
           </div>
         </div>
       </div>
-      <div className="  p-6 flex justify-center items-center ">
-        <Image
-          src="/auth/img-1.png"
-          alt="Concepts Map"
-          width={600}
-          height={100}
-          className="w-[600px] h-[700px] hidden lg:block md:block"
-        />
+      <div className="justify-center items-center  flex ">
+        <div className="  p-6 hidden lg:block md:block ">
+          <ScriptFestival />
+        </div>
       </div>
     </>
   );

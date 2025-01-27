@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "../../../../auth";
 import handleRegistration from "../../../../lib/serverAction";
 import Timer from "./timer";
+import ScriptFestival from "../../_components/slider";
 
 function OtpVerificationForm() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -126,14 +127,10 @@ function OtpVerificationForm() {
           </div>
         </div>
       </div>
-      <div className="  p-6 flex justify-center items-center ">
-        <Image
-          src="/auth/img-1.png"
-          alt="Concepts Map"
-          width={600}
-          height={100}
-          className="w-[600px] h-[700px] hidden lg:block md:block"
-        />
+      <div className="justify-center items-center  flex ">
+        <div className="  p-6 hidden lg:block md:block ">
+          <ScriptFestival />
+        </div>
       </div>
     </>
   );

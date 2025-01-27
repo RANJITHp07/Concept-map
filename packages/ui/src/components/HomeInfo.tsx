@@ -29,7 +29,7 @@ function HomeInfo() {
           {data.map((item, index) => (
             <div
               key={index}
-              className="flex items-center justify-between gap-10 p-8 rounded-2xl h-60"
+              className="flex items-center justify-between gap-10 p-8 rounded-2xl h-72"
               style={{
                 backgroundImage: "url('/home/newImg.jpg')",
                 backgroundSize: "cover",
@@ -67,14 +67,14 @@ function HomeInfo() {
               backgroundPosition: "center",
             }}
           >
-            <div className="flex justify-between gap-5 p-3 pt-[30px]">
+            <div className="flex justify-between gap-5 p-5 pt-[30px]">
               {textData.map((item, index) => (
                 <div
                   key={index}
                   className="flex flex-col items-center justify-center w-1/3 text-center text-white rounded-lg"
                 >
                   <h2 className="text-[15px]">{item.title}</h2>
-                  <p className="text-[45px]">{item.numbers}</p>
+                  <p className="text-[60px]">{item.numbers}</p>
                 </div>
               ))}
             </div>
@@ -82,7 +82,7 @@ function HomeInfo() {
 
           {/* Right Section - 30% */}
           <div
-            className="flex flex-shrink-0 flex-col gap-5 w-1/3 p-3 text-white rounded-[30px] bg-[rgba(246,170,22,1)]"
+            className="flex flex-shrink-0 flex-col gap-5 w-1/3 p-5 text-white rounded-[30px] bg-[rgba(246,170,22,1)]"
           >
             {rightData.map((item, index) => (
               <div
@@ -94,7 +94,7 @@ function HomeInfo() {
                 </div>
                 <div className="flex flex-col">
                   <h2 className="text-[20px]">{item.title}</h2>
-                  <p className="text-[50px]">{item.number}</p>
+                  <p className="text-[60px]">{item.number}</p>
                 </div>
               </div>
             ))}
