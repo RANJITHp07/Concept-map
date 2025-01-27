@@ -59,8 +59,8 @@ function HomeSlider(): JSX.Element {
         ...acc,
         [item.id]: item.isFollowed,
       }),
-      {},
-    ),
+      {}
+    )
   );
 
   const toggleFollow = (id: number): void => {

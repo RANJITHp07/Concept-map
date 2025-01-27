@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Button from "@repo/ui/components/Button";
 import { handleLogin } from "../../../../lib/serverAction";
+import ScriptFestival from "../../_components/slider";
 
 function Form() {
   const [isLoading, setIsLoading] = useState(false);
@@ -158,14 +159,10 @@ function Form() {
           </div>
         </div>
       </div>
-      <div className="  p-6 flex justify-center items-center ">
-        <Image
-          src="/auth/img-1.png"
-          alt="Concepts Map"
-          width={600}
-          height={100}
-          className="w-[500px] h-[600px] hidden lg:block md:block"
-        />
+      <div className="justify-center items-center  flex ">
+        <div className="  p-6 hidden lg:block md:block ">
+          <ScriptFestival />
+        </div>
       </div>
     </>
   );

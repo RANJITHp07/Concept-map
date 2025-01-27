@@ -11,7 +11,8 @@ import { registrationSchema } from "../../../../lib/validator/registration";
 import apiHelper from "../../../../lib/apiHelper";
 import { apis } from "../../../../lib/api";
 import { useRouter } from "next/navigation";
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
+import ScriptFestival from "../../_components/slider";
 
 function Form() {
   const [isLoading, setIsLoading] = useState(false);
@@ -59,8 +60,8 @@ function Form() {
       }
     } else if (res.status == "error") {
       //dispaly the error message
-      toast.error(res.error?.message || 'An error occurred')
-      console.log(res.error.message)
+      toast.error(res.error?.message || "An error occurred");
+      console.log(res.error.message);
       setIsLoading(false);
     }
   };
@@ -142,8 +143,13 @@ function Form() {
                 type="password"
                 errorMessage={errors.confirmPassword?.message as string}
               />
-              <div className='my-3'>
-              <Button actionName="Create an Account" type="submit" isDisabled={isLoading} loadingName="Sending OTP..." />
+              <div className="my-3">
+                <Button
+                  actionName="Create an Account"
+                  type="submit"
+                  isDisabled={isLoading}
+                  loadingName="Sending OTP..."
+                />
               </div>
             </form>
 
@@ -199,7 +205,7 @@ function Form() {
                 </button>
               </div>
               <div className="text-sm text-gray-600 flex justify-center mt-5">
-              Already have an account?{" "}
+                Already have an account?{" "}
                 <Link
                   href="/login"
                   className="text-[#f5a623] hover:text-[#e69516] mx-1"
@@ -211,14 +217,10 @@ function Form() {
           </div>
         </div>
       </div>
-      <div className="  p-6 flex justify-center items-center ">
-        <Image
-          src="/auth/img-1.png"
-          alt="Concepts Map"
-          width={500}
-          height={100}
-          className="w-[500px] h-[600px] hidden lg:block md:block"
-        />
+      <div className="justify-center items-center  flex ">
+        <div className="  p-6 hidden lg:block md:block ">
+          <ScriptFestival />
+        </div>
       </div>
     </>
   );

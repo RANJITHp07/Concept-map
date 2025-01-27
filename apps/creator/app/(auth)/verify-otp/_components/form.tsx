@@ -9,11 +9,12 @@ import Button from "@repo/ui/components/Button";
 import apiHelper from "../../../../lib/apiHelper";
 import { apis } from "../../../../lib/api";
 import toast from "react-hot-toast";
+import ScriptFestival from "../../_components/slider";
 
 function OtpVerificationForm() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [isTimerDisabled, setIsTimerDisabled] = useState(false);
-  const [isLoading,setIsLoading]=useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const router = useRouter();
 
@@ -38,7 +39,7 @@ function OtpVerificationForm() {
 
   const handleKeyDown = (
     index: number,
-    e: React.KeyboardEvent<HTMLInputElement>,
+    e: React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (e.key === "Backspace" && index > 0 && otp[index] === "") {
       inputRefs.current[index - 1]?.focus();
@@ -48,9 +49,9 @@ function OtpVerificationForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const otpString = otp.join("");
-    if(otp.length!==6) return;
+    if (otp.length !== 6) return;
 
-    setIsLoading(true)
+    setIsLoading(true);
     const userId = sessionStorage.getItem("RegisteredUser");
 
     const authentication = await handleRegistration(userId!, otpString);
@@ -59,21 +60,21 @@ function OtpVerificationForm() {
       router.push("/");
     } else {
       //dispaly the error message
-      toast.error(authentication?.error?.message!)
+      toast.error(authentication?.error?.message!);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
-  const handleResendOtp =async () => {
+  const handleResendOtp = async () => {
     const userId = sessionStorage.getItem("RegisteredUser");
 
-    const resendOtp = await apiHelper(apis.resendOtp, "POST", {userId});
+    const resendOtp = await apiHelper(apis.resendOtp, "POST", { userId });
 
-    if(resendOtp.status==='success'){
-      setIsTimerDisabled(false)
+    if (resendOtp.status === "success") {
+      setIsTimerDisabled(false);
     }
 
-    console.log(resendOtp)
+    console.log(resendOtp);
   };
 
   return (
@@ -127,34 +128,43 @@ function OtpVerificationForm() {
                   ))}
                 </div>
               </div>
-              <div className='my-3'>
-              <Button actionName="Verify OTP" type="submit" isDisabled={isLoading} loadingName="Verifying..." />
+              <div className="my-3">
+                <Button
+                  actionName="Verify OTP"
+                  type="submit"
+                  isDisabled={isLoading}
+                  loadingName="Verifying..."
+                />
               </div>
             </form>
 
             <div className="mt-5 text-center flex justify-center gap-1">
-            <p className="text-gray-400">{isTimerDisabled ? "If you haven't received the code, click here to":"The code will expire in"} </p>
-            {
-              isTimerDisabled ? 
-              <button className="text-[#f5a623] hover:text-[#e69516] transition-colors" onClick={handleResendOtp} >
-              resend 
-              </button>
-              :
-              <Timer isTimerDisabled={isTimerDisabled} handleTimerDisable={()=>setIsTimerDisabled(true)}/>
-            }
-
+              <p className="text-gray-400">
+                {isTimerDisabled
+                  ? "If you haven't received the code, click here to"
+                  : "The code will expire in"}{" "}
+              </p>
+              {isTimerDisabled ? (
+                <button
+                  className="text-[#f5a623] hover:text-[#e69516] transition-colors"
+                  onClick={handleResendOtp}
+                >
+                  resend
+                </button>
+              ) : (
+                <Timer
+                  isTimerDisabled={isTimerDisabled}
+                  handleTimerDisable={() => setIsTimerDisabled(true)}
+                />
+              )}
             </div>
           </div>
         </div>
       </div>
-      <div className="  p-6 flex justify-center items-center ">
-        <Image
-          src="/auth/img-1.png"
-          alt="Concepts Map"
-          width={600}
-          height={100}
-          className="w-[600px] h-[700px] hidden lg:block md:block"
-        />
+      <div className="justify-center items-center  flex ">
+        <div className="  p-6 hidden lg:block md:block ">
+          <ScriptFestival />
+        </div>
       </div>
     </>
   );
