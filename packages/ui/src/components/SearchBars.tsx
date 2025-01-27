@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { Fade } from "react-awesome-reveal";
 import { useRouter } from "next/navigation";
@@ -33,7 +33,7 @@ export const genreShortsOption = [
   { name: "Health & Fitness", value: "HEALTH_AND_FITNESS" },
   { name: "Animals & Pets", value: "ANIMALS_AND_PETS" },
   { name: "Family & Parenting", value: "FAMILY_AND_PARENTING" },
-  { name: "Home & DIY", value: "HOME_AND_DIY" },
+  { name: "Home & DIY", value: "HOME_AND_DDIY" },
   {
     name: "Self Help & Motivational",
     value: "SELF_HELP_AND_MOTIVATIONAL",
@@ -54,14 +54,14 @@ export const industryOptions = [
   { name: "Auto", value: "AUTO" },
   { name: "Travel & Hospitality", value: "TRAVEL & HOSPITALITY" },
   { name: "F&B", value: "FB" },
-  { name: "Consumer Electronics", value: "CONSUMER ELECTRONICS" },
+  { name: "Consumer Electronics", value: "CONSUMER_ELECTRONICS" },
   { name: "BFSI", value: "BFSI" },
   { name: "Apparel", value: "APPAREL" },
   { name: "Technology", value: "TECHNOLOGY" },
-  { name: "Real Estate", value: "REAL ESTATE" },
+  { name: "Real Estate", value: "REAL_ESTATE" },
   { name: "Utilities", value: "UTILITIES" },
   { name: "Jewellery", value: "JEWELLERY" },
-  { name: "Media & Entertainment", value: "MEDIA & ENTERTAINMENT" },
+  { name: "Media & Entertainment", value: "MEDIA_AND_ENTERTAINMENT" },
   { name: "Others", value: "OTHERS" },
 ];
 
@@ -106,7 +106,6 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
   filter,
   handleTextChange,
 }) => {
-  // const [searchValue, setSearchValue] = useState<string>("");
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [openDropdown, setOpenDropdown] = useState<string>("");
   const router = useRouter();
@@ -137,19 +136,6 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // const handleClickOutside = (event: MouseEvent) => {
-    //   if (
-    //     dropdownRef.current &&
-    //     !dropdownRef.current.contains(event.target as Node)
-    //   ) {
-    //     setOpenDropdown("");
-    //   }
-    // };
-    // document.addEventListener("mousedown", handleClickOutside);
-    // return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   const handleTagSelect = (tag: { name: string; value: string }): void => {
     setFilter((prev) => {
       const index = prev.findIndex(
@@ -161,8 +147,6 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
       }
       return [...prev, tag];
     });
-
-    // setSearchValue("");
     setShowSuggestions(false);
   };
 
@@ -191,7 +175,7 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
     key: string,
     data: DropdownOption
   ): JSX.Element => (
-    <div className="relative hidden md:block" ref={dropdownRef}>
+    <div className="relative" ref={dropdownRef}>
       <button
         className="flex items-center space-x-2 px-6 py-3 rounded-full border border-gray-200 hover:bg-gray-50"
         onClick={() => toggleDropdown(key)}
@@ -207,7 +191,7 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
         />
       </button>
       {openDropdown === key && (
-        <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-100">
+        <div className="absolute top-[calc(100%+8px)] left-0 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
           {data.options.map(
             (
               option: {
@@ -220,7 +204,6 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
                 key={option.name}
                 className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                 onClick={() => handleOptionSelect(option)}
-                // role="button"
                 tabIndex={0}
               >
                 {option.name}
@@ -241,7 +224,6 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
               type="text"
               placeholder="looking for today?"
               className="w-full pl-4 pr-12 py-3 rounded-full border border-gray-200 outline-none text-gray-600 placeholder-gray-400"
-              // value={searchValue}
               onChange={handleTextChange}
               onFocus={() => setShowSuggestions(true)}
             />
@@ -254,26 +236,6 @@ const SearchBarsWithTags: React.FC<SearchBarsWithTagsProps> = ({
                 className="text-gray-400"
               />
             </div>
-
-            {/* {showSuggestions && searchValue && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-                {suggestions
-                  .filter((suggestion) =>
-                    suggestion.toLowerCase().includes(searchValue.toLowerCase())
-                  )
-                  .map((suggestion: string, index: number) => (
-                    <div
-                      key={index}
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => handleTagSelect(suggestion)}
-                      role="button"
-                      tabIndex={0}
-                    >
-                      {suggestion}
-                    </div>
-                  ))}
-              </div>
-            )} */}
           </div>
 
           {/* Show only one filter on medium screens */}

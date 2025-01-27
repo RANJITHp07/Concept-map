@@ -33,9 +33,9 @@ function Mainsearch({ handleTextSearch }: any) {
   };
 
   return (
-    <div className=" w-full ">
-      <div className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-md">
-        <div className="relative w-[40%]">
+    <div className="w-full">
+      <div className="flex flex-col md:flex-row items-center gap-4 p-4 bg-white rounded-lg shadow-md">
+        <div className="relative w-full md:w-[40%]">
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
             <BiSearch size={20} />
           </div>
@@ -47,10 +47,9 @@ function Mainsearch({ handleTextSearch }: any) {
             className="w-full pl-10 pr-4 py-3 border rounded-lg border-[rgba(254,201,97,1)]"
           />
         </div>
-        {/* Left side - Country and Place */}
-        <div className="grid grid-cols-2 gap-4 w-[50%] ">
-          {/* Country Selection */}
-          <div className="relative w-full">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full md:w-[50%]">
+          <div className="relative w-full order-2 md:order-1">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
               <IoEarthOutline size={20} />
             </div>
@@ -59,7 +58,7 @@ function Mainsearch({ handleTextSearch }: any) {
               onChange={(e) =>
                 setSelectedCountry(e.target.value as keyof CountryData | "")
               }
-              className="w-full pl-10 pr-4 py-3 border border-[rgba(254,201,97,1)] rounded-lg  "
+              className="w-full pl-10 pr-4 py-3 border border-[rgba(254,201,97,1)] rounded-lg"
             >
               <option value="">Country</option>
               {countries.map((country) => (
@@ -70,8 +69,7 @@ function Mainsearch({ handleTextSearch }: any) {
             </select>
           </div>
 
-          {/* City Selection */}
-          <div className="relative w-full">
+          <div className="relative w-full order-3 md:order-2">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
               <IoLocationOutline size={20} />
             </div>
@@ -93,11 +91,10 @@ function Mainsearch({ handleTextSearch }: any) {
         </div>
 
         <Button
-          actionName="Search "
-          className="!mt-0 !w-[10%]"
+          actionName="Search"
+          className="w-full order-1 md:!mt-0 md:!w-[10%]"
           onClick={() => handleTextSearch(searchQuery)}
         />
-        {/* Right side - Search Bar */}
       </div>
     </div>
   );

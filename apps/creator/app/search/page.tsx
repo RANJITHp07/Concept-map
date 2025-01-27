@@ -50,7 +50,7 @@ function Page() {
 
   useEffect(() => {
     fetchScriptData();
-  }, [type, categoryFilter, priceRange, textSearch, priceRange]);
+  }, [type, categoryFilter, priceRange, textSearch]);
 
   const handleTextSearch = (value: string) => setTextSearch(value);
 
@@ -87,30 +87,28 @@ function Page() {
   };
 
   return (
-    <div>
-      <div className=" bg-[#FFF5E9] text-gray-700">
-        <div className="px-[50px] py-[40px]">
+    <div className="min-h-screen flex flex-col">
+      <div className="bg-[#FFF5E9] text-gray-700">
+        <div className="px-[10px] md:px-[20px] lg:px-[50px] py-[20px] md:py-[30px] lg:py-[40px]">
           <div className="py-[50px] px-[10px]">
-            <h1 className="text-[40px] font-bold	">
+            <h1 className="text-[20px] md:text-[30px] lg:text-[40px] font-bold">
               Browse Scripts, Synopses, & Ideas{" "}
             </h1>
-            <p className="text-[18px]">
+            <p className="text-[14px] md:text-[16px] lg:text-[18px]">
               Uncover a treasure trove of unique stories, powerful synopses, and
               creative ideas crafted by writers ready to inspire your next big
               project.
             </p>
           </div>
-
-          <div></div>
-          <div className=" px-[10px]">
+          <div className="px-[10px]">
             <MainSearch handleTextSearch={handleTextSearch} />
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-12 relative  bg-gray-50 px-[50px] pt-[40px]">
-        {/* Left Column - Fixed Position */}
-        <div className="col-span-3 h-[calc(100vh-10px)] sticky top-[10px]  bg-gray-50">
-          <div className=" h-full overflow-auto scrollbar-none">
+
+      <div className="flex-1 grid grid-cols-12 px-[10px] md:px-[20px] lg:px-[50px] pt-[40px]">
+        <div className="col-span-12 md:col-span-3 md:sticky md:top-0 md:h-screen overflow-y-auto">
+          <div className="pr-4">
             <LeftSearch
               handleCategoryFilter={handleCategoryFilter}
               handleType={handleType}
@@ -122,8 +120,7 @@ function Page() {
           </div>
         </div>
 
-        {/* Right Column - Scrollable */}
-        <div className="col-span-9  px-[10px] pb-[30px] ">
+        <div className="col-span-12 md:col-span-9 px-[10px] pb-[30px]">
           <div>
             <SearchResult data={searchData} count={count} />
           </div>

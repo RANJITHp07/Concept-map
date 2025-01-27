@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
-import { FaUsers, FaHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { Fade } from "react-awesome-reveal";
 import { useRouter } from "next/navigation";
 import {
@@ -63,7 +63,7 @@ function HomeResult({
   };
 
   return (
-    <section className="pt-[40px] -z-10">
+    <section className="pt-[40px] ">
       <Fade direction="up" triggerOnce duration={800}>
         <div className="flex items-center justify-between">
           <h1 className="text-[22px]">{count} Records Found</h1>
@@ -80,7 +80,7 @@ function HomeResult({
 
       <div className="pt-[50px]">
         {count != 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[10px] lg:gap-[20px] Home-result-gird">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[10px] lg:gap-[20px] Home-result-gird md:relative z-[-1]">
             {sliderData.map((item, index) => (
               <Fade
                 key={item.id}
@@ -89,11 +89,9 @@ function HomeResult({
                 delay={index * 200}
                 duration={800}
               >
-                <div
-                  className="border  rounded-[30px] shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                  onClick={() => router.push("/creator-details")}
-                >
-                  <div className="pl-[20px] py-[20px] flex justify-between">
+                <div className="border rounded-[30px] shadow-lg hover:shadow-xl transition-shadow cursor-pointer flex flex-col h-full">
+                  <div className="pl-[20px] 
+                   py-[20px] flex justify-between">
                     {/* Image and Content */}
                     <div className="flex items-start">
                       <Image
@@ -125,13 +123,13 @@ function HomeResult({
                     </button>
                   </div>
 
-                  <div className="px-[20px] pb-[20px] pt-[5px]">
+                  <div className="px-[20px]  pt-[5px] flex-1">
                     <div>
                       <p className="text-[14px]">
                         {item.description.slice(0, 100)}
                         ......
                       </p>
-                      <div className="flex gap-2 my-2 flex-wrap">
+                      <div className="flex gap-2 my-2 pt-[10px] flex-wrap">
                         <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full ">
                           <span className="text-gray-700 text-[14px] lg:text-[16px]">
                             {item.genre}
@@ -143,34 +141,36 @@ function HomeResult({
                           </span>
                         </div>
                       </div>
-                      <div className="flex items-center justify-between pt-[10px]">
-                        <div className="flex items-center gap-[10px]">
-                          <div className="flex items-center">
-                            <Image
-                              src={item.dot}
-                              alt="dot"
-                              width={15}
-                              height={15}
-                              className="mr-[5px]"
-                            />
-                            <p className="text-[12px]">{item.rating}</p>
-                          </div>
+                    </div>
+                  </div>
 
-                          <div className="flex">
-                            <FaHeart size={18} className="mr-[5px]" />
-                            <p className="text-[12px]">{item.rating}</p>
-                          </div>
-                        </div>
-
-                        <div className="inline-block p-2 rounded-[100px] bg-[rgba(246,170,22,1)]">
-                          <Image
-                            src={item.bookmark}
-                            alt="bookmark"
-                            width={18}
-                            height={18}
-                          />
-                        </div>
+                  {/* Bottom Section, consistent left and right padding */}
+                  <div className="flex items-center justify-between pt-[10px] pb-[20px] mt-auto px-[20px]">
+                    <div className="flex items-center gap-[10px]">
+                      <div className="flex items-center">
+                        <Image
+                          src={item.dot}
+                          alt="dot"
+                          width={15}
+                          height={15}
+                          className="mr-[5px]"
+                        />
+                        <p className="text-[12px]">{item.rating}</p>
                       </div>
+
+                      <div className="flex">
+                        <FaHeart size={18} className="mr-[5px]" />
+                        <p className="text-[12px]">{item.rating}</p>
+                      </div>
+                    </div>
+
+                    <div className="inline-block p-2 rounded-[100px] bg-[rgba(246,170,22,1)]">
+                      <Image
+                        src={item.bookmark}
+                        alt="bookmark"
+                        width={18}
+                        height={18}
+                      />
                     </div>
                   </div>
                 </div>
