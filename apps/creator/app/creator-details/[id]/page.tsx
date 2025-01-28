@@ -8,8 +8,23 @@ import Button from "@repo/ui/components/Button";
 import { Tabs, TabsList, TabsTrigger } from "@repo/ui/components/tabs";
 import Link from "next/link";
 import Image from "next/image";
+import apiHelper from "../../../lib/apiHelper";
+import { apis } from "../../../lib/api";
+import {
+  genreShortsOption,
+  genreTVOption,
+  industryOptions,
+} from "../../../lib/constant";
 
-export default function Page() {
+export default async function Page({ params }: any) {
+  const { data } = await apiHelper(apis.getScriptDetails(params.id));
+
+  const price = [
+    { name: "Script", price: data?.script?.price },
+    { name: "Story Board", price: data?.story_borad?.price },
+    { name: "Synopsis", price: data?.synopsis?.price },
+  ].filter((item) => item.price && item.price != 0);
+
   return (
     <div className="p-12">
       {/* Header */}
@@ -27,13 +42,13 @@ export default function Page() {
           <AvatarFallback>BE</AvatarFallback>
         </Avatar>
         <div className="flex-1">
-          <h2 className="text-xl font-semibold mb-1">Belle Erickson</h2>
+          <h2 className="text-xl font-semibold mb-1">{data.userId.username}</h2>
           <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-gray-600 mb-4">
             <span>🌍 United Kingdom</span>
             <span>💬 I speak English</span>
             <span>✓ 139 orders completed</span>
           </div>
-          <Tabs defaultValue="synopsis" className="w-full">
+          {/* <Tabs defaultValue="synopsis" className="w-full">
             <TabsList className="bg-transparent rounded-none p-0 h-auto">
               <TabsTrigger
                 value="synopsis"
@@ -48,17 +63,17 @@ export default function Page() {
                 Story board
               </TabsTrigger>
             </TabsList>
-          </Tabs>
+          </Tabs> */}
         </div>
       </div>
 
       {/* Description */}
       <div className="mb-8">
         <p className="text-gray-600">
-          Belle Erickson is a talented and versatile writer with a flair for
-          storytelling and a keen eye for detail. Skilled in crafting engaging
-          articles, creative fiction, and persuasive copy, she brings a unique
-          voice and passion to every project. With expertise in content
+          {data.userId.username} is a talented and versatile writer with a flair
+          for storytelling and a keen eye for detail. Skilled in crafting
+          engaging articles, creative fiction, and persuasive copy, she brings a
+          unique voice and passion to every project. With expertise in content
           creation, editing, and scriptwriting, Belle excels at connecting with
           audiences and delivering impactful narratives.
         </p>
@@ -66,30 +81,28 @@ export default function Page() {
 
       {/* Script Content */}
       <div className="bg-[#FDF6E7] rounded-lg p-6 mb-8">
-        <h3 className="font-semibold mb-4 text-2xl">The Whispering Fog</h3>
-        <p className=" text-gray-600">
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It
-          has roots in a piece of classical Latin literature from 45 BC, making
-          it over 2000 years old. Richard McClintock, a Latin professor at
-          Hampden-Sydney College in Virginia, looked up one of the more obscure
-          Latin words, consectetur, from a Lorem Ipsum passage, and going
-          through the cites of the word in classical literature, discovered the
-          undoubtable source...
-        </p>
+        <h3 className="font-semibold mb-4 text-2xl">{data.main_title}</h3>
+        <p className=" text-gray-600">{data.description}...</p>
+        <div className="mt-4 my-2 text-gray-700 flex gap-4 flex-row">
+          {price.map((_price: any) => (
+            <p key={_price.name}>
+              <b>{_price.name}:</b> ₹{_price.price}{" "}
+            </p>
+          ))}
+        </div>
         <div className="flex gap-2 my-2 pt-[10px] flex-wrap">
           <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1  border  border-gray-700 rounded-full ">
             <span className="text-gray-700 text-[14px] lg:text-[16px]">
-              Horror
+              {[...genreTVOption, ...genreShortsOption].find(
+                (option) => option.value === data.genre
+              )?.name || "Other"}
             </span>
           </div>
           <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 border  border-gray-700  rounded-full">
             <span className="text-gray-700 text-[14px] lg:text-[16px]">
-              Media Entertainment
-            </span>
-          </div>
-          <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 border  border-gray-700  rounded-full">
-            <span className="text-gray-700 text-[14px] lg:text-[16px]">
-              Script
+              {industryOptions.find(
+                (option) => option.value === data.industry_category
+              )?.name || "Other"}
             </span>
           </div>
         </div>
@@ -121,7 +134,7 @@ export default function Page() {
       {/* Pricing Tiers */}
       <div className="my-10 flex flex-col gap-5">
         <h1 className="text-xl font-semibold">
-          Explore More Synopses, Scripts, and Storyboards
+          Explore More Synopsis, Scripts, and Storyboards
         </h1>
         <div className="grid md:grid-cols-3 gap-4 mb-8">
           {[1, 2, 3].map((i) => (

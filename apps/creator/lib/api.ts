@@ -11,4 +11,6 @@ export const apis = {
 
   //search
   getSearchData: "/search",
+
+  getScriptDetails: (id: string) => `/script/${id}`,
 };

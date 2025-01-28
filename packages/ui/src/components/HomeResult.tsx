@@ -91,7 +91,12 @@ function HomeResult({
                 delay={index * 200}
                 duration={800}
               >
-                <div className="border rounded-[30px] shadow-lg hover:shadow-xl transition-shadow cursor-pointer flex flex-col h-full">
+                <div
+                  className="border rounded-[30px]  shadow-lg hover:shadow-xl transition-shadow cursor-pointer flex flex-col h-full"
+                  onClick={(e: any) =>
+                    router.push(`/creator-details/${item.id}`)
+                  }
+                >
                   <div
                     className="pl-[20px] 
                    py-[20px] flex justify-between"

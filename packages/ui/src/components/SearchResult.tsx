@@ -119,8 +119,8 @@ function SearchResult({ data, count, handlePage, page }: any) {
                 duration={600}
               >
                 <div
-                  className="border rounded-[30px] shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                  onClick={() => router.push("/creator-details")}
+                  className="border rounded-[30px]  shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                  onClick={() => router.push(`/creator-details/${item.id}`)}
                 >
                   <div className="pl-[20px] py-[20px] flex justify-between">
                     <div className="flex items-start">
