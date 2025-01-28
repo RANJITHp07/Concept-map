@@ -31,7 +31,7 @@ export interface UploadedFile {
 }
 
 export default function StoryBoardUpload() {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [uploadingFiles, setUploadingFiles] = useState<UploadingFile[]>([]);
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [currency, setCurrency] = useState<string>("");

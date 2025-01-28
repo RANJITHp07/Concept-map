@@ -1,39 +1,25 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowLeft, PlusCircle, MinusCircle } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 import { Input } from "@repo/ui/components/input"
 import { Button } from "@repo/ui/components/Button"
-import { Textarea } from "@repo/ui/components/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@repo/ui/components/select"
+import { Textarea } from "@repo/ui/components/textarea"
 
 type ScriptCategory = "CategoryA" | "CategoryB" | "CategoryC"
-type TVCOTTSeriesGenre = "GenreX" | "GenreY" | "GenreZ"
-type ShortsGenre = "GenreAA" | "GenreBB" | "GenreCC"
 type IndustryCategory = "Industry1" | "Industry2" | "Industry3"
 type ScriptType = "TypeA" | "TypeB" | "TypeC"
-
-interface Scene {
-  name: string
-  description: string
-}
-
-interface ScriptItem {
-  name: string
-  scenes: Scene[]
-}
 
 export function CreateForm() {
   const [formData, setFormData] = useState({
     mainTitle: "",
     description: "",
     category: "",
-    genre: "",
     industryCategory: "",
     price: "",
     currency: "",
     type: "",
-    script: [{ name: "", scenes: [{ name: "", description: "" }] }],
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, maxLength?: number) => {
@@ -48,41 +34,6 @@ export function CreateForm() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleScriptChange = (scriptIndex: number, field: keyof ScriptItem, value: string) => {
-    setFormData((prev) => {
-      const newScript = [...prev.script]
-      newScript[scriptIndex] = { ...newScript[scriptIndex], [field]: value }
-      return { ...prev, script: newScript }
-    })
-  }
-
-  const handleSceneChange = (scriptIndex: number, sceneIndex: number, field: keyof Scene, value: string) => {
-    setFormData((prev) => {
-      const newScript = [...prev.script]
-      newScript[scriptIndex].scenes[sceneIndex] = {
-        ...newScript[scriptIndex].scenes[sceneIndex],
-        [field]: value,
-      }
-      return { ...prev, script: newScript }
-    })
-  }
-
-  const addScene = (scriptIndex: number) => {
-    setFormData((prev) => {
-      const newScript = [...prev.script]
-      newScript[scriptIndex].scenes.push({ name: "", description: "" })
-      return { ...prev, script: newScript }
-    })
-  }
-
-  const removeScene = (scriptIndex: number, sceneIndex: number) => {
-    setFormData((prev) => {
-      const newScript = [...prev.script]
-      newScript[scriptIndex].scenes.splice(sceneIndex, 1)
-      return { ...prev, script: newScript }
-    })
-  }
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log(formData)
@@ -90,9 +41,9 @@ export function CreateForm() {
 
   return (
     <div className="p-4 md:p-6 lg:p-8 containers">
-      <div className=" px-4 sm:px-6 lg:px-8">
+      <div className="px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-6 flex items-center gap-3 ">
+        <div className="mb-6 flex items-center gap-3">
           <Button variant="ghost" size="icon" className="rounded-full">
             <ArrowLeft className="h-5 w-5" />
             <span className="sr-only">Go back</span>
@@ -178,49 +129,6 @@ export function CreateForm() {
                   />
                 </div>
               </div>
-            </FormSection>
-
-            <FormSection title="Script Details">
-              {formData.script.map((scriptItem, scriptIndex) => (
-                <div key={scriptIndex} className="space-y-4">
-                  <Input
-                    value={scriptItem.name}
-                    onChange={(e) => handleScriptChange(scriptIndex, "name", e.target.value)}
-                    className="bg-gray-100"
-                    placeholder={`Script ${scriptIndex + 1} Name`}
-                    required
-                  />
-                  {scriptItem.scenes.map((scene, sceneIndex) => (
-                    <div key={sceneIndex} className="space-y-2">
-                      <Input
-                        value={scene.name}
-                        onChange={(e) => handleSceneChange(scriptIndex, sceneIndex, "name", e.target.value)}
-                        className="bg-gray-100"
-                        placeholder={`Scene ${sceneIndex + 1} Name`}
-                        required
-                      />
-                      <Textarea
-                        value={scene.description}
-                        onChange={(e) => handleSceneChange(scriptIndex, sceneIndex, "description", e.target.value)}
-                        className="min-h-[80px] bg-white"
-                        placeholder={`Scene ${sceneIndex + 1} Description`}
-                        required
-                      />
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        onClick={() => removeScene(scriptIndex, sceneIndex)}
-                      >
-                        <MinusCircle className="mr-2 h-4 w-4" /> Remove Scene
-                      </Button>
-                    </div>
-                  ))}
-                  <Button type="button" variant="outline" size="sm" onClick={() => addScene(scriptIndex)}>
-                    <PlusCircle className="mr-2 h-4 w-4" /> Add Scene
-                  </Button>
-                </div>
-              ))}
             </FormSection>
 
             <div className="flex justify-end">
