@@ -46,7 +46,7 @@ function Form() {
       username: data.name,
       email: data.email,
       password: data.password,
-      role: "BUYER",
+      role: data.role,
     };
     const res = await apiHelper(apis.register, "POST", userData);
 
@@ -143,6 +143,30 @@ function Form() {
                 type="password"
                 errorMessage={errors.confirmPassword?.message as string}
               />
+              <div className="space-y-1">
+                <label
+                  htmlFor="role"
+                  className="block text-sm font-medium text-gray-400"
+                >
+                  Select Role
+                </label>
+                <select
+                  id="role"
+                  className="mt-1 block w-full px-3 py-3 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  value={getValues("role")}
+                  onChange={(e) =>
+                    handleInputFieldChange("role", e.target.value)
+                  }
+                >
+                  <option value="CREATOR">Creator</option>
+                  <option value="BUYER">Buyer</option>
+                </select>
+                {errors.role && (
+                  <p className="text-red-500 text-sm">
+                    {errors.role.message as string}
+                  </p>
+                )}
+              </div>
               <div className="my-3">
                 <Button
                   actionName="Create an Account"

@@ -25,7 +25,7 @@ export const registrationSchema = z.object({
     .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
     .regex(
       /[^a-zA-Z0-9]/,
-      "Password must contain at least one special character",
+      "Password must contain at least one special character"
     ),
 
   confirmPassword: z
@@ -34,4 +34,10 @@ export const registrationSchema = z.object({
       invalid_type_error: "Confirm Password must be a string",
     })
     .trim(),
+
+  role: z
+    .enum(["BUYER", "CREATOR"], {
+      required_error: "Role is required",
+    })
+    .default("BUYER"),
 });

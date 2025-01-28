@@ -8,8 +8,10 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import LeftMenu from "./LeftMenu";
 import { Slide } from "react-awesome-reveal";
+import { useRouter } from "next/navigation";
 
 function HomeNavbar() {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility
 
@@ -65,10 +67,28 @@ function HomeNavbar() {
               onClick={handleDropdownToggle} // Toggle dropdown on click
             />
             {isDropdownOpen && (
-              <div className="absolute z-[1] right-0 mt-2 w-[150px] bg-white shadow-md rounded-md border border-gray-300">
+              <div className="absolute z-[1] right-0 mt-2 w-[200px] bg-white shadow-md rounded-md border border-gray-300">
                 <ul className="text-sm">
                   <li
-                    className="text-gray-700 px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    className="text-gray-700 px-4 py-4 text-lg cursor-pointer hover:bg-gray-100"
+                    onClick={() => console.log("Logging out...")}
+                  >
+                    Profile
+                  </li>
+                  <li
+                    className="text-gray-700 px-4 py-4 text-lg cursor-pointer hover:bg-gray-100"
+                    onClick={() => router.push("/purchase_list")}
+                  >
+                    Purchase List
+                  </li>
+                  <li
+                    className="text-gray-700 px-4 py-4 text-lg cursor-pointer hover:bg-gray-100"
+                    onClick={() => console.log("Logging out...")}
+                  >
+                    Switch to Buyer
+                  </li>
+                  <li
+                    className="text-gray-700 px-4 py-4 text-lg cursor-pointer hover:bg-gray-100"
                     onClick={() => console.log("Logging out...")}
                   >
                     Logout

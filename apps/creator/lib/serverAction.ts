@@ -10,6 +10,7 @@ const handleRegistration = async (userId: string, otpString: string) => {
       email: "", // Since it is registration
       type: "register",
       code: otpString,
+      role: "",
       redirect: false,
     });
     return {
@@ -28,7 +29,11 @@ const handleRegistration = async (userId: string, otpString: string) => {
   }
 };
 
-export const handleLogin = async (email: string, password: string) => {
+export const handleLogin = async (
+  email: string,
+  password: string,
+  role: string
+) => {
   try {
     const response = await signIn("credentials", {
       userId: "",
@@ -36,6 +41,7 @@ export const handleLogin = async (email: string, password: string) => {
       email: email,
       type: "login",
       redirect: false,
+      role,
     });
 
     console.log("response", response);

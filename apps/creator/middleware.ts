@@ -5,7 +5,7 @@ import { PUBLIC_ROUTE } from "./lib/constant";
 export default auth((req: any) => {
   const { nextUrl } = req;
 
-  const isAuthenticated = !!(req.auth && req.auth.user.role === "BUYER");
+  const isAuthenticated = !!req.auth;
   const isPublicRoute = PUBLIC_ROUTE.includes(nextUrl.pathname);
 
   if (isPublicRoute && isAuthenticated)

@@ -40,10 +40,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         type: {},
         email: {},
         password: {},
+        role: {},
       },
       async authorize(credentials) {
         try {
-          const { password, email, code, type, userId } = credentials;
+          const { password, email, code, type, userId, role } = credentials;
 
           if (type == "register" && !code && !userId)
             throw new Error("Code and userId is a required field");
@@ -55,7 +56,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             const res = await apiHelper(apis.login, "POST", {
               email: email,
               password: password,
-              role: "BUYER",
+              role: role,
             });
 
             if (res.status == "success") return res.data;

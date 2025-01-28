@@ -16,7 +16,7 @@ function Search({ type }: { type: string }) {
   const [searchData, setSearchData] = useState([]);
   const [textSearch, setTextSearch] = useState("");
   const [count, setCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState<
     Array<{
       name: string;

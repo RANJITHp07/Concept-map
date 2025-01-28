@@ -7,6 +7,7 @@ import { Autoplay } from "swiper/modules";
 import { Fade } from "react-awesome-reveal";
 import "swiper/css";
 import "swiper/css/autoplay";
+import { useRouter } from "next/navigation";
 
 interface DataItem {
   name: string;
@@ -19,34 +20,42 @@ interface DataItem {
 function HomeSwiper() {
   const data: DataItem[] = [
     {
-      name: "niyas",
+      name: "Niyas",
+      title: "Amazon GroudBreaking",
+      image: "/black_icon.png",
+      bottomimage: "/amazon.jpg",
+      description:
+        "Amazon Signs Groundbreaking Deal to Significantly Boost India’s Creative Economy",
+    },
+    {
+      name: "Faizu",
       title: "Crime in scene",
-      image: "/HomeData/face.png",
+      image: "/community/icon.png",
+      bottomimage: "/community/newCard.png",
+      description:
+        "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
+    },
+    {
+      name: "Fazil",
+      title: "OTT",
+      image: "/black_icon.png",
+      bottomimage: "/ott.jpg",
+      description:
+        "OTT Technologies: Revolutionizing the Building, Securing, and Delivering of Digital Content",
+    },
+    {
+      name: "Renjith",
+      title: "Crime in scene",
+      image: "/black_icon.png",
       bottomimage: "/HomeSwiper/face.svg",
       description:
         "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
     },
     {
-      name: "faizu",
+      name: "Stephen Burg",
       title: "Crime in scene",
       image: "/HomeData/face.png",
-      bottomimage: "/HomeSwiper/face.svg",
-      description:
-        "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
-    },
-    {
-      name: "fazil",
-      title: "Crime in scene",
-      image: "/HomeData/face.png",
-      bottomimage: "/HomeSwiper/face.svg",
-      description:
-        "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
-    },
-    {
-      name: "renjith",
-      title: "Crime in scene",
-      image: "/HomeData/face.png",
-      bottomimage: "/HomeSwiper/face.svg",
+      bottomimage: "/community/newCard.png",
       description:
         "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
     },
@@ -62,26 +71,25 @@ function HomeSwiper() {
       name: "Stephen Burg",
       title: "Crime in scene",
       image: "/HomeData/face.png",
-      bottomimage: "/HomeSwiper/face.svg",
-      description:
-        "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
-    },
-    {
-      name: "Stephen Burg",
-      title: "Crime in scene",
-      image: "/HomeData/face.png",
-      bottomimage: "/HomeSwiper/face.svg",
+      bottomimage: "/amazon.jpg",
       description:
         "Branding 2.0: Navigating the Digital Wilderness with a Splash of Humor",
     },
   ];
+
+  const router = useRouter();
 
   return (
     <Fade direction="up" triggerOnce>
       <section className="pt-[40px]">
         {/* Header with View More button */}
         <div className="grid grid-cols-[1fr_auto] items-center gap-4 pb-[40px]">
-          <h1 className="text-[22px] font-medium">CM Community</h1>
+          <h1
+            className="text-[22px] font-medium hover:underline cursor-pointer"
+            onClick={() => router.push("/community")}
+          >
+            CM Community
+          </h1>
           <button className="py-[10px] px-[15px] border rounded-[10px] text-[12px] shadow-[0_2px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)] transition-shadow">
             View More
           </button>

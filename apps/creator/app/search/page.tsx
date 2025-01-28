@@ -8,6 +8,7 @@ import LeftSearch from "@repo/ui/components/LeftSearch";
 import apiHelper from "../../lib/apiHelper";
 import { apis } from "../../lib/api";
 import ScriptCardLoading from "../../components/skelton/scriptCardLoading";
+import Header from "@repo/ui/components/Header";
 
 function Page() {
   const [categoryFilter, setCategoryFilter] = useState<
@@ -106,11 +107,14 @@ function Page() {
 
   return (
     <div ref={sectionRef} className="min-h-screen flex flex-col">
+      <div className="">
+        <Header />
+      </div>
       <div className="bg-[#FFF5E9] text-gray-700">
         <div className="px-[10px] md:px-[20px] lg:px-[50px] py-[20px] md:py-[30px] lg:py-[40px]">
           <div className="py-[50px] px-[10px]">
             <h1 className="text-[20px] md:text-[30px] lg:text-[40px] font-bold">
-              Browse Scripts, Synopses, & Ideas{" "}
+              Browse Scripts, Synopsis, & Ideas{" "}
             </h1>
             <p className="text-[14px] md:text-[16px] lg:text-[18px]">
               Uncover a treasure trove of unique stories, powerful synopses, and

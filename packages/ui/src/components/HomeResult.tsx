@@ -29,7 +29,7 @@ function HomeResult({
         description: script.description || "Crime in scene",
         rating: script.rating || "5.0",
         likes: "2.1K",
-        image: script.userId.profile_url || "/HomeData/face.png",
+        image: script.userId.profile_url || "/script_icon.png",
         dot: script.dot || "/HomeResult/star.svg",
         bookmark: script.bookmark || "/HomeResult/right.svg",
 

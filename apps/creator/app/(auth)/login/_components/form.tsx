@@ -37,9 +37,17 @@ function Form() {
     };
     setIsLoading(true);
 
-    const authentication = await handleLogin(userData.email, userData.password);
+    const authentication = await handleLogin(
+      userData.email,
+      userData.password,
+      userData.role
+    );
     if (authentication && authentication.status == "success") {
-      router.push("/");
+      if (userData.role == "BUYER") {
+        router.push("/");
+      } else {
+        router.push("/creator-dashboard");
+      }
     } else {
       //dispaly the error message
       toast.error(authentication?.error?.message!);
@@ -102,21 +110,27 @@ function Form() {
 
               {/* Role Selection */}
               <div className="space-y-1">
-                <label htmlFor="role" className="block text-sm font-medium text-gray-400">
+                <label
+                  htmlFor="role"
+                  className="block text-sm font-medium text-gray-400"
+                >
                   Select Role
                 </label>
                 <select
                   id="role"
                   className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   value={getValues("role")}
-                  onChange={(e) => handleInputFieldChange("role", e.target.value)}
+                  onChange={(e) =>
+                    handleInputFieldChange("role", e.target.value)
+                  }
                 >
-                  <option value="">Select a role</option>
-                  <option value="creator">Creator</option>
-                  <option value="buyer">Buyer</option>
+                  <option value="CREATOR">Creator</option>
+                  <option value="BUYER">Buyer</option>
                 </select>
                 {errors.role && (
-                  <p className="text-red-500 text-sm">{errors.role.message as string}</p>
+                  <p className="text-red-500 text-sm">
+                    {errors.role.message as string}
+                  </p>
                 )}
               </div>
 

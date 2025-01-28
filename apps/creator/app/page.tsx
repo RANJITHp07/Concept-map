@@ -5,8 +5,6 @@ import React from "react";
 import Image from "next/image";
 import HomeNavbar from "@repo/ui/components/HomeNavbar";
 import HomeInfo from "@repo/ui/components/HomeInfo";
-import SearchBarsWithTags from "@repo/ui/components/SearchBars";
-import HomeResult from "@repo/ui/components/HomeResult";
 import HomeSwiper from "@repo/ui/components/HomeSwiper";
 import RightMenu from "@repo/ui/components/RightMenu";
 import { auth } from "../auth";

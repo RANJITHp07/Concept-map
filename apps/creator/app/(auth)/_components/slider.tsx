@@ -9,7 +9,7 @@ export default function ScriptFestival() {
         {/* Left Column - Image */}
         <div className="relative">
           <Image
-             src="/auth/img-1.jpg"
+            src="/auth/img-1.jpg"
             alt="Student writing"
             width={800}
             height={900}
@@ -36,9 +36,9 @@ export default function ScriptFestival() {
             {/* Date Box */}
             <div className="bg-gray-100 p-6 rounded-lg w-48 mt-2">
               <div className="text-center">
-                <div className="text-4xl font-bold text-gray-800">16</div>
-                <div className="text-xl text-gray-600">Sep</div>
-                <div className="text-2xl text-gray-700">2023</div>
+                <div className="text-4xl font-bold text-gray-800">26</div>
+                <div className="text-xl text-gray-600">Feb</div>
+                <div className="text-2xl text-gray-700">2025</div>
                 <div className="mt-2 text-sm text-gray-600">10 am to 6 pm</div>
                 <div className="mt-6 text-sm text-gray-600 leading-tight">
                   Grand Ballroom,
@@ -58,7 +58,9 @@ export default function ScriptFestival() {
         {/* Spark Logo */}
         <div className="flex justify-center mb-5">
           <div className="bg-[#f5a623] text-white w-28 h-20 p-4 rounded-lg ">
-            <div className="text-4xl font-extrabold text-black relative bottom-10 right-2">Spark</div>
+            <div className="text-4xl font-extrabold text-black relative bottom-10 right-2">
+              Spark
+            </div>
             <div className="text-6xl font-bold relative bottom-10">23</div>
           </div>
         </div>

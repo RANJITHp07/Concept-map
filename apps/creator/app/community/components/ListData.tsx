@@ -16,7 +16,8 @@ const data = [
     name: "Niyas P",
     role: "Programmer | Athletic | Gamer",
     date: "1/1/2025",
-    description: "Overcoming Writer's Block in Synopsis & Short Stories in 10 Minutes - A Beginner's Guide",
+    description:
+      "Overcoming Writer's Block in Synopsis & Short Stories in 10 Minutes - A Beginner's Guide",
     poster: poster,
   },
   {
@@ -24,7 +25,8 @@ const data = [
     name: "Niyas P",
     role: "Programmer | Athletic | Gamer",
     date: "1/1/2025",
-    description: "Overcoming Writer's Block in Synopsis & Short Stories in 10 Minutes - A Beginner's Guide",
+    description:
+      "Overcoming Writer's Block in Synopsis & Short Stories in 10 Minutes - A Beginner's Guide",
     poster: null,
   },
   {
@@ -40,7 +42,8 @@ const data = [
     name: "Niyas P",
     role: "Programmer | Athletic | Gamer",
     date: "1/1/2025",
-    description: "Overcoming Writer's Block in Synopsis & Short Stories in 10 Minutes - A Beginner's Guide",
+    description:
+      "Overcoming Writer's Block in Synopsis & Short Stories in 10 Minutes - A Beginner's Guide",
     poster: posterTwo,
   },
   {
@@ -48,7 +51,8 @@ const data = [
     name: "Niyas P",
     role: "Programmer | Athletic | Gamer",
     date: "1/1/2025",
-    description: "Overcoming Writer's Block in Synopsis & Short Stories in 10 Minutes - A Beginner's Guide",
+    description:
+      "Overcoming Writer's Block in Synopsis & Short Stories in 10 Minutes - A Beginner's Guide",
     poster: null,
   },
   {
@@ -79,9 +83,15 @@ function ListData() {
                   src={Profile}
                 />
                 <div className="ml-[10px] md:ml-[15px] lg:ml-[20px]">
-                  <p className="text-[14px] md:text-[16px] lg:text-[18px] font-semibold">{item.name}</p>
-                  <p className="text-[14px] md:text-[16px] lg:text-[18px] text-[#C0C0C0] font-medium">{item.role}</p>
-                  <p className="text-[14px] md:text-[16px] lg:text-[18px] text-[#0000007A] font-medium">{item.date}</p>
+                  <p className="text-[14px] md:text-[16px] lg:text-[18px] font-semibold">
+                    {item.name}
+                  </p>
+                  <p className="text-[14px] md:text-[16px] lg:text-[18px] text-[#C0C0C0] font-medium">
+                    {item.role}
+                  </p>
+                  <p className="text-[14px] md:text-[16px] lg:text-[18px] text-[#0000007A] font-medium">
+                    {item.date}
+                  </p>
                 </div>
               </div>
               <IoIosPersonAdd className="h-[35px] w-[35px] md:h-[40px] md:w-[40px] lg:h-[45px] lg:w-[45px] text-[#f6aa16] cursor-pointer" />
@@ -97,7 +107,9 @@ function ListData() {
             )}
             {item.description && (
               <div className="p-[10px] md:p-[15px] lg:p-[20px]">
-                <p className="text-[14px] md:text-[16px] lg:text-[18px]">{item.description}</p>
+                <p className="text-[14px] md:text-[16px] lg:text-[18px]">
+                  {item.description}
+                </p>
               </div>
             )}
             <div className="p-[20px] flex border-t border-[#B9B8B8A8]">
