@@ -5,6 +5,7 @@
     "build": "turbo build",
     "server:dev:dev": "dotenv -e .env.development -- turbo run server:dev",
     "server:build:dev": "dotenv -e .env.development -- turbo run server:build",
+    "server:start:dev": "dotenv -e .env.development -- turbo run server:start",
     "server:build:production": "dotenv -e .env.production -- turbo run server:build",
     "server:start:production": "dotenv -e .env.production -- turbo run server:start",
     "dev": "turbo dev",
