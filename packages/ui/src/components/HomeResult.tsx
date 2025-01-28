@@ -10,6 +10,7 @@ import {
   genreTVOption,
   industryOptions,
 } from "./SearchBars";
+import { IoDocumentTextOutline } from "react-icons/io5";
 
 function HomeResult({
   data,
@@ -26,7 +27,8 @@ function HomeResult({
         name: script.userId.username || "Stephen Burg",
         title: script.main_title || "Crime in scene",
         description: script.description || "Crime in scene",
-        rating: script.rating || "5.0(123)",
+        rating: script.rating || "5.0",
+        likes: "2.1K",
         image: script.userId.profile_url || "/HomeData/face.png",
         dot: script.dot || "/HomeResult/star.svg",
         bookmark: script.bookmark || "/HomeResult/right.svg",
@@ -66,7 +68,7 @@ function HomeResult({
     <section className="pt-[40px] ">
       <Fade direction="up" triggerOnce duration={800}>
         <div className="flex items-center justify-between">
-          <h1 className="text-[22px]">{count} Records Found</h1>
+          <h1 className="text-[22px] font-medium">{count} Records Found</h1>
           {count != 0 && (
             <button
               onClick={() => router.push("/search")}
@@ -90,8 +92,10 @@ function HomeResult({
                 duration={800}
               >
                 <div className="border rounded-[30px] shadow-lg hover:shadow-xl transition-shadow cursor-pointer flex flex-col h-full">
-                  <div className="pl-[20px] 
-                   py-[20px] flex justify-between">
+                  <div
+                    className="pl-[20px] 
+                   py-[20px] flex justify-between"
+                  >
                     {/* Image and Content */}
                     <div className="flex items-start">
                       <Image
@@ -105,7 +109,7 @@ function HomeResult({
                         <h2 className="text-[14px] lg:text-[16px]">
                           {item.name}
                         </h2>
-                        <p className="text-[14px] lg:text-[14px]">
+                        <p className="text-[14px] lg:text-[14px] text-gray-500">
                           {item.title}
                         </p>
                       </div>
@@ -125,19 +129,19 @@ function HomeResult({
 
                   <div className="px-[20px]  pt-[5px] flex-1">
                     <div>
-                      <p className="text-[14px]">
+                      <p className="text-[14px] text-gray-500">
                         {item.description.slice(0, 100)}
                         ......
                       </p>
-                      <div className="flex gap-2 my-2 pt-[10px] flex-wrap">
+                      <div className="flex gap-2 my-2 pt-[5px] flex-wrap">
                         <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full ">
-                          <span className="text-gray-700 text-[14px] lg:text-[16px]">
+                          <span className="text-gray-700 text-[14px] lg:text-[14px]">
                             {item.genre}
                           </span>
                         </div>
                         <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full">
-                          <span className="text-gray-700 text-[14px] lg:text-[16px]">
-                            {item.industry_category}roiroioiroiorio
+                          <span className="text-gray-700 text-[14px] lg:text-[14px]">
+                            {item.industry_category}
                           </span>
                         </div>
                       </div>
@@ -151,16 +155,19 @@ function HomeResult({
                         <Image
                           src={item.dot}
                           alt="dot"
-                          width={15}
-                          height={15}
+                          width={18}
+                          height={18}
                           className="mr-[5px]"
                         />
-                        <p className="text-[12px]">{item.rating}</p>
+                        <p className="text-[14px]">{item.rating}</p>
                       </div>
 
                       <div className="flex">
-                        <FaHeart size={18} className="mr-[5px]" />
-                        <p className="text-[12px]">{item.rating}</p>
+                        <FaHeart
+                          size={18}
+                          className="mr-[5px] text-[rgba(246,170,22,1)]"
+                        />
+                        <p className="text-[12px]">{item.likes}</p>
                       </div>
                     </div>
 
@@ -178,9 +185,15 @@ function HomeResult({
             ))}
           </div>
         ) : (
-          <p className="text-center text-lg text-gray-400">
-            No records match the applied filters.
-          </p>
+          <div className="flex flex-col items-center justify-center">
+            <IoDocumentTextOutline
+              size={40}
+              className="text-center text-gray-500"
+            />
+            <p className="text-center text-[22px] text-gray-500">
+              No records match the applied filters.
+            </p>
+          </div>
         )}
       </div>
     </section>

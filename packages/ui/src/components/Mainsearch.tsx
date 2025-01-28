@@ -35,7 +35,7 @@ function Mainsearch({ handleTextSearch }: any) {
   return (
     <div className="w-full">
       <div className="flex flex-col md:flex-row items-center gap-4 p-4 bg-white rounded-lg shadow-md">
-        <div className="relative w-full md:w-[40%]">
+        <div className="relative w-full md:w-[50%]">
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
             <BiSearch size={20} />
           </div>
@@ -89,12 +89,6 @@ function Mainsearch({ handleTextSearch }: any) {
             </select>
           </div>
         </div>
-
-        <Button
-          actionName="Search"
-          className="w-full order-1 md:!mt-0 md:!w-[10%]"
-          onClick={() => handleTextSearch(searchQuery)}
-        />
       </div>
     </div>
   );

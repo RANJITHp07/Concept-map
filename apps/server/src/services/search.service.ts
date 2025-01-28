@@ -18,7 +18,7 @@ export class SearchService {
       textSearch,
       priceRange = "0",
     } = searchFilter;
-    // console.log(priceRange);
+    console.log(priceRange);
 
     const filterQuery = {
       ...(type && { type: { $in: type.split(",") } }),
@@ -52,9 +52,24 @@ export class SearchService {
       }),
       ...(parseInt(priceRange) !== 0 && {
         $or: [
-          { "script.price": { $lte: parseInt(priceRange) } },
-          { "story_borad.price": { $lte: parseInt(priceRange) } },
-          { "synopsis.price": { $lte: parseInt(priceRange) } },
+          {
+            "script.price": {
+              $gte: parseInt(priceRange.split(",")[0]),
+              $lte: parseInt(priceRange.split(",")[1]),
+            },
+          },
+          {
+            "story_board.price": {
+              $gte: parseInt(priceRange.split(",")[0]),
+              $lte: parseInt(priceRange.split(",")[1]),
+            },
+          },
+          {
+            "synopsis.price": {
+              $gte: parseInt(priceRange.split(",")[0]),
+              $lte: parseInt(priceRange.split(",")[1]),
+            },
+          },
         ],
       }),
     };

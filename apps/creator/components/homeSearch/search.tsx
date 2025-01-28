@@ -4,6 +4,7 @@ import SearchBarsWithTags from "@repo/ui/components/SearchBars";
 import React, { useEffect, useState } from "react";
 import apiHelper from "../../lib/apiHelper";
 import { apis } from "../../lib/api";
+import ScriptCardLoading from "../skelton/scriptCardLoading";
 
 const scriptTypes = {
   scripts: "SCRIPT",
@@ -15,6 +16,7 @@ function Search({ type }: { type: string }) {
   const [searchData, setSearchData] = useState([]);
   const [textSearch, setTextSearch] = useState("");
   const [count, setCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [filter, setFilter] = useState<
     Array<{
       name: string;
@@ -23,6 +25,7 @@ function Search({ type }: { type: string }) {
   >([]);
 
   const fetchScriptData = async () => {
+    setIsLoading(true);
     const response = await apiHelper(
       apis.getSearchData,
       "GET",
@@ -37,10 +40,10 @@ function Search({ type }: { type: string }) {
       }
     );
     if (response.status == "success") {
-      console.log(response.data);
       setSearchData(response.data.scripts);
       setCount(response.data.count);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -50,7 +53,7 @@ function Search({ type }: { type: string }) {
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const term = event.target.value;
     setTextSearch(term);
-    debounceSearch(fetchScriptData, 300)();
+    debounceSearch(fetchScriptData, 500)();
   };
 
   const debounceSearch = (fn: () => void, delay: number) => {
@@ -68,7 +71,16 @@ function Search({ type }: { type: string }) {
         filter={filter}
         handleTextChange={handleTextChange}
       />
-      <HomeResult data={searchData} count={count} />
+
+      {isLoading ? (
+        <div className="grid grid-cols-1 mt-5 md:grid-cols-2 lg:grid-cols-3 gap-[10px] lg:gap-[20px] Home-result-gird md:relative z-[-1]">
+          {[1, 2, 3, 4, 5, 6].map((_, index) => (
+            <ScriptCardLoading key={index} />
+          ))}
+        </div>
+      ) : (
+        <HomeResult data={searchData} count={count} />
+      )}
     </>
   );
 }

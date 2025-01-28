@@ -66,45 +66,55 @@ export default function Page() {
 
       {/* Script Content */}
       <div className="bg-[#FDF6E7] rounded-lg p-6 mb-8">
-        <h3 className="font-semibold mb-4 text-xl">Script 01</h3>
-        <div className="mb-4 last:mb-0">
-          <h4 className="font-semibold text-lg mb-2">Scene</h4>
-          <p className=" text-gray-600">
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source...
-          </p>
+        <h3 className="font-semibold mb-4 text-2xl">The Whispering Fog</h3>
+        <p className=" text-gray-600">
+          Contrary to popular belief, Lorem Ipsum is not simply random text. It
+          has roots in a piece of classical Latin literature from 45 BC, making
+          it over 2000 years old. Richard McClintock, a Latin professor at
+          Hampden-Sydney College in Virginia, looked up one of the more obscure
+          Latin words, consectetur, from a Lorem Ipsum passage, and going
+          through the cites of the word in classical literature, discovered the
+          undoubtable source...
+        </p>
+        <div className="flex gap-2 my-2 pt-[10px] flex-wrap">
+          <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1  border  border-gray-700 rounded-full ">
+            <span className="text-gray-700 text-[14px] lg:text-[16px]">
+              Horror
+            </span>
+          </div>
+          <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 border  border-gray-700  rounded-full">
+            <span className="text-gray-700 text-[14px] lg:text-[16px]">
+              Media Entertainment
+            </span>
+          </div>
+          <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 border  border-gray-700  rounded-full">
+            <span className="text-gray-700 text-[14px] lg:text-[16px]">
+              Script
+            </span>
+          </div>
         </div>
-        <div className="mb-4 last:mb-0">
-          <h4 className="font-semibold text-lg mb-2">Scene</h4>
-          <p className=" text-gray-600">
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source...
-          </p>
-        </div>
-        <div className="mb-4 last:mb-0">
-          <h4 className="font-semibold text-lg mb-2">Scene</h4>
-          <p className=" text-gray-600">
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source...
-          </p>
-        </div>
-        <div>
-          <Button actionName="Click to Purchase" />
+        <div className="rounded-lg  relative mt-5">
+          <div className="absolute cursor-pointer inset-0 backdrop-blur-sm  flex items-center justify-center flex-col rounded-lg">
+            <div className="w-12 h-12 mb-2">
+              <Image src="/lock.png" width={70} height={70} alt="lock" />
+            </div>
+            <span className="font-medium text-xl">Click to Purchase</span>
+          </div>
+          <div className="bg-[#FDF6E7] rounded-lg p-5 mb-8 mt-5">
+            <h3 className="font-semibold mb-4 text-xl">Script 01</h3>
+            <div className="mb-4 last:mb-0">
+              <h4 className="font-semibold text-lg mb-2">Scene</h4>
+              <p className=" text-gray-600">
+                Contrary to popular belief, Lorem Ipsum is not simply random
+                text. It has roots in a piece of classical Latin literature from
+                45 BC, making it over 2000 years old. Richard McClintock, a
+                Latin professor at Hampden-Sydney College in Virginia, looked up
+                one of the more obscure Latin words, consectetur, from a Lorem
+                Ipsum passage, and going through the cites of the word in
+                classical literature, discovered the undoubtable source...
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
