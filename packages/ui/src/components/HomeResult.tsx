@@ -64,8 +64,8 @@ function HomeResult({
 
   return (
     <section className="pt-[40px] ">
-      <Fade direction="up" triggerOnce duration={800}>
-        <div className="flex items-center justify-between">
+      <Fade direction="up" triggerOnce duration={800} className="relative z-[-1]">
+        <div className="flex items-center justify-between  ">
           <h1 className="text-[22px]">{count} Records Found</h1>
           {count != 0 && (
             <button
