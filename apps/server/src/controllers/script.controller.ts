@@ -21,4 +21,17 @@ export class ScriptController {
       next(error);
     }
   };
+
+  getScript = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await this.scriptService.getScriptDetails(req.params.id);
+      res.status(201).json({
+        status: "success",
+        message: "Successfully fetched script details",
+        data: result,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }

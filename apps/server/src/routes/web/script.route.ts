@@ -13,6 +13,7 @@ export class ScriptRouter {
 
   private initRoutes() {
     this.router.post("/", this.scriptController.createScipt);
+    this.router.get("/:id", this.scriptController.getScript);
   }
 }
 

@@ -58,18 +58,6 @@ async function Home() {
               <hr className="flex-grow border-t border-[#C0C0C0]" />
             </div>
             <Search type="scripts" />
-
-            {/* story board */}
-            {/* <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
-              <h1 className="text-[22px] font-medium">
-                Discover Exceptional Story Board
-              </h1>
-              <hr className="flex-grow border-t border-[#C0C0C0]" />
-            </div> */}
-            {/* <SearchBarsWithTags initialTags={["story board"]} /> */}
-            {/* <HomeResult /> */}
-
-            {/* synopsis*/}
             <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
               <h1 className="text-[22px] font-medium">
                 Discover Exceptional Synopsis

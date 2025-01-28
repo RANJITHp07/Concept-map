@@ -38,9 +38,13 @@ export class CrudRepository<T> {
   // Fetch a document by its ID
   async fetchDocumentById(
     id: string,
-    nonRequiredFields?: string
+    nonRequiredFields?: string,
+    populateField: string[] | string = []
   ): Promise<T | null> {
-    return await this.model.findById(id).select(nonRequiredFields ?? "");
+    return await this.model
+      .findById(id)
+      .select(nonRequiredFields ?? "")
+      .populate(populateField);
   }
 
   // Fetch a single document based on conditions

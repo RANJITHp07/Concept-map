@@ -33,6 +33,7 @@ function Form() {
     const userData = {
       email: data.email,
       password: data.password,
+      role: data.role,
     };
     setIsLoading(true);
 
@@ -98,6 +99,27 @@ function Form() {
                 type="password"
                 errorMessage={errors.password?.message as string}
               />
+
+              {/* Role Selection */}
+              <div className="space-y-1">
+                <label htmlFor="role" className="block text-sm font-medium text-gray-400">
+                  Select Role
+                </label>
+                <select
+                  id="role"
+                  className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  value={getValues("role")}
+                  onChange={(e) => handleInputFieldChange("role", e.target.value)}
+                >
+                  <option value="">Select a role</option>
+                  <option value="creator">Creator</option>
+                  <option value="buyer">Buyer</option>
+                </select>
+                {errors.role && (
+                  <p className="text-red-500 text-sm">{errors.role.message as string}</p>
+                )}
+              </div>
+
               <div className="my-3">
                 <Button
                   actionName="Login"
@@ -148,7 +170,7 @@ function Form() {
               </button>
             </div>
             <div className="text-sm text-gray-600 justify-center  flex mt-5">
-              Don’t have an account?{" "}
+              Don't have an account?{" "}
               <Link
                 href="/register"
                 className="text-[#f5a623] hover:text-[#e69516] mx-1"

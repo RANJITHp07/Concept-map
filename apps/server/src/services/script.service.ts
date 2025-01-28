@@ -12,4 +12,8 @@ export class ScriptService {
   async createScript(data: IScript) {
     return await this.crudRepository.createDocument(data);
   }
+
+  async getScriptDetails(id: string) {
+    return await this.crudRepository.fetchDocumentById(id, "", "userId");
+  }
 }
