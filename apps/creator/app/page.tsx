@@ -8,8 +8,6 @@ import HomeNavbar from "@repo/ui/components/HomeNavbar";
 import HomeInfo from "@repo/ui/components/HomeInfo";
 import HomeData from "@repo/ui/components/HomeSlider";
 import SearchBar from "@repo/ui/components/SearchBars";
-import SearchResult from "@repo/ui/components/HomeResult";
-import HomeSwiper from "@repo/ui/components/HomeSwiper";
 
 function Home() {
   return (
@@ -29,7 +27,6 @@ function Home() {
           <LeftMenu />
           <LeftProfile />
           <LeftActivites />
-         
         </div>
 
         {/* Middle section (60% width) */}
@@ -41,15 +38,17 @@ function Home() {
           }}
         >
           <HomeNavbar />
-          <HomeInfo/>
-          <HomeSwiper/>
+          <HomeInfo />
+          <HomeSwiper />
           <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
-      <h1 className="text-[20px] font-bold">Find Talent</h1>
-      <hr className="flex-grow border-[3px] border-[#C0C0C0" />
-    </div>
-          <HomeData/>
-          <SearchBar/>
-          <SearchResult/>
+            <h1 className="text-[20px] font-bold">Find Talent</h1>
+            <hr className="flex-grow border-[3px] border-[#C0C0C0" />
+          </div>
+          <HomeData />
+          <SearchBar />
+          <SearchResult />
+          <HomeData />
+          <SearchBar />
         </div>
 
         {/* Right section (20% width) with border */}
