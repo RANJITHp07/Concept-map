@@ -40,11 +40,12 @@ export class CrudRepository<T> {
     id: string,
     nonRequiredFields?: string,
     populateField: string[] | string = []
-  ): Promise<T | null> {
+  ): Promise<any> {
     return await this.model
       .findById(id)
       .select(nonRequiredFields ?? "")
-      .populate(populateField);
+      .populate(populateField)
+      .lean();
   }
 
   // Fetch a single document based on conditions
@@ -63,8 +64,10 @@ export class CrudRepository<T> {
   async updateDocumenById(
     id: string,
     updateData: Record<string, any>
-  ): Promise<T | null> {
-    return await this.model.findByIdAndUpdate(id, updateData, { new: true });
+  ): Promise<any> {
+    return await this.model
+      .findByIdAndUpdate(id, updateData, { new: true })
+      .lean();
   }
 
   async deleteDocumenById(id: string): Promise<T | null> {

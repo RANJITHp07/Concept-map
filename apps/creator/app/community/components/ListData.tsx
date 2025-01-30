@@ -5,7 +5,7 @@ import { FcLike } from "react-icons/fc";
 import { FaRegCommentDots } from "react-icons/fa";
 import { FaShare } from "react-icons/fa6";
 import Profile from "./../../../public/community/icon.png";
-import poster from "./../../../public/community/new.png";
+import poster from "./../../../public/amazon.jpg";
 import posterOne from "./../../../public/community/newCard.png";
 import posterTwo from "./../../../public/community/newCardOne.png";
 import { Fade } from "react-awesome-reveal"; // Import the Fade component
@@ -14,10 +14,10 @@ const data = [
   {
     id: 1,
     name: "Niyas P",
-    role: "Programmer | Athletic | Gamer",
+    role: " Amazon | OTT",
     date: "1/1/2025",
     description:
-      "Overcoming Writer's Block in Synopsis & Short Stories in 10 Minutes - A Beginner's Guide",
+      "Amazon Signs Groundbreaking Deal to Significantly Boost India’s Creative Economy",
     poster: poster,
   },
   {

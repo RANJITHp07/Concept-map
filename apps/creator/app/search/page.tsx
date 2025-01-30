@@ -17,6 +17,8 @@ function Page() {
       value: string;
     }>
   >([]);
+  const [country, setCountry] = useState<string[]>([]);
+  const [state, setState] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<number[]>([0, 50000]);
   const [searchData, setSearchData] = useState([]);
   const [textSearch, setTextSearch] = useState("");
@@ -52,6 +54,8 @@ function Page() {
         filter: clear ? [] : categoryFilter.map((script) => script.value),
         textSearch: clear ? "" : textSearch,
         priceRange: clear ? [0, 50000] : priceRange,
+        country,
+        state,
       }
     );
 
@@ -62,13 +66,18 @@ function Page() {
     setIsLoading(false);
   };
 
+  const handleCountryStateChange = (state: string, country: string) => {
+    setCountry([country]);
+    setState([state]);
+  };
+
   const handlePage = (page: number) => {
     setPage(page);
   };
 
   useEffect(() => {
     fetchScriptData();
-  }, [textSearch, page]);
+  }, [textSearch, page, country, state]);
 
   const handleTextSearch = (value: string) => setTextSearch(value);
 
@@ -123,7 +132,10 @@ function Page() {
             </p>
           </div>
           <div className="px-[10px]">
-            <MainSearch handleTextSearch={handleTextSearch} />
+            <MainSearch
+              handleTextSearch={handleTextSearch}
+              handleCountryStateChange={handleCountryStateChange}
+            />
           </div>
         </div>
       </div>

@@ -36,6 +36,8 @@ function SearchResult({ data, count, handlePage, page }: any) {
           industryOptions.find(
             (_script) => _script.value == script.industry_category
           )?.name || "Other",
+        country: script.country || [],
+        state: script.state || [],
         price: [
           { name: "Script", price: script?.script?.price },
           { name: "Story Board", price: script?.story_borad?.price },
@@ -44,6 +46,8 @@ function SearchResult({ data, count, handlePage, page }: any) {
       };
     });
   }, [data]);
+
+  console.log(data);
 
   const [followState, setFollowState] = useState<Record<number, boolean>>(
     sliderData.reduce(
@@ -173,6 +177,13 @@ function SearchResult({ data, count, handlePage, page }: any) {
                             {item.industry_category}
                           </span>
                         </div>
+                        {item.country.map((country: any) => (
+                          <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full">
+                            <span className="text-gray-700 text-[14px] lg:text-[16px]">
+                              {country}
+                            </span>
+                          </div>
+                        ))}
                       </div>
                       <div className="flex items-center justify-between pt-[10px]  mt-auto">
                         <div className="flex items-center gap-[10px]">

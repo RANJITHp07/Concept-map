@@ -1,36 +1,111 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { IoEarthOutline } from "react-icons/io5";
 import { IoLocationOutline } from "react-icons/io5";
 import Button from "./Button";
 
 type CountryData = {
-  [key in "USA" | "UK" | "Canada" | "Australia" | "India"]: string[];
+  [key in "USA" | "India"]: string[];
 };
 
-function Mainsearch({ handleTextSearch }: any) {
+function Mainsearch({ handleTextSearch, handleCountryStateChange }: any) {
   const [selectedCountry, setSelectedCountry] = useState<
     keyof CountryData | ""
   >("");
   const [selectedCity, setSelectedCity] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const countries: Array<keyof CountryData> = [
-    "USA",
-    "UK",
-    "Canada",
-    "Australia",
-    "India",
-  ];
+  const countries: Array<keyof CountryData> = ["USA", "India"];
   const cities: CountryData = {
-    USA: ["New York", "Los Angeles", "Chicago"],
-    UK: ["London", "Manchester", "Birmingham"],
-    Canada: ["Toronto", "Vancouver", "Montreal"],
-    Australia: ["Sydney", "Melbourne", "Brisbane"],
-    India: ["Mumbai", "Delhi", "Bangalore"],
+    USA: [
+      "Alabama",
+      "Alaska",
+      "Arizona",
+      "Arkansas",
+      "California",
+      "Colorado",
+      "Connecticut",
+      "Delaware",
+      "Florida",
+      "Georgia",
+      "Hawaii",
+      "Idaho",
+      "Illinois",
+      "Indiana",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Maryland",
+      "Massachusetts",
+      "Michigan",
+      "Minnesota",
+      "Mississippi",
+      "Missouri",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Jersey",
+      "New Mexico",
+      "New York",
+      "North Carolina",
+      "North Dakota",
+      "Ohio",
+      "Oklahoma",
+      "Oregon",
+      "Pennsylvania",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Tennessee",
+      "Texas",
+      "Utah",
+      "Vermont",
+      "Virginia",
+      "Washington",
+      "West Virginia",
+      "Wisconsin",
+      "Wyoming",
+    ],
+    India: [
+      "Andhra Pradesh",
+      "Arunachal Pradesh",
+      "Assam",
+      "Bihar",
+      "Chhattisgarh",
+      "Goa",
+      "Gujarat",
+      "Haryana",
+      "Himachal Pradesh",
+      "Jharkhand",
+      "Karnataka",
+      "Kerala",
+      "Madhya Pradesh",
+      "Maharashtra",
+      "Manipur",
+      "Meghalaya",
+      "Mizoram",
+      "Nagaland",
+      "Odisha",
+      "Punjab",
+      "Rajasthan",
+      "Sikkim",
+      "Tamil Nadu",
+      "Telangana",
+      "Tripura",
+      "Uttar Pradesh",
+      "Uttarakhand",
+      "West Bengal",
+    ],
   };
+
+  useEffect(() => {
+    handleCountryStateChange(selectedCity, selectedCountry);
+  }, [selectedCity, selectedCountry]);
 
   return (
     <div className="w-full">
@@ -41,8 +116,7 @@ function Mainsearch({ handleTextSearch }: any) {
           </div>
           <input
             type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => handleTextSearch(e.target.value)}
             placeholder="Search..."
             className="w-full pl-10 pr-4 py-3 border rounded-lg border-[rgba(254,201,97,1)]"
           />

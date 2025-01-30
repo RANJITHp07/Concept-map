@@ -4,8 +4,6 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@repo/ui/components/avatar";
-import Button from "@repo/ui/components/Button";
-import { Tabs, TabsList, TabsTrigger } from "@repo/ui/components/tabs";
 import Link from "next/link";
 import Image from "next/image";
 import apiHelper from "../../../lib/apiHelper";
@@ -16,6 +14,7 @@ import {
   industryOptions,
 } from "../../../lib/constant";
 import Header from "@repo/ui/components/Header";
+import ScriptSwiper from "./_component/scriptSwiper";
 
 export default async function Page({ params }: any) {
   const { data } = await apiHelper(apis.getScriptDetails(params.id));
@@ -114,6 +113,20 @@ export default async function Page({ params }: any) {
                 )?.name || "Other"}
               </span>
             </div>
+            {data.country.map((country: string) => (
+              <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 border  border-gray-700  rounded-full">
+                <span className="text-gray-700 text-[14px] lg:text-[16px]">
+                  {country}
+                </span>
+              </div>
+            ))}
+            {data.state.map((country: string) => (
+              <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 border  border-gray-700  rounded-full">
+                <span className="text-gray-700 text-[14px] lg:text-[16px]">
+                  {country}
+                </span>
+              </div>
+            ))}
           </div>
           <div className="rounded-lg  relative mt-5">
             <div className="absolute cursor-pointer inset-0 backdrop-blur-sm  flex items-center justify-center flex-col rounded-lg">
@@ -147,25 +160,7 @@ export default async function Page({ params }: any) {
             Explore More Synopsis, Scripts, and Storyboards
           </h1>
           <div className="grid md:grid-cols-3 gap-4 mb-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="border rounded-lg  relative">
-                <div className="absolute inset-0 bg-white/50 backdrop-blur-sm  flex items-center justify-center flex-col rounded-lg">
-                  <div className="w-12 h-12 mb-2">
-                    <Image src="/lock.png" width={50} height={50} alt="lock" />
-                  </div>
-                  <span className="font-medium text-lg">Click to Purchase</span>
-                </div>
-                <h4 className="font-semibold mb-4 bg-[#C1C1C1] px-6 py-4 rounded-t-lg text-xl">
-                  Story Board
-                </h4>
-                <p className="text-sm text-gray-600 mb-4 px-6 py-4">
-                  A plan video with the characters and situation of your choice.
-                </p>
-                <div className="flex justify-end px-6 text-xl pb-4">
-                  <span className="font-semibold text-2xl">$450</span>
-                </div>
-              </div>
-            ))}
+            <ScriptSwiper />
           </div>
         </div>
 

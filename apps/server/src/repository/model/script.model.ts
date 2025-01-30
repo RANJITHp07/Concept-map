@@ -96,6 +96,12 @@ const ScriptSchema: Schema = new Schema(
         type: String,
       },
     },
+    country: Array<{
+      type: String;
+    }>,
+    state: Array<{
+      type: String;
+    }>,
   },
   {
     timestamps: true,
