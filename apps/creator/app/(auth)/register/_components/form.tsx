@@ -127,7 +127,7 @@ function Form() {
                 onChange={(value) =>
                   handleInputFieldChange("password", value as string)
                 }
-                placeholder="6+ strong characters"
+                placeholder="8+ strong characters"
                 type="password"
                 errorMessage={errors.password?.message as string}
               />
@@ -152,7 +152,8 @@ function Form() {
                 </label>
                 <select
                   id="role"
-                  className="mt-1 block w-full px-3 py-3 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  disabled={isLoading}
+                  className="mt-1 cursor-pointer block w-full px-3 py-3.5 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-[#f5a623]"
                   value={getValues("role")}
                   onChange={(e) =>
                     handleInputFieldChange("role", e.target.value)
