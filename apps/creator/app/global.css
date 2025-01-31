@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@media (min-width: 1024px) and (max-width: 1350px) {
+  .Home-result-gird {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .home-other-none {
+
+    justify-content: center;
+    gap: 0px;
+  }
+
+  .home-img-none {
+    display: none;
+  }
+
+  .custom-size-leftMenu {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .home-other-none {
+
+    justify-content: center;
+    gap: 0px;
+  }
+
+  .home-img-none {
+    display: none;
+  }
+}
+
+
+@media (min-width: 320px) and (max-width:767px) {
+  .home-other-none {
+    display: none !important;
+  }
+}
+
+
+@media (min-width: 768px) and (max-width:1400px) {
+  .leftMenu-hidden {
+    display: none;
+  }
+}
+
+.stats-graph {
+  background: linear-gradient(180deg, rgba(255, 166, 0, 0.1) 0%, rgba(255, 166, 0, 0.05) 100%);
+  border-radius: 12px;
+}
+
+.profile-dots {
+  position: relative;
+}
+
+.profile-dots::before,
+.profile-dots::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ffa600;
+}
+
+.profile-dots::before {
+  top: -12px;
+  right: -12px;
+}
+
+.profile-dots::after {
+  bottom: -12px;
+  left: -12px;
+}
+
+.range-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px; /* Size of the round thumb */
+    height: 16px;
+    background: rgb(246, 170, 22); /* Color of the thumb */
+    border-radius: 50%; /* Makes it round */
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2); /* Optional: shadow for better appearance */
+  }
+
+  .range-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: rgb(246, 170, 22);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Adjust focus outline if needed */
+  .range-slider:focus::-webkit-slider-thumb {
+    outline: none;
+    box-shadow: 0 0 4px rgba(246, 170, 22, 0.8); /* Glow effect */
+  }
+
+.hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+
+input[type="range"] {
+            pointer-events: none;
+          }
+
+input[type="range"]::-webkit-slider-thumb {
+            pointer-events: auto;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border: 2px solid rgb(246, 170, 22);
+            border-radius: 50%;
+            cursor: pointer;
+          }
+
+input[type="range"]::-moz-range-thumb {
+            pointer-events: auto;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border: 2px solid rgb(246, 170, 22);
+            border-radius: 50%;
+            cursor: pointer;
+          }
