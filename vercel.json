@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "apps/server/package.json",
+      "use": "@vercel/node",
+      "config": { "zeroConfig": false },
+      "buildCommand": "npm run server:build:dev"
+    },
+    {
+      "src": "apps/creator/package.json",
+      "use": "@vercel/next",
+      "buildCommand": "cd apps/creator && npm run build"
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest":"apps/server/dist/index.js" },
+    { "src": "/(.*)", "dest": "apps/creator/$1" }
+  ]
+}
