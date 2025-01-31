@@ -9,6 +9,7 @@ import apiHelper from "../../lib/apiHelper";
 import { apis } from "../../lib/api";
 import ScriptCardLoading from "../../components/skelton/scriptCardLoading";
 import Header from "@repo/ui/components/Header";
+import './search.css'
 
 function Page() {
   const [categoryFilter, setCategoryFilter] = useState<
