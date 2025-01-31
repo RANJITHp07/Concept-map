@@ -4,13 +4,11 @@
     {
       "src": "apps/server/package.json",
       "use": "@vercel/node",
-      "config": { "zeroConfig": false },
-      "buildCommand": "npm run server:build:dev"
+      "config": { "zeroConfig": false }
     },
     {
       "src": "apps/creator/package.json",
-      "use": "@vercel/next",
-      "buildCommand": "cd apps/creator && npm run build"
+      "use": "@vercel/next"
     }
   ],
   "routes": [
