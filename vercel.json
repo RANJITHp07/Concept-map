@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "turbo run build server:build:dev && cd apps/creator npm run build",
+  "buildCommand": "npm run server:build:dev && cd apps/creator npm run build",
   "installCommand": "npm install  --legacy-peer-deps && cd apps/creator && npm install --legacy-peer-deps",
   "builds": [
     {
