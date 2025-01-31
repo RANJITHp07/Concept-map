@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "tsc -w",
     "server:dev": "npm run dev",
-    "server:build": "tsc"
+    "server:build": "npm install --legacy-peer-deps && tsc"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
