@@ -62,7 +62,6 @@ function SearchResult({ data, count, handlePage, page }: any) {
   const [currentPage, setCurrentPage] = useState(page);
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
-  // Update itemsPerPage based on screen size
   useEffect(() => {
     const updateItemsPerPage = () => {
       if (window.innerWidth >= 1024) {
@@ -89,9 +88,6 @@ function SearchResult({ data, count, handlePage, page }: any) {
     }));
   };
 
-  // Calculate the items to display on the current page
-
-  // Calculate total pages
   const totalPages = Math.ceil(count / itemsPerPage);
 
   const handlePageChange = (pageNumber: number) => {
@@ -113,7 +109,7 @@ function SearchResult({ data, count, handlePage, page }: any) {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[10px] lg:gap-[20px] Home-result-gird">
+          <div className="grid grid-cols-1 custom md:grid-cols-2 lg:grid-cols-2 gap-[10px] lg:gap-[20px] Home-result-gird">
             {sliderData.map((item: any, index: any) => (
               <Fade
                 key={item.id}
@@ -123,7 +119,7 @@ function SearchResult({ data, count, handlePage, page }: any) {
                 duration={600}
               >
                 <div
-                  className="border rounded-[30px]  shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                  className="border rounded-[30px] shadow-lg hover:shadow-xl transition-shadow cursor-pointer h-full flex flex-col"
                   onClick={() => router.push(`/creator-details/${item.id}`)}
                 >
                   <div className="pl-[20px] py-[20px] flex justify-between">
@@ -156,8 +152,8 @@ function SearchResult({ data, count, handlePage, page }: any) {
                     </button>
                   </div>
 
-                  <div className="px-[20px] pb-[20px] pt-[5px]">
-                    <div>
+                  <div className="px-[20px] pb-[20px] pt-[5px] flex-grow">
+                    <div className="h-full flex flex-col">
                       <p className="text-[14px]">{item.description}....</p>
                       <div className="mt-4 my-2 text-gray-700 flex gap-4 flex-row">
                         {item.price.map((_price: any) => (
@@ -185,7 +181,7 @@ function SearchResult({ data, count, handlePage, page }: any) {
                           </div>
                         ))}
                       </div>
-                      <div className="flex items-center justify-between pt-[10px]  mt-auto">
+                      <div className="flex items-center justify-between pt-[10px] mt-auto">
                         <div className="flex items-center gap-[10px]">
                           <div className="flex items-center">
                             <IoMdStar
