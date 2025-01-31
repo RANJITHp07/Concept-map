@@ -30,12 +30,6 @@ export default async function Page({ params }: any) {
       <Header />
       <div className="px-12 py-5">
         {/* Header */}
-        <div className="flex items-center gap-2 mb-6">
-          <Link href="#" className="hover:opacity-80">
-            <ArrowLeft className="w-6 h-6" />
-          </Link>
-          <h1 className="text-xl font-semibold">Details Page</h1>
-        </div>
 
         {/* Profile Section */}
         <div className="flex flex-col md:flex-row gap-4 items-start mb-8">
@@ -55,22 +49,6 @@ export default async function Page({ params }: any) {
               <span>💬 I speak English</span>
               <span>✓ 139 orders completed</span>
             </div>
-            {/* <Tabs defaultValue="synopsis" className="w-full">
-            <TabsList className="bg-transparent rounded-none p-0 h-auto">
-              <TabsTrigger
-                value="synopsis"
-                className="bg-[#FDF6E7] data-[state=active]:bg-[#FDF6E7] rounded-full px-4 py-1 text-sm"
-              >
-                Synopsis
-              </TabsTrigger>
-              <TabsTrigger
-                value="storyboard"
-                className="bg-[#FDF6E7] data-[state=active]:bg-[#FDF6E7] rounded-full px-4 py-1 text-sm ml-2"
-              >
-                Story board
-              </TabsTrigger>
-            </TabsList>
-          </Tabs> */}
           </div>
         </div>
 
