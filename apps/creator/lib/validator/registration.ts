@@ -1,43 +1,44 @@
 import { z } from "zod";
 
-export const registrationSchema = z.object({
-  name: z
+export const ScriptFormSchema = z.object({
+  mainTitle: z
     .string({
-      required_error: "Name is required",
-      invalid_type_error: "Name must be a string",
+      required_error: "Title is required",
+      invalid_type_error: "Title must be a string",
     })
-    .trim(),
-  email: z
-    .string({
-      required_error: "Email is required",
-      invalid_type_error: "Email must be a string",
-    })
-    .trim()
-    .email("Invalid email address"),
+    .min(3, "Title must be at least 3 characters"),
 
-  password: z
+  description: z
     .string({
-      required_error: "Password is required",
-      invalid_type_error: "Password must be a string",
+      required_error: "Description is required",
+      invalid_type_error: "Description must be a string",
     })
-    .trim()
-    .min(6, "Password must be at least 6 characters")
-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .regex(
-      /[^a-zA-Z0-9]/,
-      "Password must contain at least one special character"
-    ),
+    .min(10, "Description must be at least 10 characters"),
 
-  confirmPassword: z
+  category: z.string({
+    required_error: "Category is required",
+    invalid_type_error: "Category must be a string",
+  }),
+
+  industryCategory: z.string({
+    required_error: "Industry category is required",
+    invalid_type_error: "Industry category must be a string",
+  }),
+
+  price: z
     .string({
-      required_error: "Confirm Password is required",
-      invalid_type_error: "Confirm Password must be a string",
+      required_error: "Price is required",
+      invalid_type_error: "Price must be a valid string",
     })
-    .trim(),
+    .regex(/^\d+(\.\d{1,2})?$/, "Price must be a valid number"),
 
-  role: z
-    .enum(["BUYER", "CREATOR"], {
-      required_error: "Role is required",
-    })
-    .default("BUYER"),
+  currency: z.string({
+    required_error: "Currency is required",
+    invalid_type_error: "Currency must be a string",
+  }),
+
+  type: z.string({
+    required_error: "Type is required",
+    invalid_type_error: "Type must be a string",
+  }),
 });

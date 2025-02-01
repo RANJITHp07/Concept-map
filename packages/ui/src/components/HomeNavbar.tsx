@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { apiHelper } from "../lib/utils";
 import { apis } from "../lib/api";
 
-function HomeNavbar({ email }: { email: string }) {
+function HomeNavbar({ email }: { email?: string }) {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [buyer, setBuyer] = useState(null);

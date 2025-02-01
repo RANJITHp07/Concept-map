@@ -77,7 +77,7 @@ export default function SynopsisWriter() {
               <h3 className="text-lg font-semibold mb-4">Add Pricing</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Select>
-                  <SelectTrigger>
+                  <SelectTrigger className="py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 border-black">
                     <SelectValue placeholder="Choose Currency" />
                   </SelectTrigger>
                   <SelectContent>
@@ -88,15 +88,6 @@ export default function SynopsisWriter() {
                 </Select>
                 <Input placeholder="Add Price" />
               </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row justify-end gap-3">
-              <ShadcnButton className="bg-black hover:bg-black/90 text-white order-last sm:order-first">
-                Save Now
-              </ShadcnButton>
-              <ShadcnButton className="w-full sm:w-auto bg-orange-400 hover:bg-orange-500 text-white">
-                Publish Now
-              </ShadcnButton>
             </div>
           </CardContent>
         )}

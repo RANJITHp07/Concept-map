@@ -46,30 +46,12 @@ export function CreateForm() {
       <div className="px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-6 flex items-center gap-3">
-          {/* <ShadcnButton variant="ghost" size="icon" className="rounded-full">
-            <ArrowLeft className="h-5 w-5" />
-            <span className="sr-only">Go back</span>
-          </ShadcnButton> */}
           <h1 className="text-xl font-semibold">Create New Script</h1>
         </div>
 
         {/* Form */}
         <div className="space-y-6 px-4 sm:px-6 lg:px-10">
           {/* Select Type Section */}
-          {/* <FormSection title="Select Type">
-            <Select
-              onValueChange={(value) => handleSelectChange("type", value)}
-            >
-              <SelectTrigger className="w-full bg-white">
-                <SelectValue placeholder="Choose Type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="type1">Type 1</SelectItem>
-                <SelectItem value="type2">Type 2</SelectItem>
-                <SelectItem value="type3">Type 3</SelectItem>
-              </SelectContent>
-            </Select>
-          </FormSection> */}
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <FormSection title="Adding Details">
@@ -82,6 +64,7 @@ export function CreateForm() {
                     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
                   ) => handleInputChange("mainTitle", e.target.value)}
                   maxLength={80}
+                  error={errors.mainTitle?.message as string}
                   required
                 />
                 <FormField
@@ -92,13 +75,14 @@ export function CreateForm() {
                     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
                   ) => handleInputChange("description", e.target.value)}
                   maxLength={500}
-                  required
+                  error={errors.description?.message as string}
                   textarea
                 />
                 <FormField
                   label="Category"
                   name="category"
                   value={getValues("category")}
+                  error={errors.category?.message as string}
                   onChange={(value: string) =>
                     handleInputChange("category", value)
                   }
@@ -112,6 +96,7 @@ export function CreateForm() {
                 <FormField
                   label="Industry Category"
                   name="industryCategory"
+                  error={errors.industryCategory?.message as string}
                   value={getValues("industryCategory")}
                   onChange={(value) =>
                     handleInputChange("industryCategory", value)
@@ -127,6 +112,7 @@ export function CreateForm() {
                   <FormField
                     label="Country"
                     name="country"
+                    error={errors.mainTitle?.message as string}
                     value={getValues("price")}
                     onChange={(value) => handleInputChange("price", value)}
                     type="number"
@@ -135,6 +121,7 @@ export function CreateForm() {
                   <FormField
                     label="State"
                     name="state"
+                    error={errors.mainTitle?.message as string}
                     value={getValues("currency")}
                     onChange={(value) => handleInputChange("currency", value)}
                     required
@@ -142,10 +129,6 @@ export function CreateForm() {
                 </div>
               </div>
             </FormSection>
-
-            <div className="flex justify-end">
-              <ShadcnButton type="submit">Save Details</ShadcnButton>
-            </div>
           </form>
         </div>
       </div>
@@ -180,6 +163,7 @@ function FormField({
   textarea,
   select,
   options,
+  error,
   type = "text",
 }: {
   label: string;
@@ -190,17 +174,18 @@ function FormField({
   required?: boolean;
   textarea?: boolean;
   select?: boolean;
+  error: string | null;
   options?: { value: string; label: string }[];
   type?: string;
 }) {
   return (
     <div className="space-y-2">
       <div className="flex justify-between">
-        <label htmlFor={name} className="text-sm text-gray-600">
+        <label htmlFor={name} className=" text-gray-600">
           {label}
         </label>
         {maxLength && (
-          <span className="text-sm text-gray-400">
+          <span className=" text-gray-400">
             {value?.length ?? 0}/{maxLength} Characters
           </span>
         )}
@@ -211,14 +196,17 @@ function FormField({
           name={name}
           value={value}
           onChange={onChange}
-          className="min-h-[120px] bg-white"
+          className={`min-h-[120px] bg-white ${error && "border border-red-500"}`}
           placeholder={`Enter ${label.toLowerCase()}`}
           maxLength={maxLength}
           required={required}
         />
       ) : select ? (
         <Select onValueChange={onChange} value={value}>
-          <SelectTrigger id={name} className="bg-white">
+          <SelectTrigger
+            id={name}
+            className={`bg-white px-4 py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 ${error ? "border-red-500" : "border-black"}`}
+          >
             <SelectValue placeholder={`Choose ${label}`} />
           </SelectTrigger>
           <SelectContent>
@@ -236,12 +224,12 @@ function FormField({
           type={type}
           value={value}
           onChange={onChange}
-          className="bg-white"
+          className={`bg-white ${error && "border border-red-500"}`}
           placeholder={`Enter ${label.toLowerCase()}`}
           maxLength={maxLength}
-          required={required}
         />
       )}
+      {error && <p className="text-xs text-red-400">{error}</p>}
     </div>
   );
 }

@@ -83,6 +83,10 @@ export function ScriptWriter() {
     );
   };
 
+  const removeScript = (scriptId: number) => {
+    setScripts(scripts.filter((script) => script.id !== scriptId));
+  };
+
   const handleSceneChange = (
     scriptId: number,
     sceneId: number,
@@ -161,6 +165,17 @@ export function ScriptWriter() {
               <div className="space-y-6 bg-gray-100 p-6 rounded-lg">
                 {scripts.map((script) => (
                   <div key={script.id} className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <h4 className="font-medium">Script</h4>
+                      <ShadcnButton
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeScript(script.id)}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        <MinusCircle className="h-4 w-4 mr-1" /> Remove Script
+                      </ShadcnButton>
+                    </div>
                     <Input
                       value={script.name}
                       onChange={(e) =>
@@ -218,9 +233,9 @@ export function ScriptWriter() {
 
               <div>
                 <h3 className="text-lg font-semibold mb-4">Add Pricing</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Select>
-                    <SelectTrigger>
+                    <SelectTrigger className="py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 border-black">
                       <SelectValue placeholder="Choose Currency" />
                     </SelectTrigger>
                     <SelectContent>
@@ -230,9 +245,6 @@ export function ScriptWriter() {
                     </SelectContent>
                   </Select>
                   <Input placeholder="Add Price" type="number" />
-                  <ShadcnButton className="bg-black hover:bg-black/90 text-white">
-                    Save Now
-                  </ShadcnButton>
                 </div>
               </div>
             </CardContent>
