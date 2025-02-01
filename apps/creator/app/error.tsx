@@ -22,7 +22,7 @@ const ErrorPage = () => {
         </p>
         <button
           onClick={handleGoHome}
-          className="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition duration-300"
+          className="bg-[#f5a623] text-white hover:bg-[#e69516]  py-2 px-6 rounded-lg  transition duration-300"
         >
           Go to Homepage
         </button>

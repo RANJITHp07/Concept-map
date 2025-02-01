@@ -11,6 +11,7 @@ import {
   industryOptions,
 } from "./SearchBars";
 import { IoDocumentTextOutline } from "react-icons/io5";
+import Link from "next/link";
 
 function HomeResult({
   data,
@@ -85,116 +86,118 @@ function HomeResult({
         {count != 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[10px] lg:gap-[20px] Home-result-gird md:relative z-[-1]">
             {sliderData.map((item, index) => (
-              <Fade
+              <Link
                 key={item.id}
-                direction="up"
-                triggerOnce
-                delay={index * 200}
-                duration={800}
+                className="cursor-pointer"
+                href={`/creator-details/${item.id}`}
+                passHref
               >
-                <div
-                  className="border rounded-[30px]  shadow-lg hover:shadow-xl transition-shadow cursor-pointer flex flex-col h-full"
-                  onClick={(e: any) =>
-                    router.push(`/creator-details/${item.id}`)
-                  }
+                <Fade
+                  key={item.id}
+                  direction="up"
+                  triggerOnce
+                  delay={index * 200}
+                  duration={800}
                 >
-                  <div
-                    className="pl-[20px] 
+                  <div className="border rounded-[30px]  shadow-lg hover:shadow-xl transition-shadow cursor-pointer flex flex-col h-full">
+                    <div
+                      className="pl-[20px] 
                    py-[20px] flex justify-between"
-                  >
-                    {/* Image and Content */}
-                    <div className="flex items-start">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        width={50}
-                        height={50}
-                        className="rounded-full h-[40px] w-[40px] lg:h-[50px] lg:w-[50px] mr-[10px] object-cover border border-[rgba(254,201,97,1)]"
-                      />
-                      <div>
-                        <h2 className="text-[14px] lg:text-[16px]">
-                          {item.name}
-                        </h2>
-                        <p className="text-[14px] lg:text-[14px] text-gray-500">
-                          {item.title}
-                        </p>
-                      </div>
-                    </div>
-                    {/* Button */}
-                    <button
-                      onClick={() => toggleFollow(item.id)}
-                      className={`self-start py-[6px] px-[12px] rounded-tl-[15px] rounded-bl-[15px] border transition-colors text-[14px] ${
-                        followState[item.id]
-                          ? "bg-[rgb(246,170,22)] text-white"
-                          : "bg-white text-black"
-                      }`}
                     >
-                      {followState[item.id] ? "Followed" : "Following"}
-                    </button>
-                  </div>
+                      {/* Image and Content */}
+                      <div className="flex items-start">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          width={50}
+                          height={50}
+                          className="rounded-full h-[40px] w-[40px] lg:h-[50px] lg:w-[50px] mr-[10px] object-cover border border-[rgba(254,201,97,1)]"
+                        />
+                        <div>
+                          <h2 className="text-[14px] lg:text-[16px]">
+                            {item.name}
+                          </h2>
+                          <p className="text-[14px] lg:text-[14px] text-gray-500">
+                            {item.title}
+                          </p>
+                        </div>
+                      </div>
+                      {/* Button */}
+                      <button
+                        onClick={() => toggleFollow(item.id)}
+                        className={`self-start py-[6px] px-[12px] rounded-tl-[15px] rounded-bl-[15px] border transition-colors text-[14px] ${
+                          followState[item.id]
+                            ? "bg-[rgb(246,170,22)] text-white"
+                            : "bg-white text-black"
+                        }`}
+                      >
+                        {followState[item.id] ? "Followed" : "Following"}
+                      </button>
+                    </div>
 
-                  <div className="px-[20px]  pt-[5px] flex-1">
-                    <div>
-                      <p className="text-[14px] text-gray-500">
-                        {item.description.slice(0, 100)}
-                        ......
-                      </p>
-                      <div className="flex gap-2 my-2 pt-[5px] flex-wrap">
-                        <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full ">
-                          <span className="text-gray-700 text-[14px] lg:text-[14px]">
-                            {item.genre}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full">
-                          <span className="text-gray-700 text-[14px] lg:text-[14px]">
-                            {item.industry_category}
-                          </span>
-                        </div>
-                        {item.country.map((country: any) => (
-                          <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full">
-                            <span className="text-gray-700 text-[14px] lg:text-[16px]">
-                              {country}
+                    <div className="px-[20px]  pt-[5px] flex-1">
+                      <div>
+                        <p className="text-[14px] text-gray-500">
+                          {item.description.slice(0, 100)}
+                          ......
+                        </p>
+                        <div className="flex gap-2 my-2 pt-[5px] flex-wrap">
+                          <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full ">
+                            <span className="text-gray-700 text-[14px] lg:text-[14px]">
+                              {item.genre}
                             </span>
                           </div>
-                        ))}
+                          <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full">
+                            <span className="text-gray-700 text-[14px] lg:text-[14px]">
+                              {item.industry_category}
+                            </span>
+                          </div>
+                          {item.country.map((country: any) => (
+                            <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full">
+                              <span className="text-gray-700 text-[14px] lg:text-[16px]">
+                                {country}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Bottom Section, consistent left and right padding */}
-                  <div className="flex items-center justify-between pt-[10px] pb-[20px] mt-auto px-[20px]">
-                    <div className="flex items-center gap-[10px]">
-                      <div className="flex items-center">
+                    {/* Bottom Section, consistent left and right padding */}
+                    <div className="flex items-center justify-between pt-[10px] pb-[20px] mt-auto px-[20px]">
+                      <div className="flex items-center gap-[10px]">
+                        <div className="flex items-center">
+                          <Image
+                            src={item.dot}
+                            alt="dot"
+                            width={18}
+                            height={18}
+                            className="mr-[5px]"
+                          />
+                          <p className="text-[14px]">{item.rating}</p>
+                        </div>
+
+                        <div className="flex">
+                          <FaHeart
+                            size={18}
+                            className="mr-[5px] text-[rgba(246,170,22,1)]"
+                          />
+                          <p className="text-[12px]">{item.likes}</p>
+                        </div>
+                      </div>
+
+                      <div className="inline-block p-2 rounded-[100px] bg-[rgba(246,170,22,1)] cursor-pointer">
                         <Image
-                          src={item.dot}
-                          alt="dot"
+                          src={item.bookmark}
+                          alt="bookmark"
                           width={18}
                           height={18}
-                          className="mr-[5px]"
                         />
-                        <p className="text-[14px]">{item.rating}</p>
                       </div>
-
-                      <div className="flex">
-                        <FaHeart
-                          size={18}
-                          className="mr-[5px] text-[rgba(246,170,22,1)]"
-                        />
-                        <p className="text-[12px]">{item.likes}</p>
-                      </div>
-                    </div>
-
-                    <div className="inline-block p-2 rounded-[100px] bg-[rgba(246,170,22,1)]">
-                      <Image
-                        src={item.bookmark}
-                        alt="bookmark"
-                        width={18}
-                        height={18}
-                      />
                     </div>
                   </div>
-                </div>
-              </Fade>
+                </Fade>
+              </Link>
             ))}
           </div>
         ) : (

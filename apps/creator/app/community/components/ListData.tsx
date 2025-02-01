@@ -14,7 +14,7 @@ const data = [
   {
     id: 1,
     name: "Niyas P",
-    role: " Amazon | OTT",
+    role: " Amazon | OTT | Cinema",
     date: "1/1/2025",
     description:
       "Amazon Signs Groundbreaking Deal to Significantly Boost India’s Creative Economy",
@@ -67,7 +67,7 @@ const data = [
 
 function ListData() {
   return (
-    <section className="grid gap-[10px] lg:gap-[20px] pt-[30px] lg:pt-[40px]">
+    <section className="grid gap-[10px] lg:gap-[50px] pt-[30px] lg:pt-[40px]">
       {data.map((item, index) => (
         <Fade
           key={item.id}
@@ -79,7 +79,7 @@ function ListData() {
               <div className="flex align-middle items-center">
                 <Image
                   alt="userProfile"
-                  className="h-[50px] w-[50px] md:h-[60px] md:w-[60px] lg:h-[70px] lg:w-[70px] object-cover rounded-[100px] border border-[#f6aa16]"
+                  className="h-[40px] w-[40px] md:h-[60px] md:w-[60px] object-cover rounded-[100px] border border-[#f6aa16]"
                   src={Profile}
                 />
                 <div className="ml-[10px] md:ml-[15px] lg:ml-[20px]">
@@ -109,6 +109,13 @@ function ListData() {
               <div className="p-[10px] md:p-[15px] lg:p-[20px]">
                 <p className="text-[14px] md:text-[16px] lg:text-[18px]">
                   {item.description}
+                </p>
+                <p className="text-gray-500">
+                  #cinema #ott #movies #2025 #filmmaking #storytelling
+                  #hollywood #indiefilm #screenplay #director #actors
+                  #filmproduction #blockbuster #filmlovers #moviebuff
+                  #filmcommunity #cinemalovers #movienight #movieaddict
+                  #moviepremiere #filmmaker #filmindustry
                 </p>
               </div>
             )}
