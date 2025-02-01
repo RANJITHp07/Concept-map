@@ -80,7 +80,7 @@ const ScriptSchema: Schema = new Schema(
         name: {
           type: String;
         };
-        cloud_key: {
+        cloud_url: {
           type: String;
         };
       }>,
