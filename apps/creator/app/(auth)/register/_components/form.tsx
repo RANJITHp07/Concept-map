@@ -56,6 +56,7 @@ function Form() {
 
       if (response.status == "success") {
         sessionStorage.setItem("RegisteredUser", userId);
+        sessionStorage.setItem("RegisteredUserRole", data.role);
         router.replace("/verify-otp");
       }
     } else if (res.status == "error") {

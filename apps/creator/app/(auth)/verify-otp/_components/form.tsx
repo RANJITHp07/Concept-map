@@ -53,11 +53,12 @@ function OtpVerificationForm() {
 
     setIsLoading(true);
     const userId = sessionStorage.getItem("RegisteredUser");
+    const role = sessionStorage.getItem("RegisteredUserRole");
 
     const authentication = await handleRegistration(userId!, otpString);
 
     if (authentication && authentication.status == "success") {
-      if (authentication.data.role == "BUYER") {
+      if (role == "BUYER") {
         router.push("/");
       } else {
         router.push("/creator-dashboard");
