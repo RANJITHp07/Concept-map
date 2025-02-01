@@ -52,15 +52,15 @@ function Form() {
                 <Image
                   src="/logo_.png"
                   alt="Concepts Map"
-                  width={280}
-                  height={60}
+                  width={240}
+                  height={50}
                   className="w-auto h-auto"
                 />
               </div>
             </div>
 
-            <div className="text-center mt-2 mb-5">
-              <p className="text-gray-400 text-sm text-start mt-2">
+            <div className=" mt-2 mb-5">
+              <p className="text-gray-400 text-sm">
                 Welcome to our portal where you can explore ultimate ads
                 concepts from fresh and talented brains.
               </p>
@@ -96,7 +96,7 @@ function Form() {
                 type="submit"
                 className="w-full bg-[#f5a623] text-white py-3.5 rounded-lg font-medium hover:bg-[#e69516] transition-colors mt-4"
               >
-                Create an Account
+              Login
               </button>
             </form>
 
@@ -139,10 +139,11 @@ function Form() {
                 />
               </button>
             </div>
-            <div className="text-sm text-gray-600 justify-center  flex mt-5">
-              Have an account?{" "}
+            
+            <div className="text-sm text-gray-600 text-center mt-3">
+              Have an account ?{" "}
               <Link
-                href="/register"
+                 href="/register"
                 className="text-[#f5a623] hover:text-[#e69516]"
               >
                 Sign In

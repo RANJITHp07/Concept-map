@@ -2,11 +2,8 @@ import Form from "./_components/form";
 
 export default function RegisterPage() {
   return (
-    <>
-       <div className="h-screen flex flex-col md:flex-row justify-center md:justify-start lg:justify-start">
-        <Form />
-        
-      </div>
-    </>
+    <div className="min-h-screen flex flex-col md:flex-row">
+      <Form />
+    </div>
   );
 }
