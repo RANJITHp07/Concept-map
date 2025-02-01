@@ -125,8 +125,8 @@ function Form() {
                     handleInputFieldChange("role", e.target.value)
                   }
                 >
-                  <option value="CREATOR">Creator</option>
                   <option value="BUYER">Buyer</option>
+                  <option value="CREATOR">Creator</option>
                 </select>
                 {errors.role && (
                   <p className="text-red-500 text-sm">

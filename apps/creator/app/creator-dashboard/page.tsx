@@ -6,10 +6,18 @@ import { Search, Target, Users, DollarSign, Heart } from "lucide-react";
 // import Button from "@repo/ui/components/Button";
 import { Input } from "@repo/ui/components/input";
 import Image from "next/image";
+import apiHelper from "../../lib/apiHelper";
+import { apis } from "../../lib/api";
+import { auth } from "../../auth";
 
 // const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 export default async function DashboardPage() {
+  const session = await auth();
+
+  if (!session?.user) return null;
+
+  const { data: user } = await apiHelper(apis.getUserDetails(session.user.id!));
   // await delay(3000);
   return (
     <div className="flex min-h-screen bg-[#FFF8F0]">
@@ -45,10 +53,14 @@ export default async function DashboardPage() {
               className="rounded-full transition-transform duration-300 hover:scale-110"
             />
             <div className="text-center sm:text-left">
-              <h2 className="text-2xl font-bold mb-2">Hello, Aidan Edwards</h2>
+              <h2 className="text-2xl font-bold mb-2">
+                Hello, {user.username}
+              </h2>
               <p className="text-orange-50">
-                You have an finished job. Among them are 2 Story board & scripts
-                and 2 story Work for this week is
+                Welcome to a world where creativity meets craftsmanship. Whether
+                you’re an art enthusiast or a first-time buyer, here’s the
+                perfect place to find stunning, original works of art that tell
+                a story and transform any space.
               </p>
             </div>
           </div>

@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import { apiHelper } from "../lib/utils";
 import { apis } from "../lib/api";
 
-function Header() {
+function Header({ page }: { page?: string }) {
   const router = useRouter();
   const [buyer, setBuyer] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility
@@ -33,7 +33,7 @@ function Header() {
   return (
     <nav className="flex justify-between p-5 px-5 md:px-12 bg-transparent items-center">
       <div className="flex gap-12 items-center">
-        <Link href={"/"}>
+        <Link href={page == "creator" ? "/creator-dashboard" : "/"}>
           <Image alt="logo" src={"/logo.png"} width={230} height={100} />
         </Link>
         <ul className="hidden lg:flex gap-[35px] lg:gap-[50px]">
@@ -81,18 +81,20 @@ function Header() {
                 >
                   Profile
                 </li>
-                <li
-                  className="text-gray-500 px-4 py-3 text-xl font-medium cursor-pointer hover:bg-gray-100"
-                  onClick={() => router.push("/purchase_list")}
-                >
-                  Purchase List
-                </li>
-                <li
+                {page !== "creator" && (
+                  <li
+                    className="text-gray-500 px-4 py-3 text-xl font-medium cursor-pointer hover:bg-gray-100"
+                    onClick={() => router.push("/purchase_list")}
+                  >
+                    Purchase List
+                  </li>
+                )}
+                {/* <li
                   className={`text-gray-500 px-4 py-3 text-xl font-medium ${buyer ? "cursor-pointer" : "cursor-not-allowed opacity-40"} hover:bg-gray-100`}
                   onClick={() => router.push("/creator-dashboard")}
                 >
                   Switch to Creator
-                </li>
+                </li> */}
 
                 <li
                   className="text-gray-500 px-4 py-3 text-xl cursor-pointer font-medium hover:bg-gray-100"

@@ -5,8 +5,11 @@ import Image from "next/image";
 import { Upload, Plus, Menu, X } from "lucide-react";
 import Button from "@repo/ui/components/Button";
 import LeftMenu from "@repo/ui/components/LeftMenu";
+import { useRouter } from "next/navigation";
+import { handleSignOut } from "@repo/ui/components/HomeNavbar";
 
 export function Sidebar() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
@@ -66,17 +69,18 @@ export function Sidebar() {
         {/* Footer Buttons */}
         <div className="mt-auto space-y-2">
           <Button
-            actionName="Upload"
-            className="w-full justify-center text-muted-foreground text-[17px] leading-[21px] font-medium bg-gray-300 hover:bg-gray-100"
-          >
-            Upload
-            <Upload className="mr-2 h-4 w-4" />
-          </Button>
-          <Button
             actionName="Create New"
             className="w-full justify-center text-[17px] leading-[21px] font-medium bg-[rgba(246,170,22,1)] hover:bg-orange-600 text-white"
+            onClick={() => router.push("/creator")}
           >
             <Plus className="mr-2 h-4 w-4" />
+          </Button>
+          <Button
+            actionName="Logout"
+            className="w-full justify-center text-muted-foreground text-[17px] leading-[21px] font-medium bg-gray-300 hover:bg-gray-100"
+            onClick={() => handleSignOut()}
+          >
+            <Upload className="mr-2 h-4 w-4" />
           </Button>
         </div>
       </div>

@@ -68,7 +68,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
               userId,
             });
 
-            console.log(res);
             if (res.status == "success") return res.data;
 
             throw new Error(res.error.message);

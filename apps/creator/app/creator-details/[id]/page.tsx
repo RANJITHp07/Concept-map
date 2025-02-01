@@ -15,7 +15,6 @@ import {
 } from "../../../lib/constant";
 import Header from "@repo/ui/components/Header";
 import ScriptSwiper from "./_component/scriptSwiper";
-import { auth } from "../../../auth";
 
 export default async function Page({ params }: any) {
   const { data } = await apiHelper(apis.getScriptDetails(params.id));

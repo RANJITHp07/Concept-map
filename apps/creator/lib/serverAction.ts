@@ -61,4 +61,11 @@ export const handleLogin = async (
   }
 };
 
+export const handleSignOut = async () => {
+  await signOut({
+    callbackUrl: "/login",
+    redirect: false,
+  });
+};
+
 export default handleRegistration;

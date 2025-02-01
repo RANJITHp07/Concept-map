@@ -11,6 +11,14 @@ import { Slide } from "react-awesome-reveal";
 import { useRouter } from "next/navigation";
 import { apiHelper } from "../lib/utils";
 import { apis } from "../lib/api";
+import { signOut } from "next-auth/react";
+
+export const handleSignOut = async () => {
+  await signOut({
+    callbackUrl: "/login",
+    redirect: true,
+  });
+};
 
 function HomeNavbar({ email }: { email?: string }) {
   const router = useRouter();
@@ -19,7 +27,7 @@ function HomeNavbar({ email }: { email?: string }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility
 
   const fetchUserData = async () => {
-    const result = await apiHelper(apis.getUserDetails(email));
+    const result = await apiHelper(apis.getUserDetails(email!));
     if (result.status == "success") {
       setBuyer(result.data);
     }
@@ -31,7 +39,7 @@ function HomeNavbar({ email }: { email?: string }) {
 
   useEffect(() => {
     fetchUserData();
-    localStorage.setItem("email", email);
+    localStorage.setItem("email", email!);
   }, [email]);
 
   return (
@@ -96,16 +104,16 @@ function HomeNavbar({ email }: { email?: string }) {
                   >
                     Purchase List
                   </li>
-                  <li
+                  {/* <li
                     className={`text-gray-500 px-4 py-3 text-xl font-medium ${buyer ? "cursor-pointer" : "cursor-not-allowed opacity-40"} hover:bg-gray-100`}
                     onClick={() => router.push("/creator-dashboard")}
                   >
                     Switch to Creator
-                  </li>
+                  </li> */}
 
                   <li
                     className="text-gray-500 px-4 py-3 text-xl cursor-pointer font-medium hover:bg-gray-100"
-                    onClick={() => console.log("Logging out...")}
+                    onClick={handleSignOut}
                   >
                     Logout
                   </li>
