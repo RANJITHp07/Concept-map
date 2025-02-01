@@ -80,7 +80,7 @@ const ScriptSchema: Schema = new Schema(
         name: {
           type: String;
         };
-        cloud_key: {
+        cloud_url: {
           type: String;
         };
       }>,
@@ -96,6 +96,12 @@ const ScriptSchema: Schema = new Schema(
         type: String,
       },
     },
+    country: Array<{
+      type: String;
+    }>,
+    state: Array<{
+      type: String;
+    }>,
   },
   {
     timestamps: true,

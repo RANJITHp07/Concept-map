@@ -83,9 +83,9 @@ function HomeNavbar() {
                   </li>
                   <li
                     className="text-gray-700 px-4 py-4 text-lg cursor-pointer hover:bg-gray-100"
-                    onClick={() => console.log("Logging out...")}
+                    onClick={() => router.push("/creator-dashboard")}
                   >
-                    Switch to Buyer
+                    Switch to Creator
                   </li>
                   <li
                     className="text-gray-700 px-4 py-4 text-lg cursor-pointer hover:bg-gray-100"

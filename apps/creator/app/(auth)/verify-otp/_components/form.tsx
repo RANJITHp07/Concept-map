@@ -57,7 +57,11 @@ function OtpVerificationForm() {
     const authentication = await handleRegistration(userId!, otpString);
 
     if (authentication && authentication.status == "success") {
-      router.push("/");
+      if (authentication.data.role == "BUYER") {
+        router.push("/");
+      } else {
+        router.push("/creator-dashboard");
+      }
     } else {
       //dispaly the error message
       toast.error(authentication?.error?.message!);

@@ -17,8 +17,9 @@ export class SearchService {
       filter = "",
       textSearch,
       priceRange = "0",
+      country,
+      state,
     } = searchFilter;
-    console.log(priceRange);
 
     const filterQuery = {
       ...(type && { type: { $in: type.split(",") } }),
@@ -32,6 +33,15 @@ export class SearchService {
               ],
             };
           }),
+        }),
+      ...(country &&
+        state &&
+        country.length > 0 &&
+        state.length > 0 && {
+          $and: [
+            { country: { $in: country.split(",") } },
+            { state: { $in: state.split(",") } },
+          ],
         }),
       ...(textSearch && {
         $or: [

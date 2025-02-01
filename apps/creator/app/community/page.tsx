@@ -7,9 +7,6 @@ import HomeNavbar from "@repo/ui/components/HomeNavbar";
 import ListData from "./components/ListData";
 
 async function page() {
-
-
-
   return (
     <>
       <div>
@@ -35,10 +32,7 @@ async function page() {
             }}
           >
             <HomeNavbar />
-   <ListData/>
-
-        
-        
+            <ListData />
           </div>
         </div>
       </div>

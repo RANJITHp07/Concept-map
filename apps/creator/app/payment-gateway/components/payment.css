@@ -1,0 +1,9 @@
+@media (min-width: 1024px) and (max-width: 1350px) {
+    .custom-padding{
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    .custom-font{
+        font-size: 16px;
+    }
+}
