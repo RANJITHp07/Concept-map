@@ -14,7 +14,7 @@ export const apiHelper = async (
 ) => {
   try {
     // const session = await auth();
-    let url = "http://localhost:8000/api/web" + endpoint;
+    let url = "https://concept-map-kkny.onrender.com" + endpoint;
     const options: RequestInit = {
       method,
       credentials: "include",
