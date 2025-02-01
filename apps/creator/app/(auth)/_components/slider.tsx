@@ -35,8 +35,8 @@ export default function ScriptFestival() {
             <div className="bg-gray-100 p-4 rounded-lg w-44">
               <div className="text-center">
                 <div className="text-3xl font-bold text-gray-800">16</div>
-                <div className="text-lg text-gray-600">Sep</div>
-                <div className="text-xl text-gray-700">2023</div>
+                <div className="text-lg text-gray-600">Feb</div>
+                <div className="text-xl text-gray-700">2025</div>
                 <div className="mt-1 text-sm text-gray-600">10 am to 6 pm</div>
                 <div className="mt-4 text-sm text-gray-600 leading-tight">
                   Grand Ballroom,
