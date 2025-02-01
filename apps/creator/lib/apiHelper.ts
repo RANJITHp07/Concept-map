@@ -9,7 +9,7 @@ const apiHelper = async (
 ) => {
   try {
     // const session = await auth();
-    let url = "https://concept-map-kkny.onrender.com/web" + endpoint;
+    let url = "https://concept-map-kkny.onrender.com/api/web" + endpoint;
     const options: RequestInit = {
       method,
       credentials: "include",
