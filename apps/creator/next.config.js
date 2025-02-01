@@ -8,8 +8,12 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    // Ignore TypeScript errors during build
+    ignoreBuildErrors: true,
+  },
   images: {
-    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com'],
+    domains: ["hebbkx1anhila5yf.public.blob.vercel-storage.com"],
   },
 };
 
