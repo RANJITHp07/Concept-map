@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { LuBellDot } from "react-icons/lu";
-import { useSession } from "next-auth/react";
 import { apiHelper } from "../lib/utils";
 import { apis } from "../lib/api";
+import { handleSignOut } from "./HomeNavbar";
 
 function Header({ page }: { page?: string }) {
   const router = useRouter();
@@ -98,7 +98,7 @@ function Header({ page }: { page?: string }) {
 
                 <li
                   className="text-gray-500 px-4 py-3 text-xl cursor-pointer font-medium hover:bg-gray-100"
-                  onClick={() => console.log("Logging out...")}
+                  onClick={() => handleSignOut()}
                 >
                   Logout
                 </li>
