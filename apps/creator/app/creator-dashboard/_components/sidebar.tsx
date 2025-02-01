@@ -1,78 +1,93 @@
-import Link from "next/link";
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import {
-  BarChart2,
-  FileText,
-  Users,
-  Briefcase,
-  FolderClosed,
-  LayoutIcon,
-  Settings,
-  Upload,
-  Plus,
-} from "lucide-react";
+import { Upload, Plus, Menu, X } from "lucide-react";
 import Button from "@repo/ui/components/Button";
 import LeftMenu from "@repo/ui/components/LeftMenu";
 
 export function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => setIsOpen(!isOpen);
+
+  // Disable body scrolling when sidebar is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    // Cleanup function to reset overflow when component unmounts
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
   return (
-    <div className="w-64 bg-white p-6 flex flex-col">
-      <div className="flex justify-center my-2">
-        <Image
-          alt="logo"
-          src={"/logo.png"}
-          width={230}
-          height={100}
-          className="w-[230px] h-[40px]"
-        />
+    <div className="relative overflow-auto">
+      {/* Hamburger Icon */}
+      <div className="lg:hidden p-4">
+        <button onClick={toggleSidebar} aria-label="Toggle Sidebar">
+          <Menu className="h-6 w-6 text-orange-600" />
+        </button>
       </div>
-      <div className="mb-8">
-        {/* <Image src="/logo_.png?height=32&width=150" alt="Concepts Map" width={150} height={32} className="mb-8" /> */}
-        {/* <nav className="space-y-2">
-          <Button
-            variant="secondary"
-            className="w-full justify-start bg-orange-100 text-orange-500 hover:bg-orange-200"
-            asChild
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 z-40 h-full bg-white p-6 transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 lg:relative lg:translate-x-0 lg:w-64  overflow-y-auto`}
+      >
+        {/* Close Button */}
+        <div className="flex justify-between items-center mb-4 lg:hidden">
+          <Image
+            alt="logo"
+            src={"/logo.png"}
+            width={150}
+            height={40}
+            className="w-[150px] h-[40px]"
+          />
+          <button
+            onClick={toggleSidebar}
+            aria-label="Close Sidebar"
+            className="ml-3 mb-2"
           >
-            <Link href="/dashboard">
-              <BarChart2 className="mr-2 h-4 w-4" />
-              Dashboard
-            </Link>
+            <X className="h-6 w-6 text-orange-600" />
+          </button>
+        </div>
+
+        {/* Navigation Menu */}
+        <div className="mb-8">
+          <LeftMenu />
+        </div>
+
+        {/* Footer Buttons */}
+        <div className="mt-auto space-y-2">
+          <Button
+            actionName="Upload"
+            className="w-full justify-center text-muted-foreground text-[17px] leading-[21px] font-medium bg-gray-300 hover:bg-gray-100"
+          >
+            Upload
+            <Upload className="mr-2 h-4 w-4" />
           </Button>
-          {[
-            { icon: FileText, label: "Reports" },
-            { icon: Users, label: "Profile" },
-            { icon: Briefcase, label: "Contracts" },
-            { icon: FileText, label: "Invoices" },
-            { icon: FolderClosed, label: "Projects" },
-            { icon: LayoutIcon, label: "Tasks" },
-            { icon: Settings, label: "Settings" },
-          ].map((item) => (
-            <Button key={item.label} variant="ghost" className="w-full justify-start" asChild>
-              <Link href={`/${item.label.toLowerCase()}`}>
-                <item.icon className="mr-2 h-4 w-4" />
-                {item.label}
-              </Link>
-            </Button>
-          ))}
-        </nav> */}
-        <LeftMenu />
+          <Button
+            actionName="Create New"
+            className="w-full justify-center text-[17px] leading-[21px] font-medium bg-[rgba(246,170,22,1)] hover:bg-orange-600 text-white"
+          >
+            <Plus className="mr-2 h-4 w-4" />
+          </Button>
+        </div>
       </div>
-      <div className="mt-auto space-y-2">
-        <Button
-          actionName="Upload"
-          className="w-full justify-center text-muted-foreground text-[17px] leading-[21px] font-medium bg-gray-300 hover:bg-gray-100"
-        >
-          Upload
-          <Upload className="mr-2 h-4 w-4" />
-        </Button>
-        <Button
-          actionName="Create New"
-          className="w-full justify-center text-[17px] leading-[21px] font-medium bg-[rgba(246,170,22,1)] hover:bg-orange-600 text-white"
-        >
-          <Plus className="mr-2 h-4 w-4" />
-        </Button>
-      </div>
+
+      {/* Overlay for Small Screens */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          onClick={toggleSidebar}
+        />
+      )}
     </div>
   );
 }
