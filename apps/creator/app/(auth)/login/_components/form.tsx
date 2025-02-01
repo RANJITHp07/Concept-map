@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import TextInput from "@repo/ui/components/TextInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../../../lib/validator/login";
+import apiHelper from "../../../../lib/apiHelper";
+import { apis } from "../../../../lib/api";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
-import Button from "@repo/ui/components/Button";
-import { handleLogin } from "../../../../lib/serverAction";
 import ScriptFestival from "../../_components/slider";
 
 function Form() {
-  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const {
     handleSubmit,
@@ -33,27 +31,13 @@ function Form() {
     const userData = {
       email: data.email,
       password: data.password,
-      role: data.role,
     };
-    setIsLoading(true);
-
-    const authentication = await handleLogin(
-      userData.email,
-      userData.password,
-      userData.role
-    );
-    if (authentication && authentication.status == "success") {
-      if (userData.role == "BUYER") {
-        router.push("/");
-      } else {
-        router.push("/creator-dashboard");
-      }
-    } else {
-      //dispaly the error message
-      toast.error(authentication?.error?.message!);
+    const res = await apiHelper(apis.login, "POST", userData);
+    if (res.status === "success") {
+      router.replace("/");
+    } else if (res.status === "error") {
+      console.log(res.error.message);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -68,15 +52,15 @@ function Form() {
                 <Image
                   src="/logo_.png"
                   alt="Concepts Map"
-                  width={280}
-                  height={60}
+                  width={240}
+                  height={50}
                   className="w-auto h-auto"
                 />
               </div>
             </div>
 
-            <div className="text-center mt-2 mb-5">
-              <p className="text-gray-400 text-sm text-start mt-2">
+            <div className=" mt-2 mb-5">
+              <p className="text-gray-400 text-sm">
                 Welcome to our portal where you can explore ultimate ads
                 concepts from fresh and talented brains.
               </p>
@@ -103,46 +87,17 @@ function Form() {
                 onChange={(value) =>
                   handleInputFieldChange("password", value as string)
                 }
-                placeholder="8+ strong characters"
+                placeholder="6+ strong characters"
                 type="password"
                 errorMessage={errors.password?.message as string}
               />
 
-              {/* Role Selection */}
-              <div className="space-y-1">
-                <label
-                  htmlFor="role"
-                  className="block text-sm font-medium text-gray-400"
-                >
-                  Select Role
-                </label>
-                <select
-                  id="role"
-                  disabled={isLoading}
-                  className="mt-1 cursor-pointer block w-full px-3 py-3.5 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-[#f5a623]"
-                  value={getValues("role")}
-                  onChange={(e) =>
-                    handleInputFieldChange("role", e.target.value)
-                  }
-                >
-                  <option value="BUYER">Buyer</option>
-                  <option value="CREATOR">Creator</option>
-                </select>
-                {errors.role && (
-                  <p className="text-red-500 text-sm">
-                    {errors.role.message as string}
-                  </p>
-                )}
-              </div>
-
-              <div className="my-3">
-                <Button
-                  actionName="Login"
-                  type="submit"
-                  isDisabled={isLoading}
-                  loadingName="Verifying..."
-                />
-              </div>
+              <button
+                type="submit"
+                className="w-full bg-[#f5a623] text-white py-3.5 rounded-lg font-medium hover:bg-[#e69516] transition-colors mt-4"
+              >
+                Login
+              </button>
             </form>
 
             {/* Social Login */}
@@ -184,11 +139,12 @@ function Form() {
                 />
               </button>
             </div>
-            <div className="text-sm text-gray-600 justify-center  flex mt-5">
-              Don't have an account?{" "}
+
+            <div className="text-sm text-gray-600 text-center mt-3">
+              Have an account ?{" "}
               <Link
                 href="/register"
-                className="text-[#f5a623] hover:text-[#e69516] mx-1"
+                className="text-[#f5a623] hover:text-[#e69516]"
               >
                 Sign In
               </Link>
