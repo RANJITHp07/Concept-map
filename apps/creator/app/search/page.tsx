@@ -9,7 +9,7 @@ import apiHelper from "../../lib/apiHelper";
 import { apis } from "../../lib/api";
 import ScriptCardLoading from "../../components/skelton/scriptCardLoading";
 import Header from "@repo/ui/components/Header";
-import './search.css'
+import "./search.css";
 
 function Page() {
   const [categoryFilter, setCategoryFilter] = useState<
@@ -124,7 +124,7 @@ function Page() {
         <div className="px-[10px] md:px-[20px] lg:px-[50px] py-[20px] md:py-[30px] lg:py-[40px]">
           <div className="py-[50px] px-[10px]">
             <h1 className="text-[20px] md:text-[30px] lg:text-[40px] font-bold">
-              Browse Scripts, Synopsis, & Ideas{" "}
+              Browse Scripts, Synopsis, & Story Board{" "}
             </h1>
             <p className="text-[14px] md:text-[16px] lg:text-[18px]">
               Uncover a treasure trove of unique stories, powerful synopses, and

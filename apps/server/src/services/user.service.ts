@@ -12,4 +12,11 @@ export class UserService {
   async getUserData(userId: string) {
     return await this.crudRepository.fetchDocumentById(userId, "-password");
   }
+
+  async getUserDataUsingEmail(email: string, role: string) {
+    return await this.crudRepository.fetchOneDocument({
+      email: email,
+      role: role,
+    });
+  }
 }

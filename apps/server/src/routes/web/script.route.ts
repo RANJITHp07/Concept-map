@@ -22,7 +22,7 @@ export class ScriptRouter {
       this.upload.array("files", 10),
       this.scriptController.uploadStoryBoard
     );
-    this.router.get("/details", this.scriptController.getAllOtherScripts);
+    this.router.get("/all/details", this.scriptController.getAllOtherScripts);
   }
 }
 

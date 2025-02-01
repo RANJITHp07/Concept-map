@@ -1,13 +1,14 @@
-import React from 'react'
-import LandingPayment from './components/PaymentLanding'
+import React from "react";
+import LandingPayment from "./components/PaymentLanding";
+import Header from "@repo/ui/components/Header";
 
 function page() {
   return (
-   <>
-  <LandingPayment/>
-   
-   </>
-  )
+    <>
+      <Header />
+      <LandingPayment />
+    </>
+  );
 }
 
-export default page
+export default page;

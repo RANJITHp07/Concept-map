@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { LuBellDot } from "react-icons/lu";
 import { IoIosArrowDown } from "react-icons/io";
@@ -9,15 +9,30 @@ import { IoClose } from "react-icons/io5";
 import LeftMenu from "./LeftMenu";
 import { Slide } from "react-awesome-reveal";
 import { useRouter } from "next/navigation";
+import { apiHelper } from "../lib/utils";
+import { apis } from "../lib/api";
 
-function HomeNavbar() {
+function HomeNavbar({ email }: { email: string }) {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [buyer, setBuyer] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility
+
+  const fetchUserData = async () => {
+    const result = await apiHelper(apis.getUserDetails(email));
+    if (result.status == "success") {
+      setBuyer(result.data);
+    }
+  };
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown visibility
   };
+
+  useEffect(() => {
+    fetchUserData();
+    localStorage.setItem("email", email);
+  }, [email]);
 
   return (
     <section className="px-[10px]">
@@ -70,25 +85,26 @@ function HomeNavbar() {
               <div className="absolute z-[1] right-0 mt-2 w-[200px] bg-white shadow-md rounded-md border border-gray-300">
                 <ul className="text-sm">
                   <li
-                    className="text-gray-700 px-4 py-4 text-lg cursor-pointer hover:bg-gray-100"
+                    className="text-gray-500 px-4 py-3 text-xl font-medium cursor-pointer hover:bg-gray-100"
                     onClick={() => console.log("Logging out...")}
                   >
                     Profile
                   </li>
                   <li
-                    className="text-gray-700 px-4 py-4 text-lg cursor-pointer hover:bg-gray-100"
+                    className="text-gray-500 px-4 py-3 text-xl font-medium cursor-pointer hover:bg-gray-100"
                     onClick={() => router.push("/purchase_list")}
                   >
                     Purchase List
                   </li>
                   <li
-                    className="text-gray-700 px-4 py-4 text-lg cursor-pointer hover:bg-gray-100"
+                    className={`text-gray-500 px-4 py-3 text-xl font-medium ${buyer ? "cursor-pointer" : "cursor-not-allowed opacity-40"} hover:bg-gray-100`}
                     onClick={() => router.push("/creator-dashboard")}
                   >
                     Switch to Creator
                   </li>
+
                   <li
-                    className="text-gray-700 px-4 py-4 text-lg cursor-pointer hover:bg-gray-100"
+                    className="text-gray-500 px-4 py-3 text-xl cursor-pointer font-medium hover:bg-gray-100"
                     onClick={() => console.log("Logging out...")}
                   >
                     Logout

@@ -47,8 +47,6 @@ function SearchResult({ data, count, handlePage, page }: any) {
     });
   }, [data]);
 
-  console.log(data);
-
   const [followState, setFollowState] = useState<Record<number, boolean>>(
     sliderData.reduce(
       (acc: any, item: any) => ({

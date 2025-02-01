@@ -15,6 +15,7 @@ import {
 } from "../../../lib/constant";
 import Header from "@repo/ui/components/Header";
 import ScriptSwiper from "./_component/scriptSwiper";
+import { auth } from "../../../auth";
 
 export default async function Page({ params }: any) {
   const { data } = await apiHelper(apis.getScriptDetails(params.id));
@@ -28,7 +29,7 @@ export default async function Page({ params }: any) {
   return (
     <div>
       <Header />
-      <div className="px-12 py-5">
+      <div className="px-7 md:px-12 py-5">
         {/* Header */}
 
         {/* Profile Section */}
@@ -66,7 +67,7 @@ export default async function Page({ params }: any) {
         </div>
 
         {/* Script Content */}
-        <div className="bg-[#FDF6E7] rounded-lg p-6 mb-8">
+        <div className="bg-[#FDF6E7] rounded-lg p-6 mb-8 ">
           <h3 className="font-semibold mb-4 text-2xl">{data.main_title}</h3>
           <p className=" text-gray-600">{data.description}...</p>
           <div className="mt-4 my-2 text-gray-700 flex gap-4 flex-row">
@@ -106,30 +107,32 @@ export default async function Page({ params }: any) {
               </div>
             ))}
           </div>
-          <div className="rounded-lg  relative mt-5">
-            <div className="absolute cursor-pointer inset-0 backdrop-blur-sm  flex items-center justify-center flex-col rounded-lg">
-              <div className="w-12 h-12 mb-2">
-                <Image src="/lock.png" width={70} height={70} alt="lock" />
+          <Link href={"/payment-gateway"}>
+            <div className="rounded-lg  relative mt-5">
+              <div className="absolute cursor-pointer inset-0 backdrop-blur-sm  flex items-center justify-center flex-col rounded-lg">
+                <div className="w-12 h-12 mb-2">
+                  <Image src="/lock.png" width={70} height={70} alt="lock" />
+                </div>
+                <span className="font-medium text-xl">Click to Purchase</span>
               </div>
-              <span className="font-medium text-xl">Click to Purchase</span>
-            </div>
-            <div className="bg-[#FDF6E7] rounded-lg p-5 mb-8 mt-5">
-              <h3 className="font-semibold mb-4 text-xl">Script 01</h3>
-              <div className="mb-4 last:mb-0">
-                <h4 className="font-semibold text-lg mb-2">Scene</h4>
-                <p className=" text-gray-600">
-                  Contrary to popular belief, Lorem Ipsum is not simply random
-                  text. It has roots in a piece of classical Latin literature
-                  from 45 BC, making it over 2000 years old. Richard McClintock,
-                  a Latin professor at Hampden-Sydney College in Virginia,
-                  looked up one of the more obscure Latin words, consectetur,
-                  from a Lorem Ipsum passage, and going through the cites of the
-                  word in classical literature, discovered the undoubtable
-                  source...
-                </p>
+              <div className="bg-[#FDF6E7] rounded-lg p-5 mb-8 mt-5">
+                <h3 className="font-semibold mb-4 text-xl">Script 01</h3>
+                <div className="mb-4 last:mb-0">
+                  <h4 className="font-semibold text-lg mb-2">Scene</h4>
+                  <p className=" text-gray-600">
+                    Contrary to popular belief, Lorem Ipsum is not simply random
+                    text. It has roots in a piece of classical Latin literature
+                    from 45 BC, making it over 2000 years old. Richard
+                    McClintock, a Latin professor at Hampden-Sydney College in
+                    Virginia, looked up one of the more obscure Latin words,
+                    consectetur, from a Lorem Ipsum passage, and going through
+                    the cites of the word in classical literature, discovered
+                    the undoubtable source...
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* Pricing Tiers */}
@@ -137,8 +140,8 @@ export default async function Page({ params }: any) {
           <h1 className="text-xl font-semibold">
             Explore More Synopsis, Scripts, and Storyboards
           </h1>
-          <div className="grid md:grid-cols-3 gap-4 mb-8">
-            <ScriptSwiper />
+          <div className="">
+            <ScriptSwiper userId={data.userId._id} scriptId={params.id} />
           </div>
         </div>
 

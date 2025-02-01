@@ -43,7 +43,7 @@ async function Home() {
               borderLeft: "1px solid #d7d2d2",
             }}
           >
-            <HomeNavbar />
+            <HomeNavbar email={user.email} />
             <HomeInfo name={user.username} />
             <RightMenu />
             <HomeSwiper />

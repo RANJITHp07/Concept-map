@@ -32,7 +32,8 @@ function HomeResult({
         image: script.userId.profile_url || "/script_icon.png",
         dot: script.dot || "/HomeResult/star.svg",
         bookmark: script.bookmark || "/HomeResult/right.svg",
-
+        country: script.country || [],
+        state: script.state || [],
         genre:
           [...genreTVOption, ...genreShortsOption].find(
             (_script) => _script.value == script.genre
@@ -149,6 +150,13 @@ function HomeResult({
                             {item.industry_category}
                           </span>
                         </div>
+                        {item.country.map((country: any) => (
+                          <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full">
+                            <span className="text-gray-700 text-[14px] lg:text-[16px]">
+                              {country}
+                            </span>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>

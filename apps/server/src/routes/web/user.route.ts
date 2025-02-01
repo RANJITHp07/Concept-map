@@ -13,6 +13,7 @@ export class UserRouter {
 
   private initRoutes() {
     this.router.get("/:userId", this.userController.getUserData);
+    this.router.get("/", this.userController.getUserDataUsingEmail);
   }
 }
 

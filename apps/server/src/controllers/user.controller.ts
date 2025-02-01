@@ -21,4 +21,25 @@ export class UserController {
       next(error);
     }
   };
+
+  getUserDataUsingEmail = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { email, role } = req.query;
+      const result = await this.userService.getUserDataUsingEmail(
+        email as string,
+        role as string
+      );
+      res.status(201).json({
+        status: "success",
+        message: "User data fetched successfully",
+        data: result,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }

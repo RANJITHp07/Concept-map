@@ -118,7 +118,7 @@ function Mainsearch({ handleTextSearch, handleCountryStateChange }: any) {
             type="text"
             onChange={(e) => handleTextSearch(e.target.value)}
             placeholder="Search..."
-            className="w-full pl-10 pr-4 py-3 border rounded-lg border-[rgba(254,201,97,1)]"
+            className="w-full pl-10 pr-4 py-3 border rounded-lg border-[rgba(254,201,97,1)] focus:outline-none focus:ring-1 focus:ring-[#f5a623]"
           />
         </div>
 
@@ -132,7 +132,7 @@ function Mainsearch({ handleTextSearch, handleCountryStateChange }: any) {
               onChange={(e) =>
                 setSelectedCountry(e.target.value as keyof CountryData | "")
               }
-              className="w-full pl-10 pr-4 py-3 border border-[rgba(254,201,97,1)] rounded-lg"
+              className="w-full pl-10 pr-4 py-3 border border-[rgba(254,201,97,1)] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#f5a623]"
             >
               <option value="">Country</option>
               {countries.map((country) => (
@@ -151,7 +151,7 @@ function Mainsearch({ handleTextSearch, handleCountryStateChange }: any) {
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.target.value)}
               disabled={!selectedCountry}
-              className="w-full pl-10 pr-4 py-3 border rounded-lg border-[rgba(254,201,97,1)]"
+              className="w-full pl-10 pr-4 py-3 border rounded-lg border-[rgba(254,201,97,1)] focus:outline-none focus:ring-1 focus:ring-[#f5a623]"
             >
               <option value="">Place</option>
               {selectedCountry &&
