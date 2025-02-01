@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
+    "@types/nodemailer": "^6.4.17",
     "typescript": "latest"
   },
   "dependencies": {

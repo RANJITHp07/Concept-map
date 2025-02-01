@@ -5,6 +5,7 @@ import { PORT } from "./config";
 import { router } from "./routes";
 import { errorHandler } from "./middleware/errorHandler";
 import { connectToDatabase } from "./connectDB";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -19,8 +20,11 @@ app.use(
       /http(|s):\/\/(|www\.)localhost:(3000|3001|3002|3003)$/,
       /http(|s):\/\/(|www\.)127.0.0.1:(3000|3001|3002|3003)$/,
     ],
-  }),
+    credentials: true,
+  })
 );
+
+app.use(cookieParser());
 
 app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
 

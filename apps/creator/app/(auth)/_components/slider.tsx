@@ -34,11 +34,19 @@ export default function ScriptFestival() {
             {/* Date Box */}
             <div className="bg-gray-100 p-4 rounded-lg w-44">
               <div className="text-center">
+<<<<<<< HEAD
                 <div className="text-3xl font-bold text-gray-800">16</div>
                 <div className="text-lg text-gray-600">Sep</div>
                 <div className="text-xl text-gray-700">2023</div>
                 <div className="mt-1 text-sm text-gray-600">10 am to 6 pm</div>
                 <div className="mt-4 text-sm text-gray-600 leading-tight">
+=======
+                <div className="text-4xl font-bold text-gray-800">26</div>
+                <div className="text-xl text-gray-600">Feb</div>
+                <div className="text-2xl text-gray-700">2025</div>
+                <div className="mt-2 text-sm text-gray-600">10 am to 6 pm</div>
+                <div className="mt-6 text-sm text-gray-600 leading-tight">
+>>>>>>> d762d4de53ca07c01dcaf563ebf171f029a4d573
                   Grand Ballroom,
                   <br />
                   Grand Hyatt
@@ -54,12 +62,21 @@ export default function ScriptFestival() {
       {/* Festival Title */}
       <div className="mt-8 text-center">
         {/* Spark Logo */}
+<<<<<<< HEAD
         <div className="flex justify-center mb-3">
           <div className="bg-[#f5a623] text-white w-20 h-16 p-3 rounded-lg relative">
             <div className="text-3xl font-extrabold text-black absolute -top-6 left-[0px] ">
               Spark
             </div>
             <div className="text-5xl font-bold absolute  ">23</div>
+=======
+        <div className="flex justify-center mb-5">
+          <div className="bg-[#f5a623] text-white w-28 h-20 p-4 rounded-lg ">
+            <div className="text-4xl font-extrabold text-black relative bottom-10 right-2">
+              Spark
+            </div>
+            <div className="text-6xl font-bold relative bottom-10">23</div>
+>>>>>>> d762d4de53ca07c01dcaf563ebf171f029a4d573
           </div>
         </div>
 

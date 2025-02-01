@@ -1,13 +1,19 @@
 import React from "react";
+import { FaArrowRight } from "react-icons/fa";
 import Image from "next/image";
+import { Fade } from "react-awesome-reveal";
 
-function HomeInfo() {
+type Props = {
+  name: string;
+};
+
+function HomeInfo({ name }: Props) {
   const data = [
     {
       image: "/home/face.png",
-      title: "Hello, Welcome Lexie Graham",
+      title: `Hello, Welcome ${name}`,
       description:
-        "You have an finished job. Among them are 2 Scripts, 5 Storyboards, and 2 Synopses. Work for the week is very good.",
+        "Welcome to a world where creativity meets craftsmanship. Whether you’re an art enthusiast or a first-time buyer, here’s the perfect place to find stunning, original works of art that tell a story and transform any space.",
     },
   ];
 
@@ -23,13 +29,14 @@ function HomeInfo() {
 
   return (
     <>
-      <section className="space-y-9">
-      {/* First Section */}
-        <div className="pt-6">
+      <section className="space-y-[40px]">
+        {/* First Section */}
+        {/* <Fade direction="up" triggerOnce> */}
+        <div className="pt-[40px]">
           {data.map((item, index) => (
             <div
               key={index}
-              className="flex items-center justify-between gap-10 p-8 rounded-2xl h-72"
+              className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-[20px] lg:gap-[40px] p-[20px] rounded-[20px] shadow-lg"
               style={{
                 backgroundImage: "url('/home/newImg.jpg')",
                 backgroundSize: "cover",
@@ -37,69 +44,94 @@ function HomeInfo() {
               }}
             >
               {/* Left Profile Image */}
-              <div className="flex-shrink-0 w-48 h-48 overflow-hidden border-4 border-white rounded-full">
-                <Image
-                  src={item.image}
-                  alt="Profile Picture"
-                  width={150}
-                  height={150}
-                  className="object-cover w-full h-full"
-                />
+              <div className="flex justify-center">
+                <div className="overflow-hidden border-4 border-white rounded-full">
+                  <Image
+                    src={item.image}
+                    alt="Profile Picture"
+                    width={256}
+                    height={256}
+                    className="object-cover w-[180px] h-[180px] lg:w-[256px] lg:h-[256px]"
+                  />
+                </div>
               </div>
 
               {/* Right Section with Title and Description */}
-              <div className="flex-grow text-white">
-                <h2 className="text-4xl font-bold">{item.title}</h2>
-                <p className="mt-1">{item.description}</p>
+              <div className="text-white flex flex-col justify-center ">
+                <h2 className=" text-[36px] lg:text-[40px] leading-none text-start capitalize">
+                  {item.title}
+                </h2>
+                <p className="mt-3 text-[14px] lg:text-[18px] leading-auto text-start">
+                  {item.description}
+                </p>
+
+                {/* New div with Right Arrow Icon */}
+                <div className=" mt-[10px] md:mt-[20px] lg:mt-[30px] md:mr-[30px] flex justify-center md:justify-end items-center cursor-pointer">
+                  <FaArrowRight size={25} className="md:w-[25px] md:h-[25px]" />
+                </div>
               </div>
             </div>
           ))}
         </div>
+        {/* </Fade> */}
 
         {/* Second Section */}
-        <div className="flex gap-5 rounded-lg">
-          {/* Left Section - 70% */}
+        {/* <Fade direction="up" triggerOnce> */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-[20px] rounded-[10px]">
+          {/* Left Section (8 columns) */}
           <div
-            className="flex flex-grow flex-col gap-5 rounded-[30px]"
+            className="col-span-9 grid gap-5 rounded-[30px] shadow-lg"
             style={{
               backgroundImage: "url('/home/left.jpg')",
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           >
-            <div className="flex justify-between gap-5 p-5 pt-[30px]">
+            <div className="grid grid-cols-3 gap-[5px] md:gap-[10px] lg:gap-[20px] p-[20px]">
               {textData.map((item, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center justify-center w-1/3 text-center text-white rounded-lg"
+                  className="flex flex-col items-center justify-center text-center text-white rounded-[30px]"
                 >
-                  <h2 className="text-[15px]">{item.title}</h2>
-                  <p className="text-[60px]">{item.numbers}</p>
+                  <h2 className=" text-[10px] md:text-[14px] lg:text-[15px] leading-auto">
+                    {item.title}
+                  </h2>
+                  <p className=" text-[28px] md:text-[40px] lg:text-[60px] leading-auto">
+                    {item.numbers}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right Section - 30% */}
-          <div
-            className="flex flex-shrink-0 flex-col gap-5 w-1/3 p-5 text-white rounded-[30px] bg-[rgba(246,170,22,1)]"
-          >
+          {/* Right Section (4 columns) */}
+          <div className="  col-span-3 grid gap-5 p-5 text-white rounded-[30px] bg-[rgba(246,170,22,1)] shadow-lg home-other-none">
             {rightData.map((item, index) => (
               <div
                 key={index}
-                className="flex items-center justify-evenly w-full"
+                className="grid grid-cols-[auto_1fr] items-center justify-center gap-5 home-other-none"
               >
-                <div className="flex-shrink-0">
-                  <Image src={item.logo} alt="Info Logo" width={64} height={64} />
+                <div className="home-img-none ">
+                  <Image
+                    src={item.logo}
+                    alt="Info Logo"
+                    width={64}
+                    height={64}
+                  />
                 </div>
-                <div className="flex flex-col">
-                  <h2 className="text-[20px]">{item.title}</h2>
-                  <p className="text-[60px]">{item.number}</p>
+                <div className="flex flex-col items-center justify-center">
+                  <h2 className="text-[14px] lg:text-[15px] leading-auto">
+                    {item.title}
+                  </h2>
+                  <p className="text-[40px] lg:text-[60px] leading-auto">
+                    {item.number}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
+        {/* </Fade> */}
       </section>
     </>
   );

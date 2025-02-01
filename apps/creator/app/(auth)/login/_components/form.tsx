@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import TextInput from "@repo/ui/components/TextInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../../../lib/validator/login";
-import apiHelper from "../../../../lib/apiHelper";
-import { apis } from "../../../../lib/api";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import Button from "@repo/ui/components/Button";
+import { handleLogin } from "../../../../lib/serverAction";
 import ScriptFestival from "../../_components/slider";
 
 function Form() {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const {
     handleSubmit,
@@ -31,13 +33,27 @@ function Form() {
     const userData = {
       email: data.email,
       password: data.password,
+      role: data.role,
     };
-    const res = await apiHelper(apis.login, "POST", userData);
-    if (res.status === "success") {
-      router.replace("/");
-    } else if (res.status === "error") {
-      console.log(res.error.message);
+    setIsLoading(true);
+
+    const authentication = await handleLogin(
+      userData.email,
+      userData.password,
+      userData.role
+    );
+    if (authentication && authentication.status == "success") {
+      if (userData.role == "BUYER") {
+        router.push("/");
+      } else {
+        router.push("/creator-dashboard");
+      }
+    } else {
+      //dispaly the error message
+      toast.error(authentication?.error?.message!);
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -87,17 +103,46 @@ function Form() {
                 onChange={(value) =>
                   handleInputFieldChange("password", value as string)
                 }
-                placeholder="6+ strong characters"
+                placeholder="8+ strong characters"
                 type="password"
                 errorMessage={errors.password?.message as string}
               />
 
-              <button
-                type="submit"
-                className="w-full bg-[#f5a623] text-white py-3.5 rounded-lg font-medium hover:bg-[#e69516] transition-colors mt-4"
-              >
-              Login
-              </button>
+              {/* Role Selection */}
+              <div className="space-y-1">
+                <label
+                  htmlFor="role"
+                  className="block text-sm font-medium text-gray-400"
+                >
+                  Select Role
+                </label>
+                <select
+                  id="role"
+                  disabled={isLoading}
+                  className="mt-1 cursor-pointer block w-full px-3 py-3.5 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-[#f5a623]"
+                  value={getValues("role")}
+                  onChange={(e) =>
+                    handleInputFieldChange("role", e.target.value)
+                  }
+                >
+                  <option value="CREATOR">Creator</option>
+                  <option value="BUYER">Buyer</option>
+                </select>
+                {errors.role && (
+                  <p className="text-red-500 text-sm">
+                    {errors.role.message as string}
+                  </p>
+                )}
+              </div>
+
+              <div className="my-3">
+                <Button
+                  actionName="Login"
+                  type="submit"
+                  isDisabled={isLoading}
+                  loadingName="Verifying..."
+                />
+              </div>
             </form>
 
             {/* Social Login */}
@@ -139,12 +184,11 @@ function Form() {
                 />
               </button>
             </div>
-            
-            <div className="text-sm text-gray-600 text-center mt-3">
-              Have an account ?{" "}
+            <div className="text-sm text-gray-600 justify-center  flex mt-5">
+              Don't have an account?{" "}
               <Link
-                 href="/register"
-                className="text-[#f5a623] hover:text-[#e69516]"
+                href="/register"
+                className="text-[#f5a623] hover:text-[#e69516] mx-1"
               >
                 Sign In
               </Link>

@@ -1,3 +1,3 @@
-export function Math() {
-  console.log("Heloo guyss");
-}
+import { sendEmail } from "./email";
+
+export {sendEmail}

@@ -1,6 +1,6 @@
 export function generateOTP(): string {
   let otp = "";
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 6; i++) {
     otp += Math.floor(Math.random() * 10);
   }
 

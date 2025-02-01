@@ -1,97 +1,91 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ArrowLeft } from "lucide-react"
-import { Input } from "@repo/ui/components/input"
-import { Button } from "@repo/ui/components/Button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@repo/ui/components/select"
-import { Textarea } from "@repo/ui/components/textarea"
+import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
+import { Input } from "@repo/ui/components/input";
+import { ShadcnButton } from "@repo/ui/components/ShadcnButton";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@repo/ui/components/select";
+import { Textarea } from "@repo/ui/components/textarea";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ScriptFormSchema } from "../../../lib/validator/script";
 
-type ScriptCategory = "CategoryA" | "CategoryB" | "CategoryC"
-type IndustryCategory = "Industry1" | "Industry2" | "Industry3"
-type ScriptType = "TypeA" | "TypeB" | "TypeC"
+type ScriptCategory = "CategoryA" | "CategoryB" | "CategoryC";
+type IndustryCategory = "Industry1" | "Industry2" | "Industry3";
+type ScriptType = "TypeA" | "TypeB" | "TypeC";
 
 export function CreateForm() {
-  const [formData, setFormData] = useState({
-    mainTitle: "",
-    description: "",
-    category: "",
-    industryCategory: "",
-    price: "",
-    currency: "",
-    type: "",
-  })
+  const {
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    clearErrors,
+    getValues,
+  } = useForm({
+    resolver: zodResolver(ScriptFormSchema),
+  });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, maxLength?: number) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: maxLength ? value.slice(0, maxLength) : value,
-    }))
-  }
+  const handleInputChange = (field: string, value: string) => {
+    console.log(value);
+    setValue(field, value);
+    clearErrors(field);
+  };
 
-  const handleSelectChange = (name: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log(formData)
-  }
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
 
   return (
     <div className="p-4 md:p-6 lg:p-8 containers">
       <div className="px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-6 flex items-center gap-3">
-          <Button variant="ghost" size="icon" className="rounded-full">
-            <ArrowLeft className="h-5 w-5" />
-            <span className="sr-only">Go back</span>
-          </Button>
-          <h1 className="text-xl font-semibold">Create New</h1>
+          <h1 className="text-xl font-semibold">Create New Script</h1>
         </div>
 
         {/* Form */}
         <div className="space-y-6 px-4 sm:px-6 lg:px-10">
           {/* Select Type Section */}
-          <FormSection title="Select Type">
-            <Select onValueChange={(value) => handleSelectChange("type", value)}>
-              <SelectTrigger className="w-full bg-white">
-                <SelectValue placeholder="Choose Type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="type1">Type 1</SelectItem>
-                <SelectItem value="type2">Type 2</SelectItem>
-                <SelectItem value="type3">Type 3</SelectItem>
-              </SelectContent>
-            </Select>
-          </FormSection>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <FormSection title="Adding Details">
               <div className="space-y-4">
                 <FormField
                   label="Main Title"
                   name="mainTitle"
-                  value={formData.mainTitle}
-                  onChange={(e) => handleInputChange(e, 80)}
+                  value={getValues("mainTitle")}
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+                  ) => handleInputChange("mainTitle", e.target.value)}
                   maxLength={80}
+                  error={errors.mainTitle?.message as string}
                   required
                 />
                 <FormField
                   label="Description"
                   name="description"
-                  value={formData.description}
-                  onChange={(e) => handleInputChange(e, 500)}
+                  value={getValues("description")}
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+                  ) => handleInputChange("description", e.target.value)}
                   maxLength={500}
-                  required
+                  error={errors.description?.message as string}
                   textarea
                 />
                 <FormField
                   label="Category"
                   name="category"
-                  value={formData.category}
-                  onChange={(value) => handleSelectChange("category", value)}
+                  value={getValues("category")}
+                  error={errors.category?.message as string}
+                  onChange={(value: string) =>
+                    handleInputChange("category", value)
+                  }
                   select
                   options={[
                     { value: "CategoryA", label: "Category A" },
@@ -102,8 +96,11 @@ export function CreateForm() {
                 <FormField
                   label="Industry Category"
                   name="industryCategory"
-                  value={formData.industryCategory}
-                  onChange={(value) => handleSelectChange("industryCategory", value)}
+                  error={errors.industryCategory?.message as string}
+                  value={getValues("industryCategory")}
+                  onChange={(value) =>
+                    handleInputChange("industryCategory", value)
+                  }
                   select
                   options={[
                     { value: "Industry1", label: "Industry 1" },
@@ -113,40 +110,38 @@ export function CreateForm() {
                 />
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <FormField
-                    label="Price"
-                    name="price"
-                    value={formData.price}
-                    onChange={handleInputChange}
+                    label="Country"
+                    name="country"
+                    error={errors.mainTitle?.message as string}
+                    value={getValues("price")}
+                    onChange={(value) => handleInputChange("price", value)}
                     type="number"
                     required
                   />
                   <FormField
-                    label="Currency"
-                    name="currency"
-                    value={formData.currency}
-                    onChange={handleInputChange}
+                    label="State"
+                    name="state"
+                    error={errors.mainTitle?.message as string}
+                    value={getValues("currency")}
+                    onChange={(value) => handleInputChange("currency", value)}
                     required
                   />
                 </div>
               </div>
             </FormSection>
-
-            <div className="flex justify-end">
-              <Button type="submit">Submit</Button>
-            </div>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function FormSection({
   title,
   children,
 }: {
-  title: string
-  children: React.ReactNode
+  title: string;
+  children: React.ReactNode;
 }) {
   return (
     <div className="rounded-3xl bg-white p-6 shadow-sm border">
@@ -155,7 +150,7 @@ function FormSection({
       </div>
       {children}
     </div>
-  )
+  );
 }
 
 function FormField({
@@ -168,28 +163,30 @@ function FormField({
   textarea,
   select,
   options,
+  error,
   type = "text",
 }: {
-  label: string
-  name: string
-  value: string
-  onChange: (e: any) => void
-  maxLength?: number
-  required?: boolean
-  textarea?: boolean
-  select?: boolean
-  options?: { value: string; label: string }[]
-  type?: string
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: any) => void;
+  maxLength?: number;
+  required?: boolean;
+  textarea?: boolean;
+  select?: boolean;
+  error: string | null;
+  options?: { value: string; label: string }[];
+  type?: string;
 }) {
   return (
     <div className="space-y-2">
       <div className="flex justify-between">
-        <label htmlFor={name} className="text-sm text-gray-600">
+        <label htmlFor={name} className=" text-gray-600">
           {label}
         </label>
         {maxLength && (
-          <span className="text-sm text-gray-400">
-            {value.length}/{maxLength} Characters
+          <span className=" text-gray-400">
+            {value?.length ?? 0}/{maxLength} Characters
           </span>
         )}
       </div>
@@ -199,14 +196,17 @@ function FormField({
           name={name}
           value={value}
           onChange={onChange}
-          className="min-h-[120px] bg-white"
+          className={`min-h-[120px] bg-white ${error && "border border-red-500"}`}
           placeholder={`Enter ${label.toLowerCase()}`}
           maxLength={maxLength}
           required={required}
         />
       ) : select ? (
         <Select onValueChange={onChange} value={value}>
-          <SelectTrigger id={name} className="bg-white">
+          <SelectTrigger
+            id={name}
+            className={`bg-white px-4 py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 ${error ? "border-red-500" : "border-black"}`}
+          >
             <SelectValue placeholder={`Choose ${label}`} />
           </SelectTrigger>
           <SelectContent>
@@ -224,13 +224,12 @@ function FormField({
           type={type}
           value={value}
           onChange={onChange}
-          className="bg-white"
+          className={`bg-white ${error && "border border-red-500"}`}
           placeholder={`Enter ${label.toLowerCase()}`}
           maxLength={maxLength}
-          required={required}
         />
       )}
+      {error && <p className="text-xs text-red-400">{error}</p>}
     </div>
-  )
+  );
 }
-

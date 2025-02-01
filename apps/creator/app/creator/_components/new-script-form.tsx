@@ -1,74 +1,119 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ChevronDown, ChevronUp, FileEdit, PlusCircle, MinusCircle } from "lucide-react"
-import { Card, CardContent, CardHeader } from "@repo/ui/components/card"
-import { Input } from "@repo/ui/components/input"
-import { Button } from "@repo/ui/components/Button"
-import { Textarea } from "@repo/ui/components/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@repo/ui/components/select"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@repo/ui/components/collapsible"
+import { useState } from "react";
+import {
+  ChevronDown,
+  ChevronUp,
+  FileEdit,
+  PlusCircle,
+  MinusCircle,
+} from "lucide-react";
+import { Card, CardContent, CardHeader } from "@repo/ui/components/card";
+import { Input } from "@repo/ui/components/input";
+import { ShadcnButton } from "@repo/ui/components/ShadcnButton";
+import { Textarea } from "@repo/ui/components/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@repo/ui/components/select";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@repo/ui/components/collapsible";
 
 interface Scene {
-  id: number
-  content: string
+  id: number;
+  content: string;
 }
 
 interface Script {
-  id: number
-  name: string
-  scenes: Scene[]
+  id: number;
+  name: string;
+  scenes: Scene[];
 }
 
 export function ScriptWriter() {
-  const [isOpen, setIsOpen] = useState(true)
-  const [scripts, setScripts] = useState<Script[]>([{ id: 1, name: "Script 1", scenes: [{ id: 1, content: "" }] }])
+  const [isOpen, setIsOpen] = useState(true);
+  const [scripts, setScripts] = useState<Script[]>([
+    { id: 1, name: "Script 1", scenes: [{ id: 1, content: "" }] },
+  ]);
 
   const addScript = () => {
-    const newScriptId = scripts.length + 1
-    setScripts([...scripts, { id: newScriptId, name: `Script ${newScriptId}`, scenes: [{ id: 1, content: "" }] }])
-  }
+    const newScriptId = scripts.length + 1;
+    setScripts([
+      ...scripts,
+      {
+        id: newScriptId,
+        name: `Script ${newScriptId}`,
+        scenes: [{ id: 1, content: "" }],
+      },
+    ]);
+  };
 
   const addScene = (scriptId: number) => {
     setScripts(
       scripts.map((script) => {
         if (script.id === scriptId) {
-          const newSceneId = script.scenes.length + 1
-          return { ...script, scenes: [...script.scenes, { id: newSceneId, content: "" }] }
+          const newSceneId = script.scenes.length + 1;
+          return {
+            ...script,
+            scenes: [...script.scenes, { id: newSceneId, content: "" }],
+          };
         }
-        return script
-      }),
-    )
-  }
+        return script;
+      })
+    );
+  };
 
   const removeScene = (scriptId: number, sceneId: number) => {
     setScripts(
       scripts.map((script) => {
         if (script.id === scriptId) {
-          return { ...script, scenes: script.scenes.filter((scene) => scene.id !== sceneId) }
+          return {
+            ...script,
+            scenes: script.scenes.filter((scene) => scene.id !== sceneId),
+          };
         }
-        return script
-      }),
-    )
-  }
+        return script;
+      })
+    );
+  };
 
-  const handleSceneChange = (scriptId: number, sceneId: number, content: string) => {
+  const removeScript = (scriptId: number) => {
+    setScripts(scripts.filter((script) => script.id !== scriptId));
+  };
+
+  const handleSceneChange = (
+    scriptId: number,
+    sceneId: number,
+    content: string
+  ) => {
     setScripts(
       scripts.map((script) => {
         if (script.id === scriptId) {
           return {
             ...script,
-            scenes: script.scenes.map((scene) => (scene.id === sceneId ? { ...scene, content } : scene)),
-          }
+            scenes: script.scenes.map((scene) =>
+              scene.id === sceneId ? { ...scene, content } : scene
+            ),
+          };
         }
-        return script
-      }),
-    )
-  }
+        return script;
+      })
+    );
+  };
 
   const handleScriptNameChange = (scriptId: number, name: string) => {
-    setScripts(scripts.map((script) => (script.id === scriptId ? { ...script, name } : script)))
-  }
+    setScripts(
+      scripts.map((script) =>
+        script.id === scriptId ? { ...script, name } : script
+      )
+    );
+  };
 
   return (
     <div className="py-4 flex items-start justify-center containers px-4 sm:px-6 lg:px-[100px]">
@@ -81,33 +126,61 @@ export function ScriptWriter() {
               </div>
               <div>
                 <h2 className="text-xl font-semibold">New Script</h2>
-                <p className="text-sm text-gray-500">Create design for new project</p>
+                <p className="text-sm text-gray-500">
+                  Create design for new project
+                </p>
               </div>
             </div>
             <CollapsibleTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-gray-500">
-                {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-              </Button>
+              <ShadcnButton
+                variant="ghost"
+                size="icon"
+                className="text-gray-500"
+              >
+                {isOpen ? (
+                  <ChevronUp className="h-4 w-4" />
+                ) : (
+                  <ChevronDown className="h-4 w-4" />
+                )}
+              </ShadcnButton>
             </CollapsibleTrigger>
           </CardHeader>
 
           <CollapsibleContent>
             <CardContent className="space-y-6">
               <div className="flex items-center justify-between mt-5">
-                <h3 className="text-lg font-semibold">Type your Script with yourself or with the help of AI</h3>
+                <h3 className="text-lg font-semibold">
+                  Type your Script with yourself or with the help of AI
+                </h3>
                 <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-md">
-                  <Button variant="outline" className="bg-white text-orange-500 hover:bg-orange-50">
+                  <ShadcnButton
+                    variant="outline"
+                    className="bg-white text-orange-500 hover:bg-orange-50"
+                  >
                     <span className="mr-2">⚡</span> Use AI to write
-                  </Button>
+                  </ShadcnButton>
                 </div>
               </div>
 
               <div className="space-y-6 bg-gray-100 p-6 rounded-lg">
                 {scripts.map((script) => (
                   <div key={script.id} className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <h4 className="font-medium">Script</h4>
+                      <ShadcnButton
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeScript(script.id)}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        <MinusCircle className="h-4 w-4 mr-1" /> Remove Script
+                      </ShadcnButton>
+                    </div>
                     <Input
                       value={script.name}
-                      onChange={(e) => handleScriptNameChange(script.id, e.target.value)}
+                      onChange={(e) =>
+                        handleScriptNameChange(script.id, e.target.value)
+                      }
                       placeholder="Enter script name"
                       className="font-semibold text-lg"
                     />
@@ -115,38 +188,54 @@ export function ScriptWriter() {
                       <div key={scene.id} className="space-y-2">
                         <div className="flex justify-between items-center">
                           <h4 className="font-medium">Scene {scene.id}</h4>
-                          <Button
+                          <ShadcnButton
                             variant="ghost"
                             size="sm"
                             onClick={() => removeScene(script.id, scene.id)}
                             className="text-red-500 hover:text-red-700"
                           >
-                            <MinusCircle className="h-4 w-4 mr-1" /> Remove Scene
-                          </Button>
+                            <MinusCircle className="h-4 w-4 mr-1" /> Remove
+                            Scene
+                          </ShadcnButton>
                         </div>
                         <Textarea
                           className="min-h-[120px] resize-none bg-white border-0"
                           value={scene.content}
-                          onChange={(e) => handleSceneChange(script.id, scene.id, e.target.value)}
+                          onChange={(e) =>
+                            handleSceneChange(
+                              script.id,
+                              scene.id,
+                              e.target.value
+                            )
+                          }
                           placeholder="Enter scene content..."
                         />
                       </div>
                     ))}
-                    <Button variant="outline" size="sm" onClick={() => addScene(script.id)} className="mt-2">
+                    <ShadcnButton
+                      variant="outline"
+                      size="sm"
+                      onClick={() => addScene(script.id)}
+                      className="mt-2"
+                    >
                       <PlusCircle className="h-4 w-4 mr-1" /> Add Scene
-                    </Button>
+                    </ShadcnButton>
                   </div>
                 ))}
-                <Button variant="outline" onClick={addScript} className="mt-4">
+                <ShadcnButton
+                  variant="outline"
+                  onClick={addScript}
+                  className="mt-4"
+                >
                   <PlusCircle className="h-4 w-4 mr-1" /> Add New Script
-                </Button>
+                </ShadcnButton>
               </div>
 
               <div>
                 <h3 className="text-lg font-semibold mb-4">Add Pricing</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Select>
-                    <SelectTrigger>
+                    <SelectTrigger className="py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 border-black">
                       <SelectValue placeholder="Choose Currency" />
                     </SelectTrigger>
                     <SelectContent>
@@ -156,7 +245,6 @@ export function ScriptWriter() {
                     </SelectContent>
                   </Select>
                   <Input placeholder="Add Price" type="number" />
-                  <Button className="bg-black hover:bg-black/90 text-white">Save Now</Button>
                 </div>
               </div>
             </CardContent>
@@ -164,6 +252,5 @@ export function ScriptWriter() {
         </Collapsible>
       </Card>
     </div>
-  )
+  );
 }
-

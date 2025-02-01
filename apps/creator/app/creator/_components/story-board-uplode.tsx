@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@repo/ui/components/card";
 import { Input } from "@repo/ui/components/input";
-import { Button } from "@repo/ui/components/Button";
+import { ShadcnButton } from "@repo/ui/components/ShadcnButton";
 import {
   Select,
   SelectContent,
@@ -136,7 +136,7 @@ export default function StoryBoardUpload() {
               </p>
             </div>
           </div>
-          <Button
+          <ShadcnButton
             variant="ghost"
             size="icon"
             onClick={() => setIsExpanded(!isExpanded)}
@@ -148,7 +148,7 @@ export default function StoryBoardUpload() {
             ) : (
               <ChevronDown className="h-4 w-4" />
             )}
-          </Button>
+          </ShadcnButton>
         </CardHeader>
 
         {isExpanded && (
@@ -173,8 +173,8 @@ export default function StoryBoardUpload() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Add Pricing</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Select value={currency} onValueChange={setCurrency}>
-                  <SelectTrigger>
+                <Select>
+                  <SelectTrigger className="py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 border-black">
                     <SelectValue placeholder="Choose Currency" />
                   </SelectTrigger>
                   <SelectContent>
@@ -192,15 +192,6 @@ export default function StoryBoardUpload() {
                   onChange={(e) => setPrice(e.target.value)}
                 />
               </div>
-            </div>
-
-            <div className="flex justify-end">
-              <Button
-                onClick={handleSubmit}
-                className="bg-black hover:bg-black/90 text-white"
-              >
-                Save Now
-              </Button>
             </div>
           </CardContent>
         )}

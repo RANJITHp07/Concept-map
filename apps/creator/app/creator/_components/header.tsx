@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Bell, ChevronDown, Search } from "lucide-react";
 import { Input } from "@repo/ui/components/input";
-import { Button } from "@repo/ui/components/Button";
+import { ShadcnButton } from "@repo/ui/components/ShadcnButton";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -64,7 +64,7 @@ export function Header() {
             />
           </div>
 
-          <Button
+          <ShadcnButton
             variant="ghost"
             size="icon"
             className="relative"
@@ -72,11 +72,14 @@ export function Header() {
           >
             <Bell className="h-5 w-5" />
             <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-orange-500" />
-          </Button>
+          </ShadcnButton>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+              <ShadcnButton
+                variant="ghost"
+                className="relative h-8 w-8 rounded-full"
+              >
                 <Avatar className="h-8 w-8">
                   <AvatarImage
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-01-19%20152626-7HRNYXGkCJ6wP79JTRxWer8zwSjT8A.png"
@@ -84,7 +87,7 @@ export function Header() {
                   />
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
-              </Button>
+              </ShadcnButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem>Profile</DropdownMenuItem>
@@ -93,14 +96,14 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button
+          <ShadcnButton
             variant="ghost"
             size="icon"
             className="md:hidden"
             aria-label="Open menu"
           >
             <ChevronDown className="h-5 w-5" />
-          </Button>
+          </ShadcnButton>
         </div>
       </div>
 

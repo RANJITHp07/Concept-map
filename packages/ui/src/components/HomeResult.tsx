@@ -1,119 +1,192 @@
-import React from "react";
+"use client";
+
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
+import { FaHeart } from "react-icons/fa";
+import { Fade } from "react-awesome-reveal";
+import { useRouter } from "next/navigation";
+import {
+  genreShortsOption,
+  genreTVOption,
+  industryOptions,
+} from "./SearchBars";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import Link from "next/link";
 
-const sliderData = [
-  {
-    id: 1,
-    name: "Stephen Burg",
-    title: "Crime in scene",
-    rating: "5.0(123)",
-    image: "/HomeData/face.png",
-    dot: "/HomeResult/star.svg",
-    bookmark: "/HomeResult/right.svg",
-  },
-  {
-    id: 2,
-    name: "Stephen Burg",
-    title: "Crime in scene",
-    rating: "5.0(123)",
-    image: "/HomeData/face.png",
-    dot: "/HomeResult/star.svg",
-    bookmark: "/HomeResult/right.svg",
-  },
-  {
-    id: 3,
-    name: "Stephen Burg",
-    title: "Crime in scene",
-    rating: "5.0(123)",
-    image: "/HomeData/face.png",
-    dot: "/HomeResult/star.svg",
-    bookmark: "/HomeResult/right.svg",
-  },
-  {
-    id: 4,
-    name: "Stephen Burg",
-    title: "Crime in scene",
-    rating: "5.0(123)",
-    image: "/HomeData/face.png",
-    dot: "/HomeResult/star.svg",
-    bookmark: "/HomeResult/right.svg",
-  },
-  {
-    id: 5,
-    name: "Stephen Burg",
-    title: "Crime in scene",
-    rating: "5.0(123)",
-    image: "/HomeData/face.png",
-    dot: "/HomeResult/star.svg",
-    bookmark: "/HomeResult/right.svg",
-  },
-  {
-    id: 6,
-    name: "Stephen Burg",
-    title: "Crime in scene",
-    rating: "5.0(123)",
-    image: "/HomeData/face.png",
-    dot: "/HomeResult/star.svg",
-    bookmark: "/HomeResult/right.svg",
-  },
-  
-];
+function HomeResult({
+  data,
+  count,
+}: {
+  data: Array<Record<any, any>>;
+  count: number;
+}) {
+  const router = useRouter();
+  const sliderData = useMemo(() => {
+    return (data ?? []).map((script) => {
+      return {
+        id: script._id,
+        name: script.userId.username || "Stephen Burg",
+        title: script.main_title || "Crime in scene",
+        description: script.description || "Crime in scene",
+        rating: script.rating || "5.0",
+        likes: "2.1K",
+        image: script.userId.profile_url || "/script_icon.png",
+        dot: script.dot || "/HomeResult/star.svg",
+        bookmark: script.bookmark || "/HomeResult/right.svg",
+        country: script.country || [],
+        state: script.state || [],
+        genre:
+          [...genreTVOption, ...genreShortsOption].find(
+            (_script) => _script.value == script.genre
+          )?.name || "Other",
+        industry_category:
+          industryOptions.find(
+            (_script) => _script.value == script.industry_category
+          )?.name || "Other",
+      };
+    });
+  }, [data]);
 
-function HomeResult() {
+  const [followState, setFollowState] = useState<Record<number, boolean>>(
+    () => {
+      return sliderData.reduce(
+        (acc, item) => {
+          acc[item.id] = false;
+          return acc;
+        },
+        {} as Record<number, boolean>
+      );
+    }
+  );
+
+  const toggleFollow = (id: number) => {
+    setFollowState((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
   return (
-    <>
-      <section className="py-[30px]">
-      <div className="flex items-center justify-between">
-          <h1 className="text-[20px] font-bold">100+ Results</h1>
-          <button className="py-[5px] px-[15px] border-2 text-[#A0A0A0]] border-[#A0A0A0] text-[12px] rounded-[10px]">
-            View All
-          </button>
+    <section className="pt-[40px] ">
+      <Fade direction="up" triggerOnce duration={800}>
+        <div className="flex items-center justify-between">
+          <h1 className="text-[22px] font-medium">{count} Records Found</h1>
+          {count != 0 && (
+            <button
+              onClick={() => router.push("/search")}
+              className="py-[10px] px-[15px] border text-[12px] rounded-[10px] shadow-md hover:shadow-lg transition-shadow"
+            >
+              View All
+            </button>
+          )}
         </div>
+      </Fade>
 
-        <div className="pt-[50px]">
-          <div className="grid grid-cols-3 gap-[20px]">
-            {sliderData.map((item) => (
-              <div key={item.id} className="border rounded-[30px]">
-                <div className="pl-[20px] py-[20px] flex justify-between">
-                  {/* Image and Content */}
-                  <div className="flex items-start">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      width={40}
-                      height={40}
-                      className="rounded-full h-[30px] w-[30px] mr-[10px] object-cover border border-[rgba(254,201,97,1)]"
-                    />
-                    <div>
-                      <h2 className="text-[14px]">{item.name}</h2>
-                      <p className="text-[12px]">{item.title}</p>
-                    </div>
-                  </div>
-                  {/* Button */}
-                  <button className="self-start py-[6px]  text-sm bg-[#FEC961] pl-[20px] px-[7px] text-white  rounded-tl-[15px] rounded-bl-[15px] ">
-                    Following
-                  </button>
-                </div>
-
-                <div className="px-[20px] pb-[20px] pt-[5px]">
-                  <div>
-                    <p className="text-[15px]">
-                      Torem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Etiam eu turpis molestie, dictum est a, mattis tellus. ....
-                    </p>
-                    <div className="flex items-center justify-between pt-[10px]">
-                      <div className="flex items-center ">
-                      <Image
-                          src={item.dot}
-                          alt="dot"
-                          width={15}
-                          height={15}
-                          className="mr-[5px]"
+      <div className="pt-[50px]">
+        {count != 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[10px] lg:gap-[20px] Home-result-gird md:relative z-[-1]">
+            {sliderData.map((item, index) => (
+              <Link
+                key={item.id}
+                className="cursor-pointer"
+                href={`/creator-details/${item.id}`}
+                passHref
+              >
+                <Fade
+                  key={item.id}
+                  direction="up"
+                  triggerOnce
+                  delay={index * 200}
+                  duration={800}
+                >
+                  <div className="border rounded-[30px]  shadow-lg hover:shadow-xl transition-shadow cursor-pointer flex flex-col h-full">
+                    <div
+                      className="pl-[20px] 
+                   py-[20px] flex justify-between"
+                    >
+                      {/* Image and Content */}
+                      <div className="flex items-start">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          width={50}
+                          height={50}
+                          className="rounded-full h-[40px] w-[40px] lg:h-[50px] lg:w-[50px] mr-[10px] object-cover border border-[rgba(254,201,97,1)]"
                         />
-                        <p className="text-[10px]">{item.rating}</p>
-                    
+                        <div>
+                          <h2 className="text-[14px] lg:text-[16px]">
+                            {item.name}
+                          </h2>
+                          <p className="text-[14px] lg:text-[14px] text-gray-500">
+                            {item.title}
+                          </p>
+                        </div>
                       </div>
-                      <div className="inline-block p-2 rounded-[100px] bg-[rgba(246,170,22,1)]">
+                      {/* Button */}
+                      <button
+                        onClick={() => toggleFollow(item.id)}
+                        className={`self-start py-[6px] px-[12px] rounded-tl-[15px] rounded-bl-[15px] border transition-colors text-[14px] ${
+                          followState[item.id]
+                            ? "bg-[rgb(246,170,22)] text-white"
+                            : "bg-white text-black"
+                        }`}
+                      >
+                        {followState[item.id] ? "Followed" : "Following"}
+                      </button>
+                    </div>
+
+                    <div className="px-[20px]  pt-[5px] flex-1">
+                      <div>
+                        <p className="text-[14px] text-gray-500">
+                          {item.description.slice(0, 100)}
+                          ......
+                        </p>
+                        <div className="flex gap-2 my-2 pt-[5px] flex-wrap">
+                          <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full ">
+                            <span className="text-gray-700 text-[14px] lg:text-[14px]">
+                              {item.genre}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full">
+                            <span className="text-gray-700 text-[14px] lg:text-[14px]">
+                              {item.industry_category}
+                            </span>
+                          </div>
+                          {item.country.map((country: any) => (
+                            <div className="flex items-center gap-2 px-[10px] lg:px-[16px] py-1 bg-[#FFF5E9] rounded-full">
+                              <span className="text-gray-700 text-[14px] lg:text-[16px]">
+                                {country}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Section, consistent left and right padding */}
+                    <div className="flex items-center justify-between pt-[10px] pb-[20px] mt-auto px-[20px]">
+                      <div className="flex items-center gap-[10px]">
+                        <div className="flex items-center">
+                          <Image
+                            src={item.dot}
+                            alt="dot"
+                            width={18}
+                            height={18}
+                            className="mr-[5px]"
+                          />
+                          <p className="text-[14px]">{item.rating}</p>
+                        </div>
+
+                        <div className="flex">
+                          <FaHeart
+                            size={18}
+                            className="mr-[5px] text-[rgba(246,170,22,1)]"
+                          />
+                          <p className="text-[12px]">{item.likes}</p>
+                        </div>
+                      </div>
+
+                      <div className="inline-block p-2 rounded-[100px] bg-[rgba(246,170,22,1)] cursor-pointer">
                         <Image
                           src={item.bookmark}
                           alt="bookmark"
@@ -123,13 +196,23 @@ function HomeResult() {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </Fade>
+              </Link>
             ))}
           </div>
-        </div>
-      </section>
-    </>
+        ) : (
+          <div className="flex flex-col items-center justify-center">
+            <IoDocumentTextOutline
+              size={40}
+              className="text-center text-gray-500"
+            />
+            <p className="text-center text-[22px] text-gray-500">
+              No records match the applied filters.
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
 

@@ -15,4 +15,9 @@ export const loginSchema = z.object({
       invalid_type_error: "Password must be a string",
     })
     .trim(),
+  role: z
+    .enum(["BUYER", "CREATOR"], {
+      required_error: "Role is required",
+    })
+    .default("BUYER"),
 });

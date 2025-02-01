@@ -9,6 +9,7 @@ declare module "next-auth" {
     _id?: string | undefined;
     email?: string | undefined | null;
     role?: string;
+    token: string;
   }
 
   interface Session {
@@ -16,6 +17,7 @@ declare module "next-auth" {
       id: string;
       email: string;
       role?: string;
+      token: string;
     } & DefaultSession["user"];
   }
 }
@@ -28,7 +30,7 @@ declare module "next-auth/jwt" {
   }
 }
 
-export const { handlers, signIn, signOut } = NextAuth({
+export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       name: "credentials",
@@ -38,10 +40,11 @@ export const { handlers, signIn, signOut } = NextAuth({
         type: {},
         email: {},
         password: {},
+        role: {},
       },
       async authorize(credentials) {
         try {
-          const { password, email, code, type, userId } = credentials;
+          const { password, email, code, type, userId, role } = credentials;
 
           if (type == "register" && !code && !userId)
             throw new Error("Code and userId is a required field");
@@ -53,17 +56,19 @@ export const { handlers, signIn, signOut } = NextAuth({
             const res = await apiHelper(apis.login, "POST", {
               email: email,
               password: password,
+              role: role,
             });
 
             if (res.status == "success") return res.data;
 
-            throw new Error(res.message);
+            throw new Error(res.error.message);
           } else if (type == "register") {
             const res = await apiHelper(apis.verifyOtp, "POST", {
-              code,
+              code: Number(code as string),
               userId,
             });
 
+            console.log(res);
             if (res.status == "success") return res.data;
 
             throw new Error(res.error.message);
@@ -83,10 +88,11 @@ export const { handlers, signIn, signOut } = NextAuth({
 
   callbacks: {
     async jwt({ token, user }: { token: JWT; user: User }) {
-      if (user.email && user._id) {
+      if (user?.email && user._id) {
         token.email = user.email;
         token.id = user._id;
         token.role = user.role;
+        token.jwtToken = user.token;
       }
       return token;
     },
@@ -97,13 +103,14 @@ export const { handlers, signIn, signOut } = NextAuth({
           id: token.id as string,
           email: token.email,
           role: token.role,
+          token: token.jwtToken as string,
         };
       }
       return session;
     },
   },
   pages: {
-    signIn: "/login",
+    signIn: "/verify-otp",
   },
   secret: "12345555",
 });

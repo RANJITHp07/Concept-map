@@ -1,62 +1,72 @@
+import LeftActivities from "@repo/ui/components/LeftActivities";
+import LeftMenu from "@repo/ui/components/LeftMenu";
+import LeftProfile from "@repo/ui/components/LeftProfile";
 import React from "react";
 import Image from "next/image";
-import LeftMenu from "@repo/ui/components/LeftMenu";
-import RightMenu from "@repo/ui/components/RightMenu";
-import LeftProfile from "@repo/ui/components/LeftProfile";
-import LeftActivites from "@repo/ui/components/LeftActivities";
 import HomeNavbar from "@repo/ui/components/HomeNavbar";
 import HomeInfo from "@repo/ui/components/HomeInfo";
-import HomeData from "@repo/ui/components/HomeSlider";
-import SearchBar from "@repo/ui/components/SearchBars";
+import HomeSwiper from "@repo/ui/components/HomeSwiper";
+import RightMenu from "@repo/ui/components/RightMenu";
+import { auth } from "../auth";
+import apiHelper from "../lib/apiHelper";
+import { apis } from "../lib/api";
+import Search from "../components/homeSearch/search";
 
-function Home() {
+async function Home() {
+  const session = await auth();
+
+  if (!session?.user) return null;
+
+  const { data: user } = await apiHelper(apis.getUserDetails(session.user.id!));
+
   return (
-    <section className="pt-[20px]">
-      <div className="flex w-full h-full">
-        {/* Left section (20% width) with border */}
-        <div className="w-[20%] px-[20px] border-r border-gray-300">
-          <div className="flex justify-center my-2">
+    <>
+      <div>
+        <div className="grid grid-cols-1 md:grid-cols-12   pt-[10px] ">
+          {/* Left Column - 4 columns wide */}
+          <div className="md:col-span-3 lg:col-span-2 px-[10px] items-center hidden md:block">
             <Image
               alt="logo"
               src={"/logo.png"}
               width={230}
               height={100}
-              className="w-[230px] h-[40px]"
+              className="w-[100%] "
             />
+            <LeftMenu />
+            <LeftProfile />
+            <LeftActivities />
           </div>
-          <LeftMenu />
-          <LeftProfile />
-          <LeftActivites />
-        </div>
 
-        {/* Middle section (60% width) */}
-        <div
-          className="w-[60%] px-[20px]"
-          style={{
-            borderLeft: "1px solid rgba(160,160,160,1)",
-            borderRight: "1px solid rgba(160,160,160,1)",
-          }}
-        >
-          <HomeNavbar />
-          <HomeInfo />
-          <HomeSwiper />
-          <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
-            <h1 className="text-[20px] font-bold">Find Talent</h1>
-            <hr className="flex-grow border-[3px] border-[#C0C0C0" />
+          <div
+            className="md:col-span-9 lg:col-span-10  px-[10px] md:px-[15px] lg:px-[20px] pb-[40px]"
+            style={{
+              borderLeft: "1px solid #d7d2d2",
+            }}
+          >
+            <HomeNavbar email={user.email} />
+            <HomeInfo name={user.username} />
+            <RightMenu />
+            <HomeSwiper />
+
+            {/* scripts */}
+            <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
+              <h1 className="text-[22px] font-medium">
+                Discover Exceptional Scripts
+              </h1>
+              <hr className="flex-grow border-t border-[#C0C0C0]" />
+            </div>
+            <Search type="scripts" />
+            <div className="flex items-center justify-start  gap-[20px] pt-[50px]">
+              <h1 className="text-[22px] font-medium">
+                Discover Exceptional Synopsis
+              </h1>
+              <hr className="flex-grow border-t border-[#C0C0C0]" />
+            </div>
+            <Search type="synopsis" />
           </div>
-          <HomeData />
-          <SearchBar />
-          <SearchResult />
-          <HomeData />
-          <SearchBar />
-        </div>
-
-        {/* Right section (20% width) with border */}
-        <div className="w-[20%] p-4 border-l border-gray-300">
-          <RightMenu />
         </div>
       </div>
-    </section>
+    </>
   );
 }
 

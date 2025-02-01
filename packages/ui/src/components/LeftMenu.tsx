@@ -2,23 +2,31 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { MdOutlineDashboardCustomize } from "react-icons/md";
+import { TbReportSearch } from "react-icons/tb";
+import { FaRegUser } from "react-icons/fa6";
+import { TbContract } from "react-icons/tb";
+import { TbFileInvoice } from "react-icons/tb";
+import { FaRegFolder } from "react-icons/fa";
+import { FaTasks } from "react-icons/fa";
+import { IoSettingsOutline } from "react-icons/io5";
 
 interface MenuItem {
-  logo: string;
+  logo: JSX.Element | string;
   title: string;
 }
 
 function LeftMenu() {
   const [activeItem, setActiveItem] = useState<number | null>(0);
   const Data: MenuItem[] = [
-    { logo: "LeftMenu/1.svg", title: "Dashboard" },
-    { logo: "LeftMenu/2.svg", title: "Reports" },
-    { logo: "LeftMenu/3.svg", title: "Profile" },
-    { logo: "LeftMenu/4.svg", title: "Contracts" },
-    { logo: "LeftMenu/5.svg", title: "Invoices" },
-    { logo: "LeftMenu/6.svg", title: "Projects" },
-    { logo: "LeftMenu/7.svg", title: "Tasks" },
-    { logo: "LeftMenu/8.svg", title: "Settings" },
+    { logo: <MdOutlineDashboardCustomize />, title: "Dashboard" },
+    { logo: <TbReportSearch />, title: "Reports" },
+    { logo: <FaRegUser />, title: "Profile" },
+    { logo: <TbContract />, title: "Contracts" },
+    { logo: <TbFileInvoice />, title: "Invoices" },
+    { logo: <FaRegFolder />, title: "Projects" },
+    { logo: <FaTasks />, title: "Tasks" },
+    { logo: <IoSettingsOutline />, title: "Settings" },
   ];
 
   const handleClick = (index: number) => {
@@ -26,24 +34,28 @@ function LeftMenu() {
   };
 
   return (
-    <section className="px-[20px] py-[20px]">
-      <div>
+    <section className="py-[20px]">
+      <div className="grid grid-cols-1 gap-[10px]">
         {Data.map((item, index: number) => (
           <div
             key={index}
             onClick={() => handleClick(index)}
-            className={`flex items-center justify-start px-[20px] py-[10px] mt-[5px] rounded-[12px] cursor-pointer 
+            className={`grid grid-cols-[auto_1fr] gap-[20px] md:gap-[10px] items-center px-[20px] py-[10px] rounded-[12px] cursor-pointer
               ${activeItem === index ? "bg-[rgba(246,170,22,1)] text-white" : "hover:bg-[rgba(246,170,22,1)]"}`}
           >
-            <Image
-              src={item.logo}
-              alt={item.title}
-              width={24}
-              height={24}
-              className="mr-4 text-white"
-            />
+            {typeof item.logo === "string" ? (
+              <Image
+                src={item.logo}
+                alt={item.title}
+                width={20}
+                height={20}
+                className="mr-4"
+              />
+            ) : (
+              <span className=" text-[22px] md:text-[25px]">{item.logo}</span>
+            )}
             <span
-            className={`text-[17px] leading-[21px] font-medium ${activeItem === index ? "text-gray-800" : "text-gray-800"}`}
+              className={` text-[14px] md:text-[18px] leading-[21px] custom-size-leftMenu ${activeItem === index ? "text-white" : "text-gray-800"}`}
             >
               {item.title}
             </span>

@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronUp, ChevronDown, FileText } from 'lucide-react';
+import { ChevronUp, ChevronDown, FileText } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@repo/ui/components/card";
 import { Input } from "@repo/ui/components/input";
-import { Button } from "@repo/ui/components/Button";
+import { ShadcnButton } from "@repo/ui/components/ShadcnButton";
 import { Textarea } from "@repo/ui/components/textarea";
 import {
   Select,
@@ -36,9 +36,9 @@ export default function SynopsisWriter() {
               </p>
             </div>
           </div>
-          <Button 
-            variant="ghost" 
-            size="icon" 
+          <ShadcnButton
+            variant="ghost"
+            size="icon"
             className="text-gray-500"
             onClick={toggleExpand}
           >
@@ -47,7 +47,7 @@ export default function SynopsisWriter() {
             ) : (
               <ChevronDown className="h-4 w-4" />
             )}
-          </Button>
+          </ShadcnButton>
         </CardHeader>
 
         {isExpanded && (
@@ -57,12 +57,12 @@ export default function SynopsisWriter() {
                 Type your Synopsis with yourself or with the help of AI
               </h3>
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-md">
-                <Button
+                <ShadcnButton
                   variant="outline"
                   className="bg-white text-orange-500 hover:bg-orange-50"
                 >
                   <span className="mr-2">⚡</span> Use AI to write
-                </Button>
+                </ShadcnButton>
               </div>
             </div>
 
@@ -77,7 +77,7 @@ export default function SynopsisWriter() {
               <h3 className="text-lg font-semibold mb-4">Add Pricing</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Select>
-                  <SelectTrigger>
+                  <SelectTrigger className="py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 border-black">
                     <SelectValue placeholder="Choose Currency" />
                   </SelectTrigger>
                   <SelectContent>
@@ -88,15 +88,6 @@ export default function SynopsisWriter() {
                 </Select>
                 <Input placeholder="Add Price" />
               </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row justify-end gap-3">
-              <Button className="bg-black hover:bg-black/90 text-white order-last sm:order-first">
-                Save Now
-              </Button>
-              <Button className="w-full sm:w-auto bg-orange-400 hover:bg-orange-500 text-white">
-                Publish Now
-              </Button>
             </div>
           </CardContent>
         )}

@@ -19,9 +19,14 @@ export class CrudRepository<T> {
     skip: number,
     take: string | number = "all",
     populateField: string[] | string = [],
+    sortOrder: "asc" | "desc" = "desc"
   ): Promise<T[]> {
     const limit = take === "all" ? 0 : Number(take);
-    const query = this.model.find(where).populate(populateField);
+    const query = this.model
+      .find(where)
+      .populate(populateField)
+      .sort({ createdAt: sortOrder === "asc" ? 1 : -1 });
+
     return await query.skip(skip).limit(limit || 0);
   }
 
@@ -31,13 +36,24 @@ export class CrudRepository<T> {
   }
 
   // Fetch a document by its ID
-  async fetchDocumentById(id: string): Promise<T | null> {
-    return await this.model.findById(id);
+  async fetchDocumentById(
+    id: string,
+    nonRequiredFields?: string,
+    populateField: string[] | string = []
+  ): Promise<any> {
+    return await this.model
+      .findById(id)
+      .select(nonRequiredFields ?? "")
+      .populate(populateField)
+      .lean();
   }
 
   // Fetch a single document based on conditions
-  async fetchOneDocument(where: Record<string, any>): Promise<T | null> {
-    return await this.model.findOne(where);
+  async fetchOneDocument(
+    where: Record<string, any>,
+    populateField: string[] | string = []
+  ): Promise<any> {
+    return await this.model.findOne(where).populate(populateField).lean();
   }
 
   // Create a new document
@@ -47,9 +63,11 @@ export class CrudRepository<T> {
 
   async updateDocumenById(
     id: string,
-    updateData: Record<string, any>,
-  ): Promise<T | null> {
-    return await this.model.findByIdAndUpdate(id, updateData, { new: true });
+    updateData: Record<string, any>
+  ): Promise<any> {
+    return await this.model
+      .findByIdAndUpdate(id, updateData, { new: true })
+      .lean();
   }
 
   async deleteDocumenById(id: string): Promise<T | null> {
