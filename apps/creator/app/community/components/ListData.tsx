@@ -4,7 +4,9 @@ import { IoIosPersonAdd } from "react-icons/io";
 import { FcLike } from "react-icons/fc";
 import { FaRegCommentDots } from "react-icons/fa";
 import { FaShare } from "react-icons/fa6";
-import Profile from "./../../../public/community/icon.png";
+import profile1 from "./../../../public/community/icon.png";
+import profile2 from "./../../../public/script_icon.png";
+import profile3 from "./../../../public/black_icon.png";
 import poster from "./../../../public/amazon.jpg";
 import posterOne from "./../../../public/community/newCard.png";
 import posterTwo from "./../../../public/community/newCardOne.png";
@@ -13,21 +15,23 @@ import { Fade } from "react-awesome-reveal"; // Import the Fade component
 const data = [
   {
     id: 1,
-    name: "Niyas P",
+    name: "Alex John",
     role: " Amazon | OTT | Cinema",
     date: "1/1/2025",
     description:
       "Amazon Signs Groundbreaking Deal to Significantly Boost India’s Creative Economy",
     poster: poster,
+    img: profile1,
   },
   {
     id: 2,
-    name: "Niyas P",
+    name: "Marcelo",
     role: "Programmer | Athletic | Gamer",
     date: "1/1/2025",
     description:
       "Overcoming Writer's Block in Synopsis & Short Stories in 10 Minutes - A Beginner's Guide",
     poster: null,
+    img: profile3,
   },
   {
     id: 3,
@@ -36,32 +40,36 @@ const data = [
     date: "1/1/2025",
     description: null,
     poster: posterOne,
+    img: profile2,
   },
   {
     id: 4,
-    name: "Niyas P",
+    name: "Ram",
     role: "Programmer | Athletic | Gamer",
     date: "1/1/2025",
     description:
       "Overcoming Writer's Block in Synopsis & Short Stories in 10 Minutes - A Beginner's Guide",
     poster: posterTwo,
+    img: profile1,
   },
   {
     id: 5,
-    name: "Niyas P",
+    name: "Jithin",
     role: "Programmer | Athletic | Gamer",
     date: "1/1/2025",
     description:
       "Overcoming Writer's Block in Synopsis & Short Stories in 10 Minutes - A Beginner's Guide",
     poster: null,
+    img: profile3,
   },
   {
     id: 6,
-    name: "Niyas P",
+    name: "Neure",
     role: "Programmer | Athletic | Gamer",
     date: "1/1/2025",
     description: null,
     poster: poster,
+    img: profile2,
   },
 ];
 
@@ -80,7 +88,7 @@ function ListData() {
                 <Image
                   alt="userProfile"
                   className="h-[40px] w-[40px] md:h-[60px] md:w-[60px] object-cover rounded-[100px] border border-[#f6aa16]"
-                  src={Profile}
+                  src={item.img}
                 />
                 <div className="ml-[10px] md:ml-[15px] lg:ml-[20px]">
                   <p className="text-[14px] md:text-[16px] lg:text-[18px] font-semibold">

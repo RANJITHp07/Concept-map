@@ -157,7 +157,10 @@ function HomeNavbar({ email }: { email?: string }) {
                 <li className="text-[16px] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">
                   Contact Us
                 </li>
-                <li className="text-[16px] text-[red] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer">
+                <li
+                  className="text-[16px] text-[red] center-navbar-text inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#F6AA16] after:transition-all after:duration-300 hover:after:w-full cursor-pointer"
+                  onClick={() => handleSignOut()}
+                >
                   Logout
                 </li>
               </ul>
