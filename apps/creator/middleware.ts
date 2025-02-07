@@ -8,11 +8,20 @@ export default auth((req: any) => {
   const isAuthenticated = !!req.auth;
   const isPublicRoute = PUBLIC_ROUTE.includes(nextUrl.pathname);
 
-  if (isPublicRoute && isAuthenticated)
+  if (isPublicRoute && isAuthenticated) {
     return NextResponse.redirect(new URL("/", req.url));
+  }
 
   if (!isAuthenticated && !isPublicRoute)
     return NextResponse.redirect(new URL("/login", req.url));
+
+  if (
+    req.auth &&
+    req?.auth?.user?.role === "CREATOR" &&
+    nextUrl.pathname === "/"
+  ) {
+    return NextResponse.redirect(new URL("/creator-dashboard", req.url));
+  }
 
   return NextResponse.next();
 });
