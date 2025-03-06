@@ -19,13 +19,10 @@ export default async function DashboardPage() {
 
   const { data: user } = await apiHelper(apis.getUserDetails(session.user.id!));
 
-  const { data } = await apiHelper(apis.getScriptDetails(session.user.id));
+  const { data } = await apiHelper(apis.getScriptAllDetails(session.user.id, ''));
 
-  const price = [
-    { name: "Script", price: data?.script?.price },
-    { name: "Story Board", price: data?.story_borad?.price },
-    { name: "Synopsis", price: data?.synopsis?.price },
-  ].filter((item) => item.price && item.price != 0);
+  console.log(data.length)
+
   // await delay(3000);
   return (
     <div className="flex min-h-screen bg-[#FFF8F0]">
@@ -119,15 +116,21 @@ export default async function DashboardPage() {
 
             {/* Project Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              <ProjectCard
-                scriptNumber="1"
-                title="Close in scene"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
-                likes={10}
-                comments={15}
-                shares={20}
-              />
-              <ProjectCard
+              {
+                data.map((item: any, index: number) => (
+                  <ProjectCard
+                    key={index}
+                    scriptNumber={(index + 1).toString()}
+                    title={item?.main_title}
+                    description={item?.description}
+                    likes={10}
+                    comments={15}
+                    shares={20}
+                  />
+                ))
+              }
+
+              {/* <ProjectCard
                 scriptNumber="2"
                 title="The Gift of the Magi"
                 description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
@@ -142,7 +145,7 @@ export default async function DashboardPage() {
                 likes={15}
                 comments={20}
                 shares={18}
-              />
+              /> */}
             </div>
           </div>
         </main>
