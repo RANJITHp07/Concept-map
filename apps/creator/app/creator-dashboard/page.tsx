@@ -18,6 +18,14 @@ export default async function DashboardPage() {
   if (!session?.user) return null;
 
   const { data: user } = await apiHelper(apis.getUserDetails(session.user.id!));
+
+  const { data } = await apiHelper(apis.getScriptDetails(session.user.id));
+
+  const price = [
+    { name: "Script", price: data?.script?.price },
+    { name: "Story Board", price: data?.story_borad?.price },
+    { name: "Synopsis", price: data?.synopsis?.price },
+  ].filter((item) => item.price && item.price != 0);
   // await delay(3000);
   return (
     <div className="flex min-h-screen bg-[#FFF8F0]">

@@ -222,7 +222,6 @@ export default function page() {
     }
   }
 
-  console.log(synopsis)
   return (
     <div>
       <Toaster position="top-center" />
