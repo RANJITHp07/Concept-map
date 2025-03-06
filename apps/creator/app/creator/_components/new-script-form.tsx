@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ChevronDown,
   ChevronUp,
@@ -36,7 +36,7 @@ interface Script {
   scenes: Scene[];
 }
 
-export function ScriptWriter() {
+export function ScriptWriter({ setScriptDetail, scriptRef, error }: any) {
   const [isOpen, setIsOpen] = useState(true);
   const [scripts, setScripts] = useState<Script[]>([
     { id: 1, name: "Script 1", scenes: [{ id: 1, content: "" }] },
@@ -115,8 +115,17 @@ export function ScriptWriter() {
     );
   };
 
+  const handlePrice = (field: string, value: string) => {
+    setScriptDetail((prev: any) => ({ ...prev, [field]: value }))
+  }
+
+  useEffect(() => {
+    setScriptDetail((prev: any) => ({ ...prev, scripts: scripts }))
+  }, [scripts])
+
+
   return (
-    <div className="py-4 flex items-start justify-center containers px-4 sm:px-6 lg:px-[100px]">
+    <div ref={scriptRef} className="py-4 flex items-start justify-center containers px-4 sm:px-6 lg:px-[100px]">
       <Card className="w-full bg-white border-none">
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7 bg-[#FEF6EA]">
@@ -163,8 +172,8 @@ export function ScriptWriter() {
               </div>
 
               <div className="space-y-6 bg-gray-100 p-6 rounded-lg">
-                {scripts.map((script) => (
-                  <div key={script.id} className="space-y-4">
+                {scripts.map((script, index) => (
+                  <div key={index} className="space-y-4">
                     <div className="flex justify-between items-center">
                       <h4 className="font-medium">Script</h4>
                       <ShadcnButton
@@ -234,17 +243,30 @@ export function ScriptWriter() {
               <div>
                 <h3 className="text-lg font-semibold mb-4">Add Pricing</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Select>
-                    <SelectTrigger className="py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 border-black">
-                      <SelectValue placeholder="Choose Currency" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="usd">USD</SelectItem>
-                      <SelectItem value="eur">EUR</SelectItem>
-                      <SelectItem value="gbp">GBP</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <Input placeholder="Add Price" type="number" />
+                  <div>
+                    <Select onValueChange={(value: string) => handlePrice("currency", value)}>
+                      <SelectTrigger className="py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 border-black">
+                        <SelectValue placeholder="Choose Currency" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="usd">USD</SelectItem>
+                        <SelectItem value="eur">EUR</SelectItem>
+                        <SelectItem value="gbp">INR</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {error.currency && <p className="text-xs mt-1 text-red-400">{error.currency}</p>}
+                  </div>
+                  <div>
+                    <Input placeholder="Add Price" type="number"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        const value = e.target.value;
+                        if (/^\d*$/.test(value)) {
+                          handlePrice("price", value);
+                        }
+
+                      }} />
+                    {error.price && <p className="text-xs mt-1 text-red-400">{error.price}</p>}
+                  </div>
                 </div>
               </div>
             </CardContent>

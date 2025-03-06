@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@repo/ui/components/card";
 import { Input } from "@repo/ui/components/input";
@@ -28,14 +28,13 @@ export interface UploadedFile {
   id: string;
   name: string;
   size: number;
+  file: any
 }
 
-export default function StoryBoardUpload() {
+export default function StoryBoardUpload({ setUploadFile, uploadRef, uploadError }: any) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [uploadingFiles, setUploadingFiles] = useState<UploadingFile[]>([]);
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
-  const [currency, setCurrency] = useState<string>("");
-  const [price, setPrice] = useState<string>("");
   const [error, setError] = useState<string>("");
 
   const handleFiles = async (fileList: FileList) => {
@@ -65,15 +64,16 @@ export default function StoryBoardUpload() {
           if (fileIndex === -1) return prev;
 
           const newFiles = [...prev];
-          newFiles[fileIndex].progress += 10;
+          newFiles[fileIndex]!.progress += 10;
 
-          if (newFiles[fileIndex].progress >= 100) {
+          if (newFiles[fileIndex]!.progress >= 100) {
             clearInterval(interval);
             setUploadedFiles((prev) => [
               ...prev,
               {
                 id: uploadingFile.id,
                 name: file.name,
+                file: file,
                 size: file.size,
               },
             ]);
@@ -90,27 +90,19 @@ export default function StoryBoardUpload() {
     setUploadedFiles((prev) => prev.filter((file) => file.id !== fileId));
   };
 
-  const handleSubmit = async () => {
-    if (!currency || !price) {
-      setError("Please fill in all pricing fields");
-      return;
-    }
 
-    if (uploadedFiles.length === 0) {
-      setError("Please upload at least one file");
-      return;
-    }
+  const handlePrice = (field: string, value: string) => {
+    setUploadFile((prev: any) => ({ ...prev, [field]: value }))
+  }
 
-    // Handle form submission
-    console.log({
-      files: uploadedFiles,
-      currency,
-      price,
-    });
-  };
+  useEffect(() => {
+    setUploadFile((prev: any) => ({ ...prev, files: uploadedFiles }))
+  }, [uploadedFiles])
+
+
 
   return (
-    <div className="py-4 px-4 sm:px-6 lg:px-[100px]">
+    <div ref={uploadRef} className="py-4 px-4 sm:px-6 lg:px-[100px]">
       <Card className="bg-white border-none containers mx-auto">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7 bg-[#FEF6EA] rounded-t-lg">
           <div className="flex items-center gap-3">
@@ -173,24 +165,30 @@ export default function StoryBoardUpload() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Add Pricing</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Select>
-                  <SelectTrigger className="py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 border-black">
-                    <SelectValue placeholder="Choose Currency" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="usd">USD</SelectItem>
-                    <SelectItem value="eur">EUR</SelectItem>
-                    <SelectItem value="gbp">GBP</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Input
-                  placeholder="Add Price"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
+                <div>
+                  <Select onValueChange={(value: string) => handlePrice("currency", value)}>
+                    <SelectTrigger className="py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 border-black">
+                      <SelectValue placeholder="Choose Currency" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="usd">USD</SelectItem>
+                      <SelectItem value="eur">EUR</SelectItem>
+                      <SelectItem value="gbp">INR</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {error.currency && <p className="text-xs mt-1 text-red-400">{error.currency}</p>}
+                </div>
+                <div>
+                  <Input placeholder="Add Price" type="number"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      const value = e.target.value;
+                      if (/^\d*$/.test(value)) {
+                        handlePrice("price", value);
+                      }
+
+                    }} />
+                  {error.price && <p className="text-xs mt-1 text-red-400">{error.price}</p>}
+                </div>
               </div>
             </div>
           </CardContent>

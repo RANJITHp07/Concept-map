@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronUp, ChevronDown, FileText } from "lucide-react";
+import { ChevronUp, ChevronDown, FileText, Currency } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@repo/ui/components/card";
 import { Input } from "@repo/ui/components/input";
 import { ShadcnButton } from "@repo/ui/components/ShadcnButton";
@@ -14,15 +14,20 @@ import {
   SelectValue,
 } from "@repo/ui/components/select";
 
-export default function SynopsisWriter() {
+export default function SynopsisWriter({ setSynopsis, synopsisRef, error }: any) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [price, setPrice] = useState('')
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
 
+  const handlePrice = (field: string, value: string) => {
+    setSynopsis((prev: any) => ({ ...prev, [field]: value }))
+  }
+
   return (
-    <div className="py-4 flex items-start justify-center containers  px-4 sm:px-6 lg:px-[100px]">
+    <div ref={synopsisRef} className="py-4 flex items-start justify-center containers  px-4 sm:px-6 lg:px-[100px]">
       <Card className="w-full bg-white border-none">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7 bg-[#FEF6EA]">
           <div className="flex items-center gap-3">
@@ -70,23 +75,39 @@ export default function SynopsisWriter() {
               <Textarea
                 className="min-h-[200px] resize-none bg-gray-100 border-0"
                 placeholder="Type here"
+                onChange={(e: any) => setSynopsis((prev: any) => ({ ...prev, content: e.target.value }))}
               />
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-4">Add Pricing</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Select>
-                  <SelectTrigger className="py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 border-black">
-                    <SelectValue placeholder="Choose Currency" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="usd">USD</SelectItem>
-                    <SelectItem value="eur">EUR</SelectItem>
-                    <SelectItem value="gbp">GBP</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Input placeholder="Add Price" />
+                <div>
+                  <Select onValueChange={(value: string) => handlePrice("currency", value)}>
+                    <SelectTrigger className="py-7 border  focus:outline-none focus:ring-1 focus:ring-[#f5a623] text-gray-600 border-black">
+                      <SelectValue placeholder="Choose Currency" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="usd">USD</SelectItem>
+                      <SelectItem value="eur">EUR</SelectItem>
+                      <SelectItem value="gbp">INR</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {error.currency && <p className="text-xs mt-1 text-red-400">{error.currency}</p>}
+                </div>
+                <div>
+                  <Input placeholder="Add Price" type="number" value={price}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      const value = e.target.value;
+                      if (/^\d*$/.test(value)) {
+                        handlePrice("price", value);
+                        setPrice(value)
+                      }
+
+
+                    }} />
+                  {error.price && <p className="text-xs mt-1 text-red-400">{error.price}</p>}
+                </div>
               </div>
             </div>
           </CardContent>

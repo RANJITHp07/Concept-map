@@ -1,27 +1,26 @@
-// import { auth } from "../auth";
-
 const apiHelper = async (
   endpoint: string,
   method = "GET",
-  data?: Record<string, any>,
-  headers = {},
+  data?: Record<string, any> | FormData, // Allow both JSON and FormData
+  headers: Record<string, string> = {},
   params?: Record<string, any>
 ) => {
   try {
-    // const session = await auth();
     let url = "https://concept-map-kkny.onrender.com/api/web" + endpoint;
+
+    const isFormData = data instanceof FormData; // Check if data is FormData
+
     const options: RequestInit = {
       method,
       credentials: "include",
       headers: {
-        "Content-Type": "application/json",
-        // Authorization: `Bearer ${session?.user.token}`,
+        ...(isFormData ? {} : { "Content-Type": "application/json" }), 
         ...headers,
       },
     };
 
     if (data && method !== "GET") {
-      options.body = JSON.stringify(data);
+      options.body = isFormData ? data : JSON.stringify(data); 
     }
 
     if (params && method === "GET") {
@@ -30,19 +29,18 @@ const apiHelper = async (
     }
 
     const response = await fetch(url, options);
-
     const result = await response.json();
+
     if (!response.ok) {
       throw new Error(JSON.stringify(result) || "Something went wrong");
     }
 
     return result;
   } catch (error: any) {
-    console.log(error);
     let errorResponse;
     try {
       errorResponse = JSON.parse(error.message);
-    } catch (error: any) {
+    } catch {
       errorResponse = error.message;
     }
 

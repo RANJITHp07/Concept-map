@@ -38,6 +38,13 @@ export const genreShortsOption = [
   { name: "Others", value: "OTHERS" },
 ];
 
+export const ScriptCategory = [
+  { name: "Television Commercial", value: "TVC" },
+  { name: "OTT Series", value: "OTT_SERIES" },
+  { name: "Short Form Video", value: "SHORT_FORM_VIDEO" },
+]
+
+
 export const industryOptions = [
   { name: "Grocery", value: "GROCERY" },
   { name: "CPG", value: "CPG" },

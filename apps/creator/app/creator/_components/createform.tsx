@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Input } from "@repo/ui/components/input";
+import { Country, IState, State } from "country-state-city";
 import { ShadcnButton } from "@repo/ui/components/ShadcnButton";
 import {
   Select,
@@ -15,12 +16,16 @@ import { Textarea } from "@repo/ui/components/textarea";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ScriptFormSchema } from "../../../lib/validator/script";
+import { genreShortsOption, genreTVOption, industryOptions, ScriptCategory } from "../../../lib/constant";
+import { Item } from "@radix-ui/react-select";
 
 type ScriptCategory = "CategoryA" | "CategoryB" | "CategoryC";
 type IndustryCategory = "Industry1" | "Industry2" | "Industry3";
 type ScriptType = "TypeA" | "TypeB" | "TypeC";
 
-export function CreateForm() {
+export function CreateForm({ createForm, setBasicDetails, handleSubmitForm }: any) {
+
+  const [state, setState] = useState<IState[]>([])
   const {
     handleSubmit,
     formState: { errors },
@@ -31,15 +36,33 @@ export function CreateForm() {
     resolver: zodResolver(ScriptFormSchema),
   });
 
+
   const handleInputChange = (field: string, value: string) => {
-    console.log(value);
     setValue(field, value);
     clearErrors(field);
   };
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    handleSubmitForm(data)
   };
+
+  const handleCountryChange = (value: string) => {
+    const [name, code] = value.split('-')
+    handleInputChange("country", name!);
+    setState(State.getStatesOfCountry(code));
+  };
+
+  const onError = (errors: any) => {
+    const firstError = Object.keys(errors)[0];
+    const element = createForm.current?.querySelector(`[name="${firstError}"]`) as HTMLElement;
+
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
+      element.focus();
+    }
+  };
+
+
 
   return (
     <div className="p-4 md:p-6 lg:p-8 containers">
@@ -53,7 +76,7 @@ export function CreateForm() {
         <div className="space-y-6 px-4 sm:px-6 lg:px-10">
           {/* Select Type Section */}
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form ref={createForm} onSubmit={handleSubmit(onSubmit, onError)} className="space-y-6">
             <FormSection title="Adding Details">
               <div className="space-y-4">
                 <FormField
@@ -88,9 +111,29 @@ export function CreateForm() {
                   }
                   select
                   options={[
-                    { value: "CategoryA", label: "Category A" },
-                    { value: "CategoryB", label: "Category B" },
-                    { value: "CategoryC", label: "Category C" },
+                    ...ScriptCategory.map((item) => ({
+                      label: item.name,
+                      value: item.value
+                    })),
+                  ]}
+                />
+
+                <FormField
+                  label="Genre"
+                  name="genre"
+                  value={getValues("genre")}
+                  error={errors.genre?.message as string}
+                  onChange={(value: string) =>
+                    handleInputChange("genre", value)
+                  }
+                  select
+                  options={[
+                    ...Array.from(
+                      new Set([
+                        ...genreShortsOption.map((item) => JSON.stringify({ label: item.name, value: item.value })),
+                        ...genreTVOption.map((item) => JSON.stringify({ label: item.name, value: item.value }))
+                      ])
+                    ).map((item) => JSON.parse(item))
                   ]}
                 />
                 <FormField
@@ -103,10 +146,12 @@ export function CreateForm() {
                   }
                   select
                   options={[
-                    { value: "Industry1", label: "Industry 1" },
-                    { value: "Industry2", label: "Industry 2" },
-                    { value: "Industry3", label: "Industry 3" },
+                    ...industryOptions.map((item) => ({
+                      label: item.name,
+                      value: item.value
+                    }))
                   ]}
+
                 />
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <FormField
@@ -114,17 +159,24 @@ export function CreateForm() {
                     name="country"
                     error={errors.mainTitle?.message as string}
                     value={getValues("price")}
-                    onChange={(value) => handleInputChange("price", value)}
-                    type="number"
-                    required
+                    onChange={(value) => handleCountryChange(value)}
+                    select
+                    options={Country.getAllCountries().map((country) => ({
+                      label: country.name,
+                      value: `${country.name}-${country.isoCode}`,
+                    }))}
                   />
                   <FormField
                     label="State"
                     name="state"
                     error={errors.mainTitle?.message as string}
-                    value={getValues("currency")}
-                    onChange={(value) => handleInputChange("currency", value)}
-                    required
+                    value={getValues("state")}
+                    onChange={(value) => handleInputChange("state", value)}
+                    select
+                    options={state.map((state) => ({
+                      label: state.name,
+                      value: state.name,
+                    }))}
                   />
                 </div>
               </div>
@@ -132,7 +184,7 @@ export function CreateForm() {
           </form>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

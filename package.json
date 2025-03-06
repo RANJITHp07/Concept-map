@@ -30,6 +30,7 @@
   "dependencies": {
     "@radix-ui/react-select": "^2.1.5",
     "@radix-ui/react-use-callback-ref": "^1.1.0",
+    "country-state-city": "^3.2.1",
     "creator": "^0.2.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

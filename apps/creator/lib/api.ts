@@ -15,4 +15,7 @@ export const apis = {
   getScriptDetails: (id: string) => `/script/${id}`,
   getScriptAllDetails: (userId: string, scriptId: string) =>
     `/script/all/details?userId=${userId}&scriptId=${scriptId}`,
+
+  uploadFile:'/script/upload',
+  createScript:'/script'
 };

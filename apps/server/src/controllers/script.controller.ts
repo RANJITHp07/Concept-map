@@ -41,6 +41,7 @@ export class ScriptController {
     next: NextFunction
   ) => {
     try {
+      console.log("hiii")
       const result = await this.scriptService.uploadStoryBoard(req.files);
       res.status(201).json({
         status: "success",
